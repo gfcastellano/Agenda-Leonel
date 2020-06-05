@@ -8,68 +8,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 import json
-from cefpython3 import cefpython as cef
-#sys.excepthook = cef.ExceptHook
 
-
-###----------------------------------------------------------------
-GUI=Builder.load_string("""
-
-<Gerenciador>:
-    Menu:
-        name: 'Menu'
-    Clientes:
-        name: 'Clientes'
-    Mapa:
-        name: 'Mapa'
-<Menu>:
-    BoxLayout:
-        orientation: 'vertical'
-        padding: 200
-        spacing: 50
-        Button:
-            text:'Lista de Clientes'
-            on_release:app.root.current  = 'Clientes'
-        Button:
-            text:'Mapa'
-            on_release:app.root.current = 'Mapa'
-        Button:
-            text:'Sair'
-            on_release: app.stop()
-
-<Mapa>:
-    
-        
-        
-    
-
-            
-<Clientes>:
-    BoxLayout:
-        orientation: 'vertical'
-        ScrollView:
-            BoxLayout:
-                id: box
-                orientation: 'vertical'
-                size_hint_y: None
-                height: self.minimum_height 
-        BoxLayout:
-            size_hint_y: None
-            height: 100
-            TextInput:
-                id: pesquisar
-            Button:
-                text:'Buscar'
-                size_hint_x: None
-                width: 100
-                on_release: root.buscar()
-
-
-
-	
-
-""")
-###------------------------------------------------------------------
 
 
 class Gerenciador(ScreenManager):
@@ -80,27 +19,7 @@ class Menu(Screen):
 
 class Mapa(Screen):
     
-    def on_pre_enter(self,*args):
-        settings = {
-                    "ignore_certificate_errors" : True,
-                    }
-        switches = {
-                    "disable-web-secutirty" : True
-                    }
-        
-        cef.Initialize(settings = settings,
-                       switches = switches)
-        settings = {
-                    "file_access_from_file_urls_allowed" : True,
-                    "universal_access_from_file_urls_allowed": True
-                    }
-        cef.CreateBrowserSync(settings = settings,
-                              url='file://clientes_cadastrados.html',
-                              window_title='mapa de clientes')
-        cef.MessageLoop()
-        Window.bind(on_keyboard = self.voltar)
-        print('Print de ter executado')
-
+    
     def voltar(self,window,key,*args):
         if key == 27:
             App.get_running_app().root.current = 'Menu'
@@ -178,5 +97,3 @@ class Test(App):
 	
 if __name__ == '__main__':
     Test().run()
-
-#['Cliente1','Cliente2','Cliente3','4','5','6','Cl','Cl1nte','Client3']
