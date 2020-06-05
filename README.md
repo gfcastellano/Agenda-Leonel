@@ -27,3 +27,6 @@ Contará com:
     - histórico das visitas para cada cliente (dados da visita, cometários, contato, o que foi conversado)
 
 Comentario retirado para testar o vscode
+
+
+Vamos ver se isso aqui funciona
