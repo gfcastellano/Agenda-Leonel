@@ -6,9 +6,8 @@ Uso:
 - Adicionar eventos de contato comercial (agenda)
 - Gerenciar estoques de produtos
 - Emitir relatórios e métricas de eficiencia de contatos comerciais (melhor dia e horario para contato, sugestão de produtos, etc)
-- Adicionar lembretes
-Auotmatização
-- Adicionar eventos automaticamente na agenda, criar assistete pessoal
+- Adicionar lembretes 
+- Adicionar eventos automaticamente na agenda, criar assistete pessoal (Automatização de eventos, ligar, fazer visita, acompanhamento de venda)
 
 Código:
 Funcionalidade serão escritas em linguagem .py e design será escrito em "linguagem" .kv (tentaremos, né)
