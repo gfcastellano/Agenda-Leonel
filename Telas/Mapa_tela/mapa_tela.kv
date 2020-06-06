@@ -1,0 +1,15 @@
+#:import Screen kivy.uix.screenmanager.Screen
+#:include Mapa/mapa.kv
+
+<Mapa_tela>:
+    FloatLayout:
+        Mapa:
+            id: mapa
+        Botao:
+            text:'Menu'
+            size_hint: None, None
+            height:100
+            width: 100
+            pos_hint: {'top':1, 'left':1}
+            on_release: 
+                app.root.current = 'Menu'
