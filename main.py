@@ -1,6 +1,6 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
-from Telas.menu import Menu
+from Telas.menu_tela import Menu
 from Telas.mapa_tela import Mapa_tela
 from Mapa.mapa import Mapa
 
