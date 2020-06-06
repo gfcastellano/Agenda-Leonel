@@ -1,6 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
-from marcador import Marcador
+from Mapa.marcador import Marcador
 
 class Mapa_tela(Screen):
     def on_pre_enter(self):

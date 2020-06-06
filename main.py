@@ -1,8 +1,8 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
-from menu import Menu
-from mapa_tela import Mapa_tela
-from mapa import Mapa
+from Telas.menu import Menu
+from Telas.mapa_tela import Mapa_tela
+from Mapa.mapa import Mapa
 
 import json
 
