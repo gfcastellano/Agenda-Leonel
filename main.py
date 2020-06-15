@@ -4,6 +4,7 @@ from kivy.uix.screenmanager import ScreenManager
 from Telas.menu_tela import Menu
 from Telas.mapa_tela import Mapa_tela
 from Mapa.mapa import Mapa
+from Telas.clientes_tela import Clientes_tela
 
 import json
 
