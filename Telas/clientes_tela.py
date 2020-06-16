@@ -2,8 +2,6 @@ from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
-from kivy.clock import Clock
-Clock.max_iteration = 20
 
 
 class Clientes_tela(Screen):
