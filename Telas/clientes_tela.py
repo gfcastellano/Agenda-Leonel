@@ -30,7 +30,7 @@ class Clientes_tela(Screen):
         except ValueError:
             texto = str(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
             parametro = 'nome_fantasia'
-        self.executar_busca(texto,parametro)
+        self.executar_busca(texto.lower(),parametro)
 
     def executar_busca(self,texto,parametro):
         match=[]
@@ -39,7 +39,7 @@ class Clientes_tela(Screen):
                 if texto in str(cliente['codigo']):
                     match.append(cliente)
             else:
-                if texto in cliente['nome_fantasia']:
+                if texto in str(cliente['nome_fantasia']).lower():
                     match.append(cliente)
         self.apagar_clientes()
         self.adicionar_clientes(match)
