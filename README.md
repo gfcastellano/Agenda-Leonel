@@ -1,4 +1,4 @@
-# Aplicativo __em processo de desenvolvimento__ que será criado usando a biblioteca Kivy para python.
+# Aplicativo **em processo de desenvolvimento** que será criado usando a biblioteca Kivy para python.
 
 ## Uso/Aplicações:
 - Visualizar, adicionar e editar lista de contatos comerciais
