@@ -1,7 +1,8 @@
 from kivymd.app import MDApp
+from kivy.graphics import Color, Rectangle
 from kivy.uix.screenmanager import Screen
-from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.label import MDLabel
 
 
 class Clientes_tela(Screen):
@@ -11,7 +12,6 @@ class Clientes_tela(Screen):
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
         children = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.children
-        print('CHILDREN:',len(children))
         if len(children) < 1:
             self.adicionar_clientes()
 
@@ -19,7 +19,6 @@ class Clientes_tela(Screen):
         print('Adicionando clientes na tela')
         scroll = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll
         for cliente in self.dados_clientes:
-            #print(cliente)
             scroll.add_widget(Cliente(codigo = str(cliente['codigo']),nome_fantasia = cliente['nome_fantasia']))
 
 
@@ -29,3 +28,10 @@ class Cliente(BoxLayout):
         self.ids.codigo.text = codigo
         self.ids.nome_fantasia.text = nome_fantasia
 
+
+class MDLabel(MDLabel):
+    def on_size(self, *args):
+        self.canvas.before.clear()
+        with canvas.before:
+            Color(MDApp.theme_cls.primary_color)
+            Rectangle(pos=self.pos,size=self.size)

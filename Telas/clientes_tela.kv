@@ -5,15 +5,26 @@
 <Clientes_tela>:
     BoxLayout:
         orientation:'vertical'
-        BoxLayout:
+        BoxLayout:   #---------------------------------------HEADER
             size_hint_y: None
             height: 100
-            TextInput:
+            MDLabel:
+                text: 'Lista de Clientes'
+                halign: 'center'
+                color: app.theme_cls.primary_dark
+                background_color: app.theme_cls.primary_light
+        BoxLayout:   #----------------------------------------CAIXA DE BUSCA
+            size_hint_y: None
+            height: 100
+            MDTextField:
                 id: buscar
-            Button:
+                font_size: 30
+            MDIconButton:
                 text: 'Buscar'
-                on_release: root.adicionar_clientes()
-        ScrollView:
+                on_release: root.buscar()
+                icon: 'account-search'
+                size: 150,100
+        ScrollView:   #---------------------------------------LISTA DE CLIENTES
             BoxLayout:
                 id: box_scroll
                 orientation: 'vertical'
@@ -30,15 +41,21 @@
         id: codigo
         halign: 'center'
         size_hint_x: 1
+        color: app.theme_cls.primary_dark
     MDLabel:
         id: nome_fantasia
         halign: 'center'
         size_hint_x: 7
-    Button:
+        color: app.theme_cls.primary_dark
+    MDIconButton:
         text: 'Infos'
         size_hint_x: 1
-    Button:
+        icon: 'information-outline'
+        size: 100,100
+    MDIconButton:
         text: 'Vendas'
         size_hint_x: 1
+        icon: 'point-of-sale'
+        size: 100,100
                 
 

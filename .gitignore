@@ -1,0 +1,5 @@
+/.gitattributes
+/icons.py
+/.vscode
+/cache
+/__pychache__
