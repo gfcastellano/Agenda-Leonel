@@ -1,6 +1,6 @@
 # Aplicativo *EM PROCESSO DE DESENVOLVIMENTO* que será criado usando a biblioteca Kivy para python.
 
-## Uso:
+## Uso/Aplicações:
 - Visualizar, adicionar e editar lista de contatos comerciais
 - [x] Visualizar distribuição de contatos comerciais em um mapa da cidade
 - Adicionar eventos de contato comercial (agenda)
