@@ -2,7 +2,7 @@
 
 ## Uso:
 - Visualizar, adicionar e editar lista de contatos comerciais
-- Visualizar distribuição de contatos comerciais em um mapa da cidade
+- Visualizar distribuição de contatos comerciais em um mapa da cidade - [x] 
 - Adicionar eventos de contato comercial (agenda)
 - Gerenciar estoques de produtos
 - Emitir relatórios e métricas de eficiencia de contatos comerciais (melhor dia e horario para contato, sugestão de produtos, etc)
