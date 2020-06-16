@@ -16,7 +16,7 @@ class Gerenciador(ScreenManager):
 class MainApp(MDApp):
     dados_clientes =[]
     def build(self):
-        self.theme_cls.primary_palette = "Gray"
+        self.theme_cls.primary_palette = "BlueGray"
         return Gerenciador()
 
     def on_start(self):
