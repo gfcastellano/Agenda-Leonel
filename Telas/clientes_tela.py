@@ -28,10 +28,3 @@ class Cliente(BoxLayout):
         self.ids.codigo.text = codigo
         self.ids.nome_fantasia.text = nome_fantasia
 
-
-class MDLabel(MDLabel):
-    def on_size(self, *args):
-        self.canvas.before.clear()
-        with canvas.before:
-            Color(MDApp.theme_cls.primary_color)
-            Rectangle(pos=self.pos,size=self.size)
