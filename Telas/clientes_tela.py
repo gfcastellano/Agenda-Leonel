@@ -3,10 +3,12 @@ from kivy.graphics import Color, Rectangle
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.label import MDLabel
+from kivy.clock import Clock
+
 
 
 class Clientes_tela(Screen):
-    
+    dados_clientes=[]
     def on_pre_enter(self):
         print('Entrando em Mapa_tela')
         app = MDApp.get_running_app()
@@ -21,7 +23,11 @@ class Clientes_tela(Screen):
         for cliente in dados_clientes:
             scroll.add_widget(Cliente(codigo = str(cliente['codigo']),nome_fantasia = cliente['nome_fantasia']))
 
-    def buscar(self):
+    def mostrar_popup(self):
+        MDApp.get_running_app().popup_leituradados.open()
+        Clock.schedule_once(self.buscar,0.1)
+
+    def buscar(self,*args):
         print(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
         try:  #Se conseguir transformar em int significa que é pra procurar pelo código
             texto = int(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
@@ -43,6 +49,10 @@ class Clientes_tela(Screen):
                     match.append(cliente)
         self.apagar_clientes()
         self.adicionar_clientes(match)
+        self.fechar_popup()
+
+    def fechar_popup(self):
+        MDApp.get_running_app().popup_leituradados.dismiss()
 
     def apagar_clientes(self):
         MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.clear_widgets()
@@ -55,4 +65,7 @@ class Cliente(BoxLayout):
         super().__init__(**kwargs)
         self.ids.codigo.text = codigo
         self.ids.nome_fantasia.text = nome_fantasia
+
+
+
 

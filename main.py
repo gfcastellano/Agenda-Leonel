@@ -5,6 +5,8 @@ from Telas.menu_tela import Menu
 from Telas.mapa_tela import Mapa_tela
 from Mapa.mapa import Mapa
 from Telas.clientes_tela import Clientes_tela
+from kivy.uix.popup import Popup
+from Popups.popups import Popup_LeituraDados
 
 import json
 
@@ -15,6 +17,8 @@ class Gerenciador(ScreenManager):
 
 class MainApp(MDApp):
     dados_clientes =[]
+    popup_leituradados = None
+    
     def build(self):
         self.theme_cls.primary_palette = "BlueGray"
         return Gerenciador()
@@ -23,6 +27,7 @@ class MainApp(MDApp):
         self.carregar_clientes()
         clientes_tela = Clientes_tela()
         clientes_tela.adicionar_clientes(self.dados_clientes)
+        self.popup_leituradados = Popup_LeituraDados()
 
     def carregar_clientes(self):
         with open('clientes.json', 'r') as file:
