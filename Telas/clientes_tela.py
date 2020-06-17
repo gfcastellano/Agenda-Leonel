@@ -16,7 +16,7 @@ class Clientes_tela(Screen):
             self.adicionar_clientes(self.dados_clientes)
 
     def adicionar_clientes(self,dados_clientes):
-        print('Adicionando clientes na tela')
+        print('Adicionando clientes na tela Clientes_tela')
         scroll = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll
         for cliente in dados_clientes:
             scroll.add_widget(Cliente(codigo = str(cliente['codigo']),nome_fantasia = cliente['nome_fantasia']))
