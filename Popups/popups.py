@@ -1,7 +1,8 @@
 from kivymd.uix.dialog import MDDialog
 
 class Popup_LeituraDados(MDDialog):
-    title = 'Isso pode levar alguns segundos... aguarde!'
+    title = 'AGUARDE!'
+    text = 'Acessando base de dados, isso pode demorar...'
 
     def __init__(self):
         super().__init__()
