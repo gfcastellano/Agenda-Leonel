@@ -7,7 +7,7 @@ import webbrowser
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
-from urllib3 import parse
+from urllib import parse
 
 
 class Info_tela(Screen):
