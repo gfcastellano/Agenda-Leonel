@@ -49,7 +49,7 @@ requirements = python3,kivy==master,openssl,requests,urllib3,chardet,idna,future
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/data/icons8-cachorro-64.png
+icon.filename = icons8-cachorro-64.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
