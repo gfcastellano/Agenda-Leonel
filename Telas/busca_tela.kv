@@ -3,17 +3,21 @@
 <Busca_tela>:
     BoxLayout:
         orientation: 'vertical'
+        #-------------------------------------------------HEADER
+        MDLabel:
+            text: 'Busca Avancada'
+            halign: 'center'
+            color: app.theme_cls.primary_dark
+            font_size: 60
+            size_hint_y: None
+            height: 100
         ScrollView:
             BoxLayout:
                 orientation: 'vertical'
-#-------------------------------------------------HEADER
-                MDLabel:
-                    text: 'Busca Avancada'
-                    halign: 'center'
-                    color: app.theme_cls.primary_dark
-                    font_size: 60
+                size_hint_y: None
+                height: self.minimum_height
 #-------------------------------------------------CAIXAS
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'Codigo:'
                         size_hint_x: 0.5
@@ -22,7 +26,7 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('codigo')
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'Nome:'
                         size_hint_x: 0.5
@@ -31,7 +35,7 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('nome_fantasia') 
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'Endereco:'
                         size_hint_x: 0.5
@@ -40,7 +44,7 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('endereco') 
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'Bairro:'
                         size_hint_x: 0.5
@@ -49,7 +53,7 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('bairro') 
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'Telefone:'
                         size_hint_x: 0.5
@@ -58,7 +62,7 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('telefone') 
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'Contato:'
                         size_hint_x: 0.5
@@ -67,7 +71,7 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('contato') 
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'Perfil:'
                         size_hint_x: 0.5
@@ -76,7 +80,7 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('perfil')
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'Banho:'
                         halign: 'center'
@@ -89,7 +93,7 @@
                     MDLabel:
                         text: 'Clinica:'
                         halign: 'center'
-                BoxLayout:
+                BoxparaScroll:
                     MDCheckbox:
                         id: banho
                     MDCheckbox:
@@ -98,7 +102,7 @@
                         id: pet_shop
                     MDCheckbox:
                         id: clinica
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'Razao Social:'
                         size_hint_x: 0.5
@@ -107,7 +111,7 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('razao_social') 
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'CNPJ:'
                         size_hint_x: 0.5
@@ -116,7 +120,7 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('cnpj') 
-                BoxLayout:
+                BoxparaScroll:
                     MDLabel:
                         text: 'CEP:'
                         size_hint_x: 0.5
@@ -125,11 +129,34 @@
                     MDIconButton:
                         icon: 'eraser'
                         on_release: root.apagar_texto('cep')
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Therapet:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Tesoura:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Tapetinho:'
+                        halign: 'center'
+                BoxparaScroll:
+                    MDCheckbox:
+                        id: therapet
+                    MDCheckbox:
+                        id: tesoura
+                    MDCheckbox:
+                        id: tap_higienico
 #-------------------------------------------------------------BOTÃO DE BUSCA
         MDRaisedButton:
             text: 'Buscar'
-            on_release: self.busca_avancada()
+            on_release: root.mostrar_popup()
             size_hint_x: 1
             size_hint_y: None
             height: 100
 
+
+
+<BoxparaScroll@BoxLayout>:
+    padding: [5,0,0,0]
+    size_hint_y: None
+    height: 60

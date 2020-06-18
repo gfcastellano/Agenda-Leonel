@@ -14,7 +14,7 @@ class Clientes_tela(Screen):
     dados_clientes=[]
 
     def on_pre_enter(self):
-        print('Entrando em Mapa_tela')
+        print('Entrando em Clientes_tela')
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
         children = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.children
@@ -24,6 +24,8 @@ class Clientes_tela(Screen):
     def adicionar_clientes(self,dados_clientes):
         print('Adicionando clientes na tela Clientes_tela')
         scroll = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll
+        if len(dados_clientes) == 0: #Caso ele receba um match que contem nada
+            scroll.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
         for cliente in dados_clientes:
             scroll.add_widget(Cliente(codigo = str(cliente['codigo']),nome_fantasia = cliente['nome_fantasia']))
 
@@ -32,13 +34,13 @@ class Clientes_tela(Screen):
         Clock.schedule_once(self.buscar,0.1)
 
     def buscar(self,*args):
-        print(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
+        print('Buscando pelo texto:',MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
         try:  #Se conseguir transformar em int significa que é pra procurar pelo código
             texto = int(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
-            texto = str(texto) #se manter no formato int não é possivel iterar
+            texto = str(texto).lower() #se manter no formato int não é possivel iterar
             parametro = 'codigo'
         except ValueError:
-            texto = str(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
+            texto = str(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text).lower()
             parametro = 'nome_fantasia'
         self.executar_busca(texto.lower(),parametro)
 
