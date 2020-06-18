@@ -104,7 +104,7 @@ class Info_tela(Screen):
         endereco = self.ids.endereco.text
         numero = self.ids.numero.text
         bairro = self.ids.bairro.text
-        endereco_completo = endereco + ', ' + numero + ' - ' + bairro + 
+        endereco_completo = endereco + ', ' + numero + ' - ' + bairro
         print(endereco_completo)
         endereco_completo = parse.quote(endereco_completo)
         url_maps = 'https://www.google.com.br/maps/dir//'
