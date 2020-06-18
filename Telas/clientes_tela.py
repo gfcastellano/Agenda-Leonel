@@ -3,12 +3,19 @@ from kivy.graphics import Color, Rectangle
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.label import MDLabel
+<<<<<<< HEAD
 from kivy.clock import Clock
 
 
 
 class Clientes_tela(Screen):
     dados_clientes=[]
+=======
+
+
+class Clientes_tela(Screen):
+    
+>>>>>>> master
     def on_pre_enter(self):
         print('Entrando em Mapa_tela')
         app = MDApp.get_running_app()
@@ -18,16 +25,24 @@ class Clientes_tela(Screen):
             self.adicionar_clientes(self.dados_clientes)
 
     def adicionar_clientes(self,dados_clientes):
+<<<<<<< HEAD
         print('Adicionando clientes na tela Clientes_tela')
+=======
+        print('Adicionando clientes na tela')
+>>>>>>> master
         scroll = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll
         for cliente in dados_clientes:
             scroll.add_widget(Cliente(codigo = str(cliente['codigo']),nome_fantasia = cliente['nome_fantasia']))
 
+<<<<<<< HEAD
     def mostrar_popup(self):
         MDApp.get_running_app().popup_leituradados.open()
         Clock.schedule_once(self.buscar,0.1)
 
     def buscar(self,*args):
+=======
+    def buscar(self):
+>>>>>>> master
         print(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
         try:  #Se conseguir transformar em int significa que é pra procurar pelo código
             texto = int(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
@@ -49,10 +64,13 @@ class Clientes_tela(Screen):
                     match.append(cliente)
         self.apagar_clientes()
         self.adicionar_clientes(match)
+<<<<<<< HEAD
         self.fechar_popup()
 
     def fechar_popup(self):
         MDApp.get_running_app().popup_leituradados.dismiss()
+=======
+>>>>>>> master
 
     def apagar_clientes(self):
         MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.clear_widgets()
@@ -66,6 +84,9 @@ class Cliente(BoxLayout):
         self.ids.codigo.text = codigo
         self.ids.nome_fantasia.text = nome_fantasia
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> master

@@ -8,6 +8,7 @@ from Telas.clientes_tela import Clientes_tela
 from kivy.uix.popup import Popup
 from Popups.popups import Popup_LeituraDados
 
+
 import json
 
 
@@ -36,6 +37,9 @@ class MainApp(MDApp):
                 print('clientes.json carregado com sucesso,' 'tamanho:',len(self.dados_clientes))
             except FileNotFoundError:
                 print('clientes.json não achado no diretório')
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     
 MainApp().run()
