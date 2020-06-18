@@ -13,7 +13,7 @@ from kivy.core.clipboard import Clipboard
 
 class Info_tela(Screen):
     dados_clientes=[]
-    pop_up_maps=None
+    popup_maps=None
 
     def on_pre_enter(self):
         app = MDApp.get_running_app()
@@ -87,20 +87,22 @@ class Info_tela(Screen):
         self.ids.tap_higienico.active = str(dados['tap_higienico'])
 
     def abrir_popup_maps(self):    
-        if not self.pop_up_maps:
-            self.pop_up_maps = MDDialog(
+        if not self.popup_maps:
+            self.popup_maps = MDDialog(
                 text="Deseja ir para rotas no Maps?",
                 buttons=[
+                    MDLabel(
+                        text=''),
                     MDFlatButton(
-                        text="SIM", text_color=MDApp.get_running_app().theme_cls.primary_color, events_callback = MDApp.get_running_app().root.get_screen('Info_tela').abrir_maps
+                        text="SIM", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = MDApp.get_running_app().root.get_screen('Info_tela').abrir_maps
                     ),
                 ],
             )
-        self.pop_up_maps.open()
+        self.popup_maps.open()
     
     def abrir_maps(self,*args):
-        Print('Abrindo Google Maps')
-        self.pop_up_maps.dismiss()
+        print('Abrindo Google Maps')
+        self.popup_maps.dismiss()
         endereco = self.ids.endereco.text
         numero = self.ids.numero.text
         bairro = self.ids.bairro.text
