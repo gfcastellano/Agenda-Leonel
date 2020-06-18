@@ -92,7 +92,7 @@ class Info_tela(Screen):
                 text="Deseja ir para rotas no Maps?",
                 buttons=[
                     MDFlatButton(
-                        text="SIM", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.abrir_maps
+                        text="SIM", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = MDApp.get_running_app().root.get_screen('Info_tela').abrir_maps
                     ),
                 ],
             )

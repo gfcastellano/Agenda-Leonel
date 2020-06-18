@@ -36,7 +36,7 @@ class MainApp(MDApp):
         clientes_tela = Clientes_tela()
         clientes_tela.adicionar_clientes(self.dados_clientes)
         self.popup_leituradados = Popup_LeituraDados()
-        self.popup_maps = Popup_Maps()
+        #self.popup_maps = Popup_Maps()
 
     def carregar_clientes(self):
         with open('clientes.json', 'r') as file:
