@@ -13,8 +13,8 @@ from kivy.core.clipboard import Clipboard
 
 class Info_tela(Screen):
     dados_clientes=[]
-    dialog=None
-    cop=None
+    pop_up_maps=None
+
     def on_pre_enter(self):
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
@@ -87,8 +87,8 @@ class Info_tela(Screen):
         self.ids.tap_higienico.active = str(dados['tap_higienico'])
 
     def abrir_popup_maps(self):    
-        if not self.dialog:
-            self.dialog = MDDialog(
+        if not self.pop_up_maps:
+            self.pop_up_maps = MDDialog(
                 text="Deseja ir para rotas no Maps?",
                 buttons=[
                     MDFlatButton(
@@ -96,14 +96,15 @@ class Info_tela(Screen):
                     ),
                 ],
             )
-        self.dialog.open()
+        self.pop_up_maps.open()
     
     def abrir_maps(self,*args):
-        self.dialog.dismiss()
+        Print('Abrindo Google Maps')
+        self.pop_up_maps.dismiss()
         endereco = self.ids.endereco.text
         numero = self.ids.numero.text
         bairro = self.ids.bairro.text
-        endereco_completo = endereco + ', ' + numero + ' - ' + bairro
+        endereco_completo = endereco + ', ' + numero + ' - ' + bairro + 
         print(endereco_completo)
         endereco_completo = parse.quote(endereco_completo)
         url_maps = 'https://www.google.com.br/maps/dir//'
