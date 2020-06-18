@@ -2,7 +2,6 @@ import android
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivy.core.window import Window
-import webbrowser
 from kivymd.toast import toast
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
@@ -104,6 +103,7 @@ class Info_tela(Screen):
         self.popup_maps.open()
     
     def abrir_maps(self,*args):
+        import webbrowser
         print('Abrindo Google Maps')
         endereco = self.ids.endereco.text
         numero = self.ids.numero.text
