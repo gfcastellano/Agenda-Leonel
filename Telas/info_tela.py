@@ -1,7 +1,6 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivy.core.window import Window
-from kivymd.toast import toast
 import pyperclip
 import webbrowser
 from kivymd.uix.button import MDFlatButton
@@ -13,6 +12,7 @@ from urllib import parse
 class Info_tela(Screen):
     dados_clientes=[]
     dialog=None
+    cop=None
     def on_pre_enter(self):
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
@@ -112,10 +112,28 @@ class Info_tela(Screen):
         webbrowser.open(url)
 
     def copiar(self,ref):
-        toast('Número de telefone copiado')
         numero_copiado = ref.text
         print(numero_copiado)
         pyperclip.copy(numero_copiado)
+        self.abrir_popup_copiar()
+
+    def abrir_popup_copiar(self):   
+        if not self.cop:
+            self.cop = MDDialog(
+                text="Numero de telefone copiado",
+                buttons=[
+                    MDLabel(
+                        text=""
+                    ),
+                    MDFlatButton(
+                        text="OK", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_popup_copiar
+                    ),
+                ],
+            )
+        self.cop.open()
+
+    def fechar_popup_copiar(self,*args):
+        self.cop.dismiss()
 
     def voltar(self,window,key,*args):
         if key ==27:
