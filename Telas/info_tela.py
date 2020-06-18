@@ -7,6 +7,7 @@ import webbrowser
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
+from urllib import parse
 
 
 class Info_tela(Screen):
@@ -105,6 +106,10 @@ class Info_tela(Screen):
         bairro = self.ids.bairro.text
         endereco_completo = endereco + ', ' + numero + ' - ' + bairro
         print(endereco_completo)
+        endereco_completo = parse.quote(endereco_completo)
+        url_maps = 'https://www.google.com.br/maps/dir//'
+        url = url_maps + endereco_completo
+        webbrowser.open(url)
 
     def copiar(self,ref):
         toast('Número de telefone copiado')
