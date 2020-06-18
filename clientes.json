@@ -5052,7 +5052,7 @@
    "telefone_3": "",
    "tipo_3": "",
    "data": null,
-   "banho": "",
+   "banho": "True",
    "tosa": "",
    "pet_shop": "",
    "clinica": "",

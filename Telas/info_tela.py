@@ -75,16 +75,19 @@ class Info_tela(Screen):
         self.ids.nome_3.text        = str(dados['nome_3'])
         self.ids.telefone_3.text    = str(dados['telefone_3'])
         self.ids.tipo_3.text        = str(dados['tipo_3'])
-        self.ids.banho.active       = str(dados['banho'])
-        self.ids.tosa.active        = str(dados['tosa'])
-        self.ids.pet_shop.active    = str(dados['pet_shop'])
-        self.ids.clinica.active     = str(dados['clinica'])
         self.ids.razao_social.text  = str(dados['razao_social'])
         self.ids.cnpj.text          = str(dados['cnpj'])
         self.ids.cep.text           = str(dados['cep'])
-        self.ids.therapet.active    = str(dados['therapet'])
-        self.ids.tesoura.active     = str(dados['tesoura'])
-        self.ids.tap_higienico.active = str(dados['tap_higienico'])
+
+        x = (lambda a: 'Sim' if a == 'True' else '')
+
+        self.ids.therapet.text    = x(str(dados['therapet']))
+        self.ids.tesoura.text     = x(str(dados['tesoura']))
+        self.ids.tap_higienico.text = x(str(dados['tap_higienico']))
+        self.ids.banho.text       = x(str(dados['banho']))
+        self.ids.tosa.text        = x(str(dados['tosa']))
+        self.ids.pet_shop.text    = x(str(dados['pet_shop']))
+        self.ids.clinica.text     = x(str(dados['clinica']))
 
     def abrir_popup_maps(self):    
         if not self.popup_maps:
