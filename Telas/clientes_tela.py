@@ -23,7 +23,7 @@ class Clientes_tela(Screen):
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
         children = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.children
-        if len(children) < 1:
+        if len(children) <= 1:
             self.adicionar_clientes(self.dados_clientes)
 
     def adicionar_clientes(self,dados_clientes):
@@ -67,6 +67,7 @@ class Clientes_tela(Screen):
 
     def apagar_clientes(self):
         MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.clear_widgets()
+    
 
     def voltar(self,window,key,*args):
         if key ==27:
@@ -92,6 +93,11 @@ class Cliente(BoxLayout):
         super().__init__(**kwargs)
         self.ids.codigo.text = codigo
         self.ids.nome_fantasia.text = nome_fantasia
+
+    def ir_para_infos(self, root):
+        app = MDApp.get_running_app()
+        app.root.current = 'Info_tela'
+        app.root.get_screen('Info_tela').adicionar_infos(root)
 
 
 

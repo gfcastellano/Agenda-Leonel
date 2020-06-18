@@ -7,7 +7,10 @@ from Mapa.mapa import Mapa
 from Telas.clientes_tela import Clientes_tela
 from Telas.busca_tela import Busca_tela
 from kivy.uix.popup import Popup
-from Popups.popups import Popup_LeituraDados
+from Popups.popups import Popup_LeituraDados, Popup_Maps
+from Telas.info_tela import Info_tela
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton, MDRaisedButton
 
 
 import json
@@ -20,6 +23,7 @@ class Gerenciador(ScreenManager):
 class MainApp(MDApp):
     dados_clientes =[]
     popup_leituradados = None
+    popup_maps = None
     telas = ['Menu_tela']
     
     def build(self):
@@ -31,6 +35,7 @@ class MainApp(MDApp):
         clientes_tela = Clientes_tela()
         clientes_tela.adicionar_clientes(self.dados_clientes)
         self.popup_leituradados = Popup_LeituraDados()
+        self.popup_maps = Popup_Maps()
 
     def carregar_clientes(self):
         with open('clientes.json', 'r') as file:

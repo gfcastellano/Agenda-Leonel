@@ -53,6 +53,9 @@
         size_hint_x: 2
         icon: 'information-outline'
         size: self.size
+        on_release: 
+            root.ir_para_infos(root)
+            app.root.transition.direction = 'left'
     MDIconButton:
         size_hint_x: 2
         icon: 'point-of-sale'
