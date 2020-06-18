@@ -4,6 +4,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.label import MDLabel
 from kivy.clock import Clock
+from kivy.core.window import Window
 
 
 
@@ -14,6 +15,10 @@ class Clientes_tela(Screen):
     dados_clientes=[]
 
     def on_pre_enter(self):
+        app = MDApp.get_running_app()
+        gerenciador = app.root
+        app.telas.append(str(gerenciador.current_screen)[14:-2])
+        Window.bind(on_keyboard=self.voltar)
         print('Entrando em Clientes_tela')
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
@@ -63,6 +68,15 @@ class Clientes_tela(Screen):
     def apagar_clientes(self):
         MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.clear_widgets()
 
+    def voltar(self,window,key,*args):
+        if key ==27:
+            gerenciador = MDApp.get_running_app().root
+            app = MDApp.get_running_app()
+            gerenciador.current = str(app.telas[-2])
+            return True
+        if key == 113:
+            app = MDApp.get_running_app()
+            print(app.telas)
         
 
 

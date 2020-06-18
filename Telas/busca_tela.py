@@ -2,9 +2,16 @@ from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
+from kivy.core.window import Window
 
 
 class Busca_tela(Screen):
+    def on_pre_enter(self):
+        app = MDApp.get_running_app()
+        gerenciador = app.root
+        app.telas.append(str(gerenciador.current_screen)[14:-2])
+        Window.bind(on_keyboard=self.voltar)
+
     def apagar_texto(self,id):
         field = MDApp.get_running_app().root.get_screen('Busca_tela').ids
         field[id].text = ''
@@ -82,6 +89,16 @@ class Busca_tela(Screen):
         # Ele usa o match que é passado na chamada da função acima e instaura o Clientes_tela.dados_clientes como match.
         MDApp.get_running_app().root.current = 'Clientes_tela'
         clientes_tela.fechar_popup()
+
+    def voltar(self,window,key,*args):
+        if key ==27:
+            gerenciador = MDApp.get_running_app().root
+            app = MDApp.get_running_app()
+            gerenciador.current = str(app.telas[-2])
+            return True
+        if key == 113:
+            app = MDApp.get_running_app()
+            print(app.telas)
 
 
              

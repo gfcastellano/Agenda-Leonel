@@ -20,6 +20,7 @@ class Gerenciador(ScreenManager):
 class MainApp(MDApp):
     dados_clientes =[]
     popup_leituradados = None
+    telas = ['Menu_tela']
     
     def build(self):
         self.theme_cls.primary_palette = "BlueGray"
