@@ -5,6 +5,7 @@ from Telas.menu_tela import Menu
 from Telas.mapa_tela import Mapa_tela
 from Mapa.mapa import Mapa
 from Telas.clientes_tela import Clientes_tela
+from Telas.busca_tela import Busca_tela
 
 import json
 
