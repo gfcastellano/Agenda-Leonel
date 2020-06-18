@@ -105,7 +105,6 @@ class Info_tela(Screen):
     
     def abrir_maps(self,*args):
         print('Abrindo Google Maps')
-        self.popup_maps.dismiss()
         endereco = self.ids.endereco.text
         numero = self.ids.numero.text
         bairro = self.ids.bairro.text
@@ -115,6 +114,7 @@ class Info_tela(Screen):
         url_maps = 'https://www.google.com.br/maps/dir//'
         url = url_maps + endereco_completo
         webbrowser.open(url)
+        self.popup_maps.dismiss()
 
     def copiar(self,ref):
         toast('Numero copiado')
