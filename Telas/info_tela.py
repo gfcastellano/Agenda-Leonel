@@ -1,7 +1,7 @@
+import android
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivy.core.window import Window
-import pyperclip
 import webbrowser
 from kivymd.toast import toast
 from kivymd.uix.button import MDFlatButton
@@ -113,6 +113,7 @@ class Info_tela(Screen):
         endereco_completo = parse.quote(endereco_completo)
         url_maps = 'https://www.google.com.br/maps/dir//'
         url = url_maps + endereco_completo
+        print(url)
         webbrowser.open(url)
         self.popup_maps.dismiss()
 
