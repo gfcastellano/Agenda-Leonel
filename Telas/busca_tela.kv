@@ -3,117 +3,133 @@
 <Busca_tela>:
     BoxLayout:
         orientation: 'vertical'
-        BoxLayout:
-            MDLabel:
-                text: 'Codigo:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: codigo
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self)
-        BoxLayout:
-            MDLabel:
-                text: 'Nome:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: nome_fantasia
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self) 
-        BoxLayout:
-            MDLabel:
-                text: 'Endereco:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: endereco
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self) 
-        BoxLayout:
-            MDLabel:
-                text: 'Bairro:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: bairro
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self) 
-        BoxLayout:
-            MDLabel:
-                text: 'Telefone:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: telefone
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self) 
-        BoxLayout:
-            MDLabel:
-                text: 'Contato:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: contato
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self) 
-        BoxLayout:
-            MDLabel:
-                text: 'Perfil:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: perfil
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self)
-        BoxLayout:
-            MDLabel:
-                text: 'Banho:'
-                halign: 'center'
-            MDLabel:
-                text: 'Tosa:'
-                halign: 'center'
-            MDLabel:
-                text: 'Pet-Shop:'
-                halign: 'center'
-            MDLabel:
-                text: 'Clinica:'
-                halign: 'center'
-        BoxLayout:
-            MDCheckbox:
-                id: banho
-            MDCheckbox:
-                id: tosa
-            MDCheckbox:
-                id: pet_shop
-            MDCheckbox:
-                id: clinica
-        BoxLayout:
-            MDLabel:
-                text: 'Razao Social:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: razao_social
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self) 
-        BoxLayout:
-            MDLabel:
-                text: 'CNPJ:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: cnpj
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self) 
-        BoxLayout:
-            MDLabel:
-                text: 'CEP:'
-                size_hint_x: 0.5
-            MDTextField:
-                id: cep
-            MDIconButton:
-                icon: 'eraser'
-                on_release: root.apagar_texto(self)
-
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+#-------------------------------------------------HEADER
+                MDLabel:
+                    text: 'Busca Avancada'
+                    halign: 'center'
+                    color: app.theme_cls.primary_dark
+                    font_size: 60
+#-------------------------------------------------CAIXAS
+                BoxLayout:
+                    MDLabel:
+                        text: 'Codigo:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: codigo
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('codigo')
+                BoxLayout:
+                    MDLabel:
+                        text: 'Nome:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: nome_fantasia
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('nome_fantasia') 
+                BoxLayout:
+                    MDLabel:
+                        text: 'Endereco:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: endereco
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('endereco') 
+                BoxLayout:
+                    MDLabel:
+                        text: 'Bairro:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: bairro
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('bairro') 
+                BoxLayout:
+                    MDLabel:
+                        text: 'Telefone:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: telefone
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('telefone') 
+                BoxLayout:
+                    MDLabel:
+                        text: 'Contato:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: contato
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('contato') 
+                BoxLayout:
+                    MDLabel:
+                        text: 'Perfil:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: perfil
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('perfil')
+                BoxLayout:
+                    MDLabel:
+                        text: 'Banho:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Tosa:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Pet-Shop:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Clinica:'
+                        halign: 'center'
+                BoxLayout:
+                    MDCheckbox:
+                        id: banho
+                    MDCheckbox:
+                        id: tosa
+                    MDCheckbox:
+                        id: pet_shop
+                    MDCheckbox:
+                        id: clinica
+                BoxLayout:
+                    MDLabel:
+                        text: 'Razao Social:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: razao_social
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('razao_social') 
+                BoxLayout:
+                    MDLabel:
+                        text: 'CNPJ:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: cnpj
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('cnpj') 
+                BoxLayout:
+                    MDLabel:
+                        text: 'CEP:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: cep
+                    MDIconButton:
+                        icon: 'eraser'
+                        on_release: root.apagar_texto('cep')
+#-------------------------------------------------------------BOTÃO DE BUSCA
+        MDRaisedButton:
+            text: 'Buscar'
+            on_release: self.busca_avancada()
+            size_hint_x: 1
+            size_hint_y: None
+            height: 100
 
