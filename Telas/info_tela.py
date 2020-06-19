@@ -89,12 +89,18 @@ class Info_tela(Screen):
 
     def abrir_popup_maps(self):    
         if not self.popup_maps:
-            self.popup_maps = MDDialog(title="Deseja ir para rotas no Maps?",
-            buttons = [MDLabel(text=''), MDRaisedButton(text='Sim', on_release=self.abrir_maps),])
+            self.popup_maps = MDDialog( size_hint = [0.8,0.8],
+                text="Deseja ir para rotas no Maps?",
+                buttons=[MDRaisedButton(
+                        text="SIM", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.abrir_maps
+                    ),
+                    MDLabel(
+                        text='')
+                ],
+            )
         self.popup_maps.open()
     
-    def abrir_maps(self,*args):        
-        self.popup_maps.dismiss()
+    def abrir_maps(self,*args):
         import webbrowser
         print('Abrindo Google Maps')
         endereco = self.ids.endereco.text
@@ -107,6 +113,7 @@ class Info_tela(Screen):
         url = url_maps + endereco_completo
         print(url)
         webbrowser.open(url)
+        self.popup_maps.dismiss()
 
     def copiar(self,ref):
         toast('Numero copiado')
