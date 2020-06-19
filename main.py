@@ -11,7 +11,6 @@ from Popups.popups import Popup_LeituraDados, Popup_Maps
 from Telas.info_tela import Info_tela
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRaisedButton
-import webbrowser
 
 
 import json
