@@ -7,6 +7,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
 from urllib import parse
 from kivy.core.clipboard import Clipboard
+from mapview import MapMarkerPopup
 
 
 class Info_tela(Screen):
@@ -14,12 +15,13 @@ class Info_tela(Screen):
     popup_maps=None
 
     def on_pre_enter(self):
+        print('Entrando em Info_tela')
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
         gerenciador = app.root
         app.telas.append(str(gerenciador.current_screen)[14:-2])
         Window.bind(on_keyboard=self.voltar)
-        self.apagar_infos()
+        #self.apagar_infos()
 
     def apagar_infos(self):
         print('Apagando infos da Info_tela')
@@ -53,19 +55,23 @@ class Info_tela(Screen):
     def adicionar_infos(self,root):
         print('Adicionando infos a Info_tela')
         print('TYPE root:',type(root))
+        print(root)
         if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>":
+            print('NOME_FANTASIA!!!!!!!!!!!!!!!!')
             nome_fantasia = str(root.ids.nome_fantasia.text)
             dados=''
             for cliente in self.dados_clientes:
                 if nome_fantasia == cliente['nome_fantasia']:
                     dados = cliente
         else:
+            print('LAAAAAATTT!!!!!!!!!!!!!!!!')
             lat = root
             dados=''
+            print('------------------------------------TAMANHO DE SELF.DADOS_CLIENTES:',len(self.dados_clientes))
             for cliente in self.dados_clientes:
-                if lat == cliente['lat']:
+                if cliente['lat'] == lat:
                     dados = cliente
-        
+           
         self.ids.codigo.text        = str(dados['codigo'])
         self.ids.nome_fantasia.text = str(dados['nome_fantasia'])
         self.ids.endereco.text      = str(dados['endereco'])
@@ -132,6 +138,22 @@ class Info_tela(Screen):
 
     def fechar_popup_copiar(self,*args):
         self.cop.dismiss()
+
+    def ir_para_mapa(self):
+        for cliente in self.dados_clientes:
+            if cliente['nome_fantasia'] == self.ids.nome_fantasia.text:
+                dados = cliente
+        try:
+            lat,lon = dados['lat'], dados['lon']
+            app = MDApp.get_running_app()
+            mapa_tela = app.root.get_screen('Mapa_tela')
+            mapa_tela.ids.mapa.center_on(lat,lon)
+            mapa_tela.ids.mapa.zoom = 16
+            app.root.transition.direction = 'right'
+            app.root.current = 'Mapa_tela'
+        except:
+            pass
+        
 
     def voltar(self,window,key,*args):
         if key ==27:

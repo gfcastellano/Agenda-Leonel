@@ -1,6 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
-from Mapa.marcador import Marcador
+from Mapa.marcador import Marcador, Marcador_vermelho
 from kivy.core.window import Window
 
 class Mapa_tela(Screen):
@@ -38,11 +38,17 @@ class Mapa_tela(Screen):
 
     def voltar(self,window,key,*args):
         if key ==27:
-            gerenciador = MDApp.get_running_app().root
             app = MDApp.get_running_app()
-            gerenciador.transition.direction = 'left'
-            gerenciador.current = str(app.telas[-2])
-            gerenciador.transition.direction = 'right'
+            print('----------------------------------------------------------------------------------Ultima tela:',str(app.telas[-2]))
+            if str(app.telas[-2]) == 'Info_tela':
+                print('[voltar] if')
+                app.root.transition.direction = 'left'                
+                app.root.current = str(app.telas[-2])
+            else:
+                print('[voltar] elif')
+                app.root.transition.direction = 'left'
+                app.root.current = str(app.telas[-2])
+                app.root.transition.direction = 'right'
             try:
                 if app.telas[-1] == app.telas[-3]:
                     app.telas = app.telas[:-2]
@@ -53,3 +59,7 @@ class Mapa_tela(Screen):
             app = MDApp.get_running_app()
             print(app.telas)
     
+
+    def on_pre_leave(self):
+        mapa = self.ids.mapa
+        lat, lon = mapa.lat, mapa.lon

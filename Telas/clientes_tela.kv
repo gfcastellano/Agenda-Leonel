@@ -44,21 +44,21 @@
         halign: 'center'
         size_hint_x: 1
         color: app.theme_cls.primary_dark
-    MDLabel:
+    MDTextButton:
         id: nome_fantasia
         halign: 'center'
         size_hint_x: 6
         color: app.theme_cls.primary_dark
-    MDIconButton:
-        size_hint_x: 2
-        icon: 'information-outline'
-        size: self.size
         on_release: 
             root.ir_para_infos(root)
             app.root.transition.direction = 'left'
     MDIconButton:
         size_hint_x: 2
         icon: 'point-of-sale'
+        size: self.size
+    MDIconButton:
+        size_hint_x: 2
+        icon: 'briefcase'
         size: self.size
                 
 
