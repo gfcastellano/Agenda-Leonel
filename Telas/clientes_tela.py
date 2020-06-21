@@ -46,7 +46,7 @@ class Clientes_tela(Screen):
             texto = str(texto).lower() #se manter no formato int não é possivel iterar
             parametro = 'codigo'
         except ValueError:
-            texto = str(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text).lower()
+            texto = str(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar).lower()
             parametro = 'nome_fantasia'
         self.executar_busca(texto.lower(),parametro)
 
