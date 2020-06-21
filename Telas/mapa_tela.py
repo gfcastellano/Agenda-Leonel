@@ -4,6 +4,7 @@ from Mapa.marcador import Marcador
 from kivy.core.window import Window
 
 class Mapa_tela(Screen):
+    lista_de_marcadores=[]
     def on_pre_enter(self):
         app = MDApp.get_running_app()
         gerenciador = app.root
@@ -14,20 +15,26 @@ class Mapa_tela(Screen):
         self.dados_clientes = app.dados_clientes
         children = self.ids.mapa.children
         if len(children) <= 2:
-            self.adicionar_marcadores()
+            self.adicionar_marcadores(self.dados_clientes)
+        for cliente in self.dados_clientes:
+            if cliente['nome_fantasia'] not in self.lista_de_marcadores:
+                self.adicionar_marcadores(cliente)
         
 
-    def adicionar_marcadores(self):
+    def adicionar_marcadores(self,dados_cliente):
         print('Adicionando marcadores no Mapa')
         for cliente in self.dados_clientes:
             try:
-                lat, lon = cliente['lat'],cliente['lon']
-            except KeyError:
-                continue
-            try:
-                self.ids.mapa.add_widget(Marcador(lat=lat,lon=lon))
+                nome, lat, lon = cliente['nome_fantasia'],cliente['lat'],cliente['lon']
+                if nome not in self.lista_de_marcadores:
+                    self.ids.mapa.add_widget(Marcador(lat=lat,lon=lon)) #adiciona marcador
+                    self.lista_de_marcadores.append(nome) #adiciona nome a lista
             except:
                 continue
+        
+        print('Fim de adicionar_marcadores:',len(self.lista_de_marcadores))
+        print(self.lista_de_marcadores[-1])
+                
 
     def voltar(self,window,key,*args):
         if key ==27:
