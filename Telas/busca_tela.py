@@ -87,6 +87,7 @@ class Busca_tela(Screen):
         clientes_tela = MDApp.get_running_app().root.get_screen('Clientes_tela')
         clientes_tela.apagar_clientes()
         clientes_tela.adicionar_clientes(match)
+        clientes_tela.apagar_texto()
         MDApp.get_running_app().carregar_clientes() #Não entendo pq dá um erro se não executar isso.
         # Ele usa o match que é passado na chamada da função acima e instaura o Clientes_tela.dados_clientes como match.
         MDApp.get_running_app().root.transition.direction = 'left'
