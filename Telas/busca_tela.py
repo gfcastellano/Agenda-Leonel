@@ -87,6 +87,7 @@ class Busca_tela(Screen):
         clientes_tela.adicionar_clientes(match)
         MDApp.get_running_app().carregar_clientes() #Não entendo pq dá um erro se não executar isso.
         # Ele usa o match que é passado na chamada da função acima e instaura o Clientes_tela.dados_clientes como match.
+        MDApp.get_running_app().root.transition.direction = 'left'
         MDApp.get_running_app().root.current = 'Clientes_tela'
         clientes_tela.fechar_popup()
 
