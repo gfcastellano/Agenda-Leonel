@@ -30,7 +30,7 @@ class MainApp(MDApp):
         self.theme_cls.primary_palette = "BlueGray"
         return Gerenciador()
 
-    def on_start(self):
+    def on_enter(self):
         self.carregar_clientes()
         clientes_tela = Clientes_tela()
         clientes_tela.adicionar_clientes(self.dados_clientes)
