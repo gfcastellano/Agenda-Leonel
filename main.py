@@ -25,6 +25,10 @@ class MainApp(MDApp):
     dados_clientes =[]
     popup_leituradados = None
     telas = ['Menu_tela']
+    data = {
+        'point-of-sale': 'Vendas',
+        'briefcase': 'Visitas'}
+    
     
     def build(self):
         self.theme_cls.primary_palette = "BlueGray"
