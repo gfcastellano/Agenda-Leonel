@@ -12,6 +12,7 @@
             pos_hint: {'top':1}
             elevation: 11
             left_action_items: [["menu-left", lambda x: root.voltar_toolbar()]]
+            right_action_items: [["account-search", lambda x: root.mostrar_popup()]]
 #----------------------------------------CAIXA DE BUSCA
         BoxLayout:   
             size_hint_y: None
@@ -22,8 +23,8 @@
                 size_hint_x: 4
             MDIconButton:
                 text: 'Buscar'
-                on_release: root.mostrar_popup()
-                icon: 'account-search'
+                on_release: root.apagar_texto() 
+                icon: 'backspace' 
 #---------------------------------------LISTA DE CLIENTES
         ScrollView:   
             BoxLayout:

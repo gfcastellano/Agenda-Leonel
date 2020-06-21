@@ -7,6 +7,7 @@ from kivy.core.window import Window
 
 class Busca_tela(Screen):
     def on_pre_enter(self):
+        print('Entrando em Busca_tela')
         app = MDApp.get_running_app()
         gerenciador = app.root
         app.telas.append(str(gerenciador.current_screen)[14:-2])
@@ -22,6 +23,7 @@ class Busca_tela(Screen):
         Clock.schedule_once(self.busca_avancada,0.1)
 
     def busca_avancada(self,*args):
+        print('Executando busca avançada')
         field = MDApp.get_running_app().root.get_screen('Busca_tela').ids
         dicionario = {'codigo':  field['codigo'].text,
         'nome_fantasia' : field['nome_fantasia'].text,

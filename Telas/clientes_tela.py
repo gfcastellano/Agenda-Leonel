@@ -21,7 +21,7 @@ class Clientes_tela(Screen):
         Window.bind(on_keyboard=self.voltar)
         print('Entrando em Clientes_tela')
         self.dados_clientes = app.dados_clientes
-        self.ids.buscar = ''
+        
         children = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.children
         if len(children) < 1:
             self.adicionar_clientes(self.dados_clientes)
@@ -38,19 +38,26 @@ class Clientes_tela(Screen):
         MDApp.get_running_app().popup_leituradados.open()
         Clock.schedule_once(self.buscar,0.1)
 
+    def apagar_texto(self):
+        self.ids.buscar.text = ''
+
+
     def buscar(self,*args):
         print('Excutando busca')
-        print('Buscando pelo texto:',MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar)
+        texto = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text
+        print('Buscando pelo texto:',texto)
         try:  #Se conseguir transformar em int significa que é pra procurar pelo código
-            texto = int(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar)
-            texto = str(texto).lower() #se manter no formato int não é possivel iterar
+            texto = int(texto)
+            #texto = str(texto) #se manter no formato int não é possivel iterar
             parametro = 'codigo'
         except ValueError:
-            texto = str(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar).lower()
+            #texto = str(texto)
             parametro = 'nome_fantasia'
         self.executar_busca(texto.lower(),parametro)
 
     def executar_busca(self,texto,parametro):
+        print('[executar_busca] texto:',texto)
+        print('[executar_busca] parametro:',parametro)
         match=[]
         for cliente in self.dados_clientes:
             if parametro == 'codigo':
@@ -59,6 +66,8 @@ class Clientes_tela(Screen):
             else:
                 if texto in str(cliente['nome_fantasia']).lower():
                     match.append(cliente)
+
+        print('MATCH:',len(match))
         self.apagar_clientes()
         self.adicionar_clientes(match)
         self.fechar_popup()

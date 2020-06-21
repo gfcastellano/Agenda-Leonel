@@ -24,8 +24,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: codigo
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('codigo')
                 BoxparaScroll:
                     MDLabel:
@@ -33,8 +32,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: nome_fantasia
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('nome_fantasia') 
                 BoxparaScroll:
                     MDLabel:
@@ -42,8 +40,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: endereco
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('endereco') 
                 BoxparaScroll:
                     MDLabel:
@@ -51,8 +48,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: bairro
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('bairro') 
                 BoxparaScroll:
                     MDLabel:
@@ -60,8 +56,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: telefone
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('telefone') 
                 BoxparaScroll:
                     MDLabel:
@@ -69,8 +64,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: contato
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('contato') 
                 BoxparaScroll:
                     MDLabel:
@@ -78,8 +72,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: perfil
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('perfil')
                 BoxparaScroll:
                     MDLabel:
@@ -109,8 +102,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: razao_social
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('razao_social') 
                 BoxparaScroll:
                     MDLabel:
@@ -118,8 +110,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: cnpj
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('cnpj') 
                 BoxparaScroll:
                     MDLabel:
@@ -127,8 +118,7 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: cep
-                    MDIconButton:
-                        icon: 'eraser'
+                    MDIconApagar:
                         on_release: root.apagar_texto('cep')
                 BoxparaScroll:
                     MDLabel:
@@ -161,3 +151,6 @@
     padding: [5,0,0,0]
     size_hint_y: None
     height: 120
+
+<MDIconApagar@MDIconButton>:
+    icon: 'backspace'
