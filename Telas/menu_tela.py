@@ -5,6 +5,7 @@ from kivy.core.window import Window
 
 
 class Menu(Screen):
+
     def on_enter(self):
         print('Entrando em Menu_tela')
         app = MDApp.get_running_app()
@@ -18,6 +19,7 @@ class Menu(Screen):
         except:
             pass  
         Window.bind(on_keyboard=self.voltar)
+
         
     def voltar(self,window,key,*args):
         if key ==27:
