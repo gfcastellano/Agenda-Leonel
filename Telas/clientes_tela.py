@@ -21,6 +21,7 @@ class Clientes_tela(Screen):
         Window.bind(on_keyboard=self.voltar)
         print('Entrando em Clientes_tela')
         self.dados_clientes = app.dados_clientes
+        self.ids.buscar = ''
         children = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.children
         if len(children) < 1:
             self.adicionar_clientes(self.dados_clientes)
@@ -67,6 +68,17 @@ class Clientes_tela(Screen):
     def apagar_clientes(self):
         MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.clear_widgets()
     
+    def voltar_toolbar(self):
+        gerenciador = MDApp.get_running_app().root
+        app = MDApp.get_running_app()
+        gerenciador.transition.direction = 'left'
+        gerenciador.current = str(app.telas[-2])
+        gerenciador.transition.direction = 'right'
+        try:
+            if app.telas[-1] == app.telas[-3]:
+                app.telas = app.telas[:-2]
+        except IndexError:
+            app.telas = app.telas[:-1]
 
     def voltar(self,window,key,*args):
         if key ==27:

@@ -181,3 +181,15 @@ class Adicionar_cliente_tela(Screen):
         if key == 113:
             app = MDApp.get_running_app()
             print(app.telas)
+
+    def voltar_toolbar(self):
+        gerenciador = MDApp.get_running_app().root
+        app = MDApp.get_running_app()
+        gerenciador.transition.direction = 'left'
+        gerenciador.current = str(app.telas[-2])
+        gerenciador.transition.direction = 'right'
+        try:
+            if app.telas[-1] == app.telas[-3]:
+                app.telas = app.telas[:-2]
+        except IndexError:
+            app.telas = app.telas[:-1]

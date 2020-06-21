@@ -3,14 +3,15 @@
 <Busca_tela>:
     BoxLayout:
         orientation: 'vertical'
-        #-------------------------------------------------HEADER
-        MDLabel:
-            text: 'Busca Avancada'
-            halign: 'center'
-            color: app.theme_cls.primary_dark
-            font_size: 60
+#---------------------------------------HEADER
+        MDToolbar:
+            title: 'Busca Avancada'
+            md_bg_color: app.theme_cls.primary_dark
             size_hint_y: None
             height: 100
+            pos_hint: {'top':1}
+            elevation: 11
+            left_action_items: [["menu-left", lambda x: root.voltar_toolbar()]]
         ScrollView:
             BoxLayout:
                 orientation: 'vertical'

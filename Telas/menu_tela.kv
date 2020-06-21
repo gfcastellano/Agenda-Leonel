@@ -1,32 +1,32 @@
 
 
 <Menu>:
+#---------------------------------------HEADER
+    MDToolbar:
+        title: 'Menu'
+        md_bg_color: app.theme_cls.primary_dark
+        size_hint_y: None
+        height: 100
+        pos_hint: {'top':1}
+        elevation: 11
     BoxLayout:
         orientation: 'vertical'
-        padding: 100
+        padding: 50
         spacing: 50
         MDRaisedButton:
             text: 'Mapa'
             on_release: app.root.current = 'Mapa_tela'
-            halign: "center"
         MDRaisedButton:
             text: 'Lista de Clientes'
             on_release: app.root.current = 'Clientes_tela'
-            halign: "center"
         MDRaisedButton:
             text: 'Busca Avancada'
             on_release: app.root.current = 'Busca_tela'
-            halign: "center"
         MDRaisedButton:
             text: 'Lembretes'
-            halign: "center"
         MDRaisedButton:
             text: 'Adicionar Cliente'
             on_release: app.root.current = 'Adicionar_cliente_tela'
-            halign: "center"
         MDRaisedButton:
             text: 'Sair'
             on_release: app.stop()
-            halign: "center"
-
-           

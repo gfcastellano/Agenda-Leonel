@@ -1,138 +1,62 @@
+
+
 Screen:
     BoxLayout:
-        orientation: 'vertical'
-        #-------------------------------------------------HEADER
-        MDLabel:
-            text: 'Adicionar Cliente'
-            halign: 'center'
-            color: app.theme_cls.primary_dark
-            font_size: 60
+        orientation:'vertical'
+#---------------------------------------HEADER
+        MDToolbar:
+            title: 'Lista de Clientes'
+            md_bg_color: app.theme_cls.primary_dark
             size_hint_y: None
             height: 100
-        ScrollView:
+            pos_hint: {'top':1}
+            elevation: 11
+            left_action_items: [["menu-left", lambda x: root.voltar_toolbar()]]
+#----------------------------------------CAIXA DE BUSCA
+        BoxLayout:   
+            size_hint_y: None
+            height: 100
+            MDTextField:
+                id: buscar
+                font_size: 30
+                size_hint_x: 4
+            MDIconButton:
+                text: 'Buscar'
+                on_release: root.mostrar_popup()
+                icon: 'account-search'
+#---------------------------------------LISTA DE CLIENTES
+        ScrollView:   
             BoxLayout:
+                id: box_scroll
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
-#-------------------------------------------------CAIXAS
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Codigo:'
-                        size_hint_x: 0.5
-                    MDLabel:
-                        id: codigo
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Nome:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: nome_fantasia
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Endereco:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: endereco
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Bairro:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: bairro 
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Telefone:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: telefone_fixo
-				BoxparaScroll:
-                    MDLabel:
-                        text: 'Perfil:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: perfil					
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Contato'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Telefone'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Tipo'
-                        halign: 'center'
-                BoxparaScroll:
-                    MDTextField:
-                        id: nome_1
-                    MDTextField:
-                        id: telefone_1
-                    MDTextField:
-                        id: tipo_1
-				BoxparaScroll:
-                    MDTextField:
-                        id: nome_2
-                    MDTextField:
-                        id: telefone_2
-                    MDTextField:
-                        id: tipo_2
-				BoxparaScroll:
-                    MDTextField:
-                        id: nome_3
-                    MDTextField:
-                        id: telefone_3
-                    MDTextField:
-                        id: tipo_3
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Banho:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Tosa:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Pet-Shop:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Clinica:'
-                        halign: 'center'
-                BoxparaScroll:
-                    MDCheckbox:
-                        id: banho
-                    MDCheckbox:
-                        id: tosa
-                    MDCheckbox:
-                        id: pet_shop
-                    MDCheckbox:
-                        id: clinica
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Razao Social:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: razao_social
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'CNPJ:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: cnpj
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'CEP:'
-                        size_hint_x: 0.5
-                    MDTextField:
-                        id: cep
-#-------------------------------------------------------------BOTaO DE ADICIONAR
-        MDRaisedButton:
-            text: 'Adicionar'
-            on_release: root.adicionar()
-            size_hint_x: 1
-            size_hint_y: None
-            height: 100
 
 
 
-<BoxparaScroll@BoxLayout>:
-    padding: [5,0,0,0]
+<Cliente>:
     size_hint_y: None
-    height: 120
+    height: 100
+    padding: [0,5,0,0]
+    MDLabel:
+        id: codigo
+        halign: 'center'
+        size_hint_x: 1
+        color: app.theme_cls.primary_dark
+    MDLabel:
+        id: nome_fantasia
+        halign: 'center'
+        size_hint_x: 6
+        color: app.theme_cls.primary_dark
+    MDIconButton:
+        size_hint_x: 2
+        icon: 'information-outline'
+        size: self.size
+        on_release: 
+            root.ir_para_infos(root)
+            app.root.transition.direction = 'left'
+    MDIconButton:
+        size_hint_x: 2
+        icon: 'point-of-sale'
+        size: self.size
+                
