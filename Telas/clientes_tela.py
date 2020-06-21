@@ -39,7 +39,8 @@ class Clientes_tela(Screen):
         Clock.schedule_once(self.buscar,0.1)
 
     def buscar(self,*args):
-        print('Buscando pelo texto:',MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
+        print('Excutando busca')
+        #print('Buscando pelo texto:',MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
         try:  #Se conseguir transformar em int significa que é pra procurar pelo código
             texto = int(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
             texto = str(texto).lower() #se manter no formato int não é possivel iterar
