@@ -30,11 +30,12 @@ class MainApp(MDApp):
         self.theme_cls.primary_palette = "BlueGray"
         return Gerenciador()
 
-    def on_enter(self):
+    def on_start(self):
         self.carregar_clientes()
         clientes_tela = Clientes_tela()
         clientes_tela.adicionar_clientes(self.dados_clientes)
         self.popup_leituradados = Popup_LeituraDados()
+        
 
     def carregar_clientes(self):
         with open('clientes.json', 'r') as file:
@@ -43,5 +44,6 @@ class MainApp(MDApp):
                 print('clientes.json carregado com sucesso,' 'tamanho:',len(self.dados_clientes))
             except FileNotFoundError:
                 print('clientes.json não achado no diretório')
+                
     
 MainApp().run()
