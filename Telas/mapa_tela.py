@@ -20,7 +20,10 @@ class Mapa_tela(Screen):
     def adicionar_marcadores(self):
         print('Adicionando marcadores no Mapa')
         for cliente in self.dados_clientes:
-            lat, lon = cliente['lat'],cliente['lon']
+            try:
+                lat, lon = cliente['lat'],cliente['lon']
+            except KeyError:
+                continue
             try:
                 self.ids.mapa.add_widget(Marcador(lat=lat,lon=lon))
             except:

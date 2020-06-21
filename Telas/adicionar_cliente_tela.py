@@ -3,13 +3,18 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import Screen
 from urllib import parse
 from kivy.network.urlrequest import UrlRequest
-from pprint import pprint
 from datetime import date
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDRaisedButton
+from kivymd.uix.label import MDLabel
+
+import json
 
 
 class Adicionar_cliente_tela(Screen):
     dados_clientes=[]
     novo_cliente={}
+    popup_error=None
     def on_pre_enter(self):
         print('Entrando em Adicionar_cliente_tela')
         app = MDApp.get_running_app()
@@ -66,7 +71,7 @@ class Adicionar_cliente_tela(Screen):
         novo_cliente['nome_3']         = self.ids.nome_3.text
         novo_cliente['telefone_3']     = self.ids.telefone_3.text
         novo_cliente['tipo_3']         = self.ids.tipo_3.text
-        novo_cliente['data']           = date.today()
+        novo_cliente['data']           = str(date.today())
         novo_cliente['razao_social']   = self.ids.razao_social.text
         novo_cliente['cnpj']           = self.ids.cnpj.text
         novo_cliente['cep']            = self.ids.cep.text
@@ -88,29 +93,75 @@ class Adicionar_cliente_tela(Screen):
         app = MDApp.get_running_app()
         app.popup_leituradados.open()
         self.novo_cliente = novo_cliente
-        req = UrlRequest(url,on_success=self.success)
+        req = UrlRequest(url,on_success=self.success, on_error=self.error, on_failure=self.failure)
 
 
     def success(self,urlrequest, result):
         print('Success')
-        pprint(result['items'][0]['access'][0]['lat'])
-        pprint(result['items'][0]['access'][0]['lng'])
-        self.novo_cliente['lat'] = result['items'][0]['access'][0]['lat']
-        self.novo_cliente['lon'] = result['items'][0]['access'][0]['lng']
+        print('tamanho de result:',len(result['items']))
+        
+        if len(result['items']) == 0:
+            app = MDApp.get_running_app()
+            app.popup_leituradados.dismiss()
+            self.abrir_popup_error()
+        else:
+            try:
+                print(result['items'][0]['access'][0]['lat'])
+                print(result['items'][0]['access'][0]['lng'])
+                self.novo_cliente['lat'] = result['items'][0]['access'][0]['lat']
+                self.novo_cliente['lon'] = result['items'][0]['access'][0]['lng']
+            except KeyError:
+                app = MDApp.get_running_app()
+                app.popup_leituradados.dismiss()
+                self.abrir_popup_error()
+
+        self.dados_clientes.append(self.novo_cliente)
+        with open('clientes.json', 'w') as data:
+            json.dump(self.dados_clientes,data)
 
         app = MDApp.get_running_app()
         app.popup_leituradados.dismiss()
+        app.root.transition.direction = 'right'
+        app.root.current = 'Menu_tela'
 
-        pprint(self.novo_cliente)
+    def error(self,urlrequest, result):
+        print('Error')
+        app = MDApp.get_running_app()
+        app.popup_leituradados.dismiss()
+        self.abrir_popup_error()
+        
 
         self.dados_clientes.append(self.novo_cliente)
-        print(len(self.dados_clientes))
+        with open('clientes.json', 'w') as data:
+            json.dump(self.dados_clientes,data)
+
+        
+        app.root.transition.direction = 'right'
+        app.root.current = 'Menu_tela'
+
+    def failure(self,urlrequest, result):
+        self.error(urlrequest, result)
 
 
+    def abrir_popup_error(self):
+        if not self.popup_error:
+            self.popup_error = MDDialog( size_hint = [0.8,0.8],
+                title= 'ERRO',
+                text = ('As informações foram armazenadas mas houve um erro ao tentar conseguir as coordenadas geográficas para o endereço digitado.' \
+                        ' \n'
+                        'Não será possivel colocar um marcador para esse cliente no mapa.'),
+                buttons=[MDRaisedButton(
+                        text="OK", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar
+                    ),
+                    MDLabel(
+                        text='')
+                ],
+            )
+        self.popup_error.open()
 
 
-
-
+    def fechar(self,*args):
+        self.popup_error.dismiss()
 
 
 
