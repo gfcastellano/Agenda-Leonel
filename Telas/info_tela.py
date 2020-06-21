@@ -52,11 +52,20 @@ class Info_tela(Screen):
     
     def adicionar_infos(self,root):
         print('Adicionando infos a Info_tela')
-        nome_fantasia = str(root.ids.nome_fantasia.text)
-        dados=''
-        for cliente in self.dados_clientes:
-            if nome_fantasia == cliente['nome_fantasia']:
-                dados = cliente
+        print('TYPE root:',type(root))
+        if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>":
+            nome_fantasia = str(root.ids.nome_fantasia.text)
+            dados=''
+            for cliente in self.dados_clientes:
+                if nome_fantasia == cliente['nome_fantasia']:
+                    dados = cliente
+        else:
+            lat = root
+            dados=''
+            for cliente in self.dados_clientes:
+                if lat == cliente['lat']:
+                    dados = cliente
+        
         self.ids.codigo.text        = str(dados['codigo'])
         self.ids.nome_fantasia.text = str(dados['nome_fantasia'])
         self.ids.endereco.text      = str(dados['endereco'])
