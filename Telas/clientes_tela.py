@@ -20,7 +20,6 @@ class Clientes_tela(Screen):
         app.telas.append(str(gerenciador.current_screen)[14:-2])
         Window.bind(on_keyboard=self.voltar)
         print('Entrando em Clientes_tela')
-        app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
         children = MDApp.get_running_app().root.get_screen('Clientes_tela').ids.box_scroll.children
         if len(children) < 1:

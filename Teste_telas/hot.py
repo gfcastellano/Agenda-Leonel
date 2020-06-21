@@ -24,7 +24,7 @@ BoxLayout:
 '''
 
 class Example(MDApp):
-    path_to_kv_file = "D:\\Users\\Gabriel\\Documents\\GitHub\\Agenda_Leonel\\kv_file.kv"
+    path_to_kv_file = "D:\\Users\\Gabriel\\Documents\\GitHub\\Agenda_Leonel\\Teste_telas\\kv_file.kv"
 
     def build(self):
         #self.theme_cls.theme_style = "Dark"

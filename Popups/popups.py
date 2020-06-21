@@ -10,6 +10,7 @@ class Popup_LeituraDados(MDDialog):
     def __init__(self):
         super().__init__()
         self.size_hint = [.6,.4]
+        self.auto_dismiss = False
 
 class Popup_Maps(MDDialog):
     title= 'Deseja ir para rotas do Maps?'

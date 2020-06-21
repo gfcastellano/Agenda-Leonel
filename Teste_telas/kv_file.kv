@@ -1,0 +1,138 @@
+Screen:
+    BoxLayout:
+        orientation: 'vertical'
+        #-------------------------------------------------HEADER
+        MDLabel:
+            text: 'Adicionar Cliente'
+            halign: 'center'
+            color: app.theme_cls.primary_dark
+            font_size: 60
+            size_hint_y: None
+            height: 100
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+#-------------------------------------------------CAIXAS
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Codigo:'
+                        size_hint_x: 0.5
+                    MDLabel:
+                        id: codigo
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Nome:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: nome_fantasia
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Endereco:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: endereco
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Bairro:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: bairro 
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Telefone:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: telefone_fixo
+				BoxparaScroll:
+                    MDLabel:
+                        text: 'Perfil:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: perfil					
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Contato'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Telefone'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Tipo'
+                        halign: 'center'
+                BoxparaScroll:
+                    MDTextField:
+                        id: nome_1
+                    MDTextField:
+                        id: telefone_1
+                    MDTextField:
+                        id: tipo_1
+				BoxparaScroll:
+                    MDTextField:
+                        id: nome_2
+                    MDTextField:
+                        id: telefone_2
+                    MDTextField:
+                        id: tipo_2
+				BoxparaScroll:
+                    MDTextField:
+                        id: nome_3
+                    MDTextField:
+                        id: telefone_3
+                    MDTextField:
+                        id: tipo_3
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Banho:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Tosa:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Pet-Shop:'
+                        halign: 'center'
+                    MDLabel:
+                        text: 'Clinica:'
+                        halign: 'center'
+                BoxparaScroll:
+                    MDCheckbox:
+                        id: banho
+                    MDCheckbox:
+                        id: tosa
+                    MDCheckbox:
+                        id: pet_shop
+                    MDCheckbox:
+                        id: clinica
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'Razao Social:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: razao_social
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'CNPJ:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: cnpj
+                BoxparaScroll:
+                    MDLabel:
+                        text: 'CEP:'
+                        size_hint_x: 0.5
+                    MDTextField:
+                        id: cep
+#-------------------------------------------------------------BOTaO DE ADICIONAR
+        MDRaisedButton:
+            text: 'Adicionar'
+            on_release: root.adicionar()
+            size_hint_x: 1
+            size_hint_y: None
+            height: 100
+
+
+
+<BoxparaScroll@BoxLayout>:
+    padding: [5,0,0,0]
+    size_hint_y: None
+    height: 120
