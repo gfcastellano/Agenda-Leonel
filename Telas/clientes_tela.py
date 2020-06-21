@@ -40,9 +40,9 @@ class Clientes_tela(Screen):
 
     def buscar(self,*args):
         print('Excutando busca')
-        #print('Buscando pelo texto:',MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
+        print('Buscando pelo texto:',MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar)
         try:  #Se conseguir transformar em int significa que é pra procurar pelo código
-            texto = int(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar.text)
+            texto = int(MDApp.get_running_app().root.get_screen('Clientes_tela').ids.buscar)
             texto = str(texto).lower() #se manter no formato int não é possivel iterar
             parametro = 'codigo'
         except ValueError:
