@@ -48,10 +48,10 @@ class Clientes_tela(Screen):
         print('Buscando pelo texto:',texto)
         try:  #Se conseguir transformar em int significa que é pra procurar pelo código
             texto = int(texto)
-            #texto = str(texto) #se manter no formato int não é possivel iterar
+            texto = str(texto) #se manter no formato int não é possivel iterar
             parametro = 'codigo'
         except ValueError:
-            #texto = str(texto)
+            texto = str(texto)
             parametro = 'nome_fantasia'
         self.executar_busca(texto.lower(),parametro)
 

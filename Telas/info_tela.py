@@ -13,6 +13,7 @@ from mapview import MapMarkerPopup
 class Info_tela(Screen):
     dados_clientes=[]
     popup_maps=None
+    popup_editar=None
 
     def on_pre_enter(self):
         print('Entrando em Info_tela')
@@ -152,5 +153,32 @@ class Info_tela(Screen):
             app.root.current = 'Mapa_tela'
         except:
             pass
+
+    def editar(self):
+        if not self.popup_editar:
+            app = MDApp.get_running_app()
+            self.popup_editar = MDDialog( size_hint = [0.8,0.8],
+                text="Deseja editar as informações desse cliente?",
+                buttons=[
+                    MDRaisedButton(
+                        text="Sim", text_color=app.theme_cls.accent_dark, on_release = self.ir_para_Editar_tela
+                    ),
+                    MDFlatButton(
+                        text="Não", text_color=app.theme_cls.primary_color, on_release = self.fechar_popup_editar
+                    )
+                ],
+            )
+        self.popup_editar.open()
+    
+    def ir_para_Editar_tela(self,root,*args):
+        app = MDApp.get_running_app()
+        app.root.transition.direction = 'left'
+        app.root.current = 'Editar_tela'
+        root = app.root.get_screen('Info_tela')
+        app.root.get_screen('Editar_tela').adicionar_infos(root)
+        self.fechar_popup_editar()
+    
+    def fechar_popup_editar(self,*args):
+        self.popup_editar.dismiss()
         
 
