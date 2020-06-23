@@ -102,11 +102,13 @@ class Info_tela(Screen):
         if not self.popup_maps:
             self.popup_maps = MDDialog( size_hint = [0.8,0.8],
                 text="Deseja ir para rotas no Maps?",
-                buttons=[MDRaisedButton(
-                        text="SIM", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.abrir_maps
+                buttons=[
+                    MDRaisedButton(
+                        text="Sim", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.abrir_maps
                     ),
-                    MDLabel(
-                        text='')
+                    MDFlatButton(
+                        text="Não", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_popup_maps
+                    )
                 ],
             )
         self.popup_maps.open()
@@ -132,8 +134,8 @@ class Info_tela(Screen):
         print(numero_copiado)
         Clipboard.copy(numero_copiado)
 
-    def fechar_popup_copiar(self,*args):
-        self.cop.dismiss()
+    def fechar_popup_maps(self,*args):
+        self.popup_maps.dismiss()
 
     def ir_para_mapa(self):
         for cliente in self.dados_clientes:

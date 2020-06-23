@@ -11,6 +11,7 @@
             pos_hint: {'top':1}
             elevation: 11
             left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
+            right_action_items: [["account-plus-outline", lambda x: root.adicionar()]]
         ScrollView:
             BoxLayout:
                 orientation: 'vertical'

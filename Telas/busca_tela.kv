@@ -12,6 +12,7 @@
             pos_hint: {'top':1}
             elevation: 11
             left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
+            right_action_items: [["account-search", lambda x: root.mostrar_popup()]]
         ScrollView:
             BoxLayout:
                 orientation: 'vertical'
@@ -137,13 +138,6 @@
                         id: tesoura
                     MDCheckbox:
                         id: tap_higienico
-#-------------------------------------------------------------BOTÃO DE BUSCA
-        MDRaisedButton:
-            text: 'Buscar'
-            on_release: root.mostrar_popup()
-            size_hint_x: 1
-            size_hint_y: None
-            height: 100
 
 
 
