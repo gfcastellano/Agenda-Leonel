@@ -9,9 +9,8 @@ class Busca_tela(Screen):
     def on_pre_enter(self):
         print('Entrando em Busca_tela')
         app = MDApp.get_running_app()
-        gerenciador = app.root
-        app.telas.append(str(gerenciador.current_screen)[14:-2])
-        Window.bind(on_keyboard=self.voltar)
+        app.registrar_tela()
+        Window.bind(on_keyboard=app.voltar)
 
     def apagar_texto(self,id):
         field = MDApp.get_running_app().root.get_screen('Busca_tela').ids
@@ -93,36 +92,3 @@ class Busca_tela(Screen):
         MDApp.get_running_app().root.transition.direction = 'left'
         MDApp.get_running_app().root.current = 'Clientes_tela'
         clientes_tela.fechar_popup()
-
-    def voltar(self,window,key,*args):
-        if key ==27:
-            gerenciador = MDApp.get_running_app().root
-            app = MDApp.get_running_app()
-            gerenciador.transition.direction = 'left'
-            gerenciador.current = str(app.telas[-2])
-            gerenciador.transition.direction = 'right'
-            try:
-                if app.telas[-1] == app.telas[-3]:
-                    app.telas = app.telas[:-2]
-            except IndexError:
-                app.telas = app.telas[:-1]
-            return True
-        if key == 113:
-            app = MDApp.get_running_app()
-            print(app.telas)
-    
-    def voltar_toolbar(self):
-        gerenciador = MDApp.get_running_app().root
-        app = MDApp.get_running_app()
-        gerenciador.transition.direction = 'left'
-        gerenciador.current = str(app.telas[-2])
-        gerenciador.transition.direction = 'right'
-        try:
-            if app.telas[-1] == app.telas[-3]:
-                app.telas = app.telas[:-2]
-        except IndexError:
-            app.telas = app.telas[:-1]
-
-
-             
-            

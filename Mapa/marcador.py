@@ -5,12 +5,13 @@ class Marcador(MapMarkerPopup):
     def on_release(self):
         app = MDApp.get_running_app()
         app.root.transition.direction = 'left'
-        app.root.get_screen('Info_tela').adicionar_infos(self.lat)
+        
         app.root.current = 'Info_tela'
+        app.root.get_screen('Info_tela').adicionar_infos(self.lat)
 
 class Marcador_vermelho(MapMarkerPopup):
     def on_release(self):
         app = MDApp.get_running_app()
         app.root.transition.direction = 'left'        
-        app.root.get_screen('Info_tela').adicionar_infos(self.lat)
         app.root.current = 'Info_tela'
+        app.root.get_screen('Info_tela').adicionar_infos(self.lat)

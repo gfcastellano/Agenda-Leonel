@@ -18,10 +18,8 @@ class Info_tela(Screen):
         print('Entrando em Info_tela')
         app = MDApp.get_running_app()
         self.dados_clientes = app.dados_clientes
-        gerenciador = app.root
-        app.telas.append(str(gerenciador.current_screen)[14:-2])
-        Window.bind(on_keyboard=self.voltar)
-        #self.apagar_infos()
+        app.registrar_tela()
+        Window.bind(on_keyboard=app.voltar)
 
     def apagar_infos(self):
         print('Apagando infos da Info_tela')
@@ -53,23 +51,21 @@ class Info_tela(Screen):
         self.ids.tap_higienico.active = False
     
     def adicionar_infos(self,root):
+        dados=[]
         print('Adicionando infos a Info_tela')
-        print('TYPE root:',type(root))
-        print(root)
         if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>":
-            print('NOME_FANTASIA!!!!!!!!!!!!!!!!')
             nome_fantasia = str(root.ids.nome_fantasia.text)
             dados=''
+            print('Adicionando informações do cliente:', nome_fantasia)
             for cliente in self.dados_clientes:
                 if nome_fantasia == cliente['nome_fantasia']:
                     dados = cliente
         else:
-            print('LAAAAAATTT!!!!!!!!!!!!!!!!')
-            lat = root
+            lat = str(root)
             dados=''
-            print('------------------------------------TAMANHO DE SELF.DADOS_CLIENTES:',len(self.dados_clientes))
+            print('Adicionando informações do cliente na latitude:', lat)
             for cliente in self.dados_clientes:
-                if cliente['lat'] == lat:
+                if lat == str(cliente['lat']):
                     dados = cliente
            
         self.ids.codigo.text        = str(dados['codigo'])
@@ -149,37 +145,10 @@ class Info_tela(Screen):
             mapa_tela = app.root.get_screen('Mapa_tela')
             mapa_tela.ids.mapa.center_on(lat,lon)
             mapa_tela.ids.mapa.zoom = 16
+            print('Indo para Mapa_tela centralizado em:', self.ids.nome_fantasia.text)
             app.root.transition.direction = 'right'
             app.root.current = 'Mapa_tela'
         except:
             pass
         
 
-    def voltar(self,window,key,*args):
-        if key ==27:
-            gerenciador = MDApp.get_running_app().root
-            app = MDApp.get_running_app()
-            gerenciador.transition.direction = 'left'
-            gerenciador.current = str(app.telas[-2])
-            gerenciador.transition.direction = 'right'
-            try:
-                if app.telas[-1] == app.telas[-3]:
-                    app.telas = app.telas[:-2]
-            except IndexError:
-                app.telas = app.telas[:-1]
-            return True
-        if key == 113:
-            app = MDApp.get_running_app()
-            print(app.telas)
-
-    def voltar_toolbar(self):
-        gerenciador = MDApp.get_running_app().root
-        app = MDApp.get_running_app()
-        gerenciador.transition.direction = 'left'
-        gerenciador.current = str(app.telas[-2])
-        gerenciador.transition.direction = 'right'
-        try:
-            if app.telas[-1] == app.telas[-3]:
-                app.telas = app.telas[:-2]
-        except IndexError:
-            app.telas = app.telas[:-1]

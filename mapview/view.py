@@ -668,10 +668,10 @@ class MapView(Widget):
         zoom = self._zoom
         scatter = self._scatter
         scale = scatter.scale
-        if scale >= 2.:
+        if scale >= 2.01:
             zoom += 1
             scale /= 2.
-        elif scale < 1:
+        elif scale < 0.99:
             zoom -= 1
             scale *= 2.
         zoom = clamp(zoom, map_source.min_zoom, map_source.max_zoom)

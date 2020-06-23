@@ -18,9 +18,8 @@ class Adicionar_cliente_tela(Screen):
     def on_pre_enter(self):
         print('Entrando em Adicionar_cliente_tela')
         app = MDApp.get_running_app()
-        gerenciador = app.root
-        app.telas.append(str(gerenciador.current_screen)[14:-2])
-        Window.bind(on_keyboard=self.voltar)        
+        app.registrar_tela()
+        Window.bind(on_keyboard=app.voltar)        
         self.dados_clientes = app.dados_clientes
         self.ids.codigo.text = str(len(self.dados_clientes) + 1)
         self.apagar_infos()
@@ -164,32 +163,3 @@ class Adicionar_cliente_tela(Screen):
         self.popup_error.dismiss()
 
 
-
-    def voltar(self,window,key,*args):
-        if key ==27:
-            gerenciador = MDApp.get_running_app().root
-            app = MDApp.get_running_app()
-            gerenciador.transition.direction = 'left'
-            gerenciador.current = str(app.telas[-2])
-            gerenciador.transition.direction = 'right'
-            try:
-                if app.telas[-1] == app.telas[-3]:
-                    app.telas = app.telas[:-2]
-            except IndexError:
-                app.telas = app.telas[:-1]
-            return True
-        if key == 113:
-            app = MDApp.get_running_app()
-            print(app.telas)
-
-    def voltar_toolbar(self):
-        gerenciador = MDApp.get_running_app().root
-        app = MDApp.get_running_app()
-        gerenciador.transition.direction = 'left'
-        gerenciador.current = str(app.telas[-2])
-        gerenciador.transition.direction = 'right'
-        try:
-            if app.telas[-1] == app.telas[-3]:
-                app.telas = app.telas[:-2]
-        except IndexError:
-            app.telas = app.telas[:-1]

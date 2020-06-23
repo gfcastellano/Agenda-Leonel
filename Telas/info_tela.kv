@@ -11,7 +11,7 @@
             height: 100
             pos_hint: {'top':1}
             elevation: 11
-            left_action_items: [["menu-left", lambda x: root.voltar_toolbar()]]
+            left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
             right_action_items: [["map-marker", lambda x: root.ir_para_mapa()],["dots-vertical", lambda x: root.voltar_toolbar()]]
         ScrollView:
             BoxLayout:
@@ -192,9 +192,9 @@
                     MDLabel:
                         id: tap_higienico
                         halign: 'center'
-        MDFloatingActionButtonSpeedDial:
-            data: app.data
-            rotation_root_button: True
+    MDFloatingActionButtonSpeedDial:
+        data: app.data
+        rotation_root_button: True
 
 
 <BoxparaScroll@BoxLayout>:

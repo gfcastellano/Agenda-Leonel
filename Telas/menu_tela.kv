@@ -15,18 +15,26 @@
         spacing: 50
         MDRaisedButton:
             text: 'Mapa'
-            on_release: app.root.current = 'Mapa_tela'
+            on_release: 
+                app.root.transition.direction = 'left'
+                app.root.current = 'Mapa_tela'
         MDRaisedButton:
             text: 'Lista de Clientes'
-            on_release: app.root.current = 'Clientes_tela'
+            on_release: 
+                app.root.transition.direction = 'left'
+                app.root.current = 'Clientes_tela'
         MDRaisedButton:
             text: 'Busca Avancada'
-            on_release: app.root.current = 'Busca_tela'
+            on_release: 
+                app.root.transition.direction = 'left'
+                app.root.current = 'Busca_tela'
         MDRaisedButton:
             text: 'Lembretes'
         MDRaisedButton:
             text: 'Adicionar Cliente'
-            on_release: app.root.current = 'Adicionar_cliente_tela'
+            on_release: 
+                app.root.transition.direction = 'left'
+                app.root.current = 'Adicionar_cliente_tela'
         MDRaisedButton:
             text: 'Sair'
             on_release: app.stop()
