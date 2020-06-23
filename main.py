@@ -39,7 +39,7 @@ class MainApp(MDApp):
         clientes_tela = Clientes_tela()
         clientes_tela.adicionar_clientes(self.dados_clientes)
         self.popup_leituradados = Popup_LeituraDados()
-        
+
         
 
     def carregar_clientes(self):
@@ -68,15 +68,16 @@ class MainApp(MDApp):
 
             if ultima_tela == 'Info_tela' and tela_atual == 'Mapa_tela':
                 app.root.transition.direction = 'left'                
-                app.root.current = str(app.telas[-2])
+                app.root.current = ultima_tela
             elif tela_atual == 'Menu_tela':
                 app.root.transition.direction = 'left'                
-                app.root.current = str(app.telas[-2])
+                app.root.current = ultima_tela
             else:
                 app.root.transition.direction = 'left'
-                app.root.current = str(app.telas[-2])
+                app.root.current = ultima_tela
                 app.root.transition.direction = 'right'
             # Aqui faz com que o voltar não fique sempre pulando entre as duas ultimas telas
+            print()
             try:  
                 if app.telas[-1] == app.telas[-3]:
                     app.telas = app.telas[:-2]

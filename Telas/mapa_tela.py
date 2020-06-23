@@ -7,6 +7,7 @@ from kivy.core.window import Window
 class Mapa_tela(Screen):
     dados_clientes=[]
     lista_de_marcadores=[]
+    lista_sem_marcadores=[]
     
     def on_pre_enter(self):
         print('Entrando em Mapa_tela')
@@ -17,9 +18,9 @@ class Mapa_tela(Screen):
         children = self.ids.mapa.children
         if len(children) <= 2:
             self.adicionar_marcadores(self.dados_clientes)
-        #for cliente in self.dados_clientes:
-        #    if cliente['nome_fantasia'] not in self.lista_de_marcadores:
-        #        self.adicionar_marcadores(cliente)
+        for cliente in self.dados_clientes:
+            if cliente['nome_fantasia'] not in self.lista_de_marcadores and cliente['nome_fantasia'] not in self.lista_sem_marcadores:
+                self.adicionar_marcadores(cliente)
         
 
     def adicionar_marcadores(self,dados_cliente):
@@ -31,8 +32,10 @@ class Mapa_tela(Screen):
                     self.ids.mapa.add_widget(Marcador(lat=lat,lon=lon)) #adiciona marcador
                     self.lista_de_marcadores.append(nome_fantasia) #adiciona nome a lista
             except:
-                print('Não possivel adicionar marcador para o cliente:', nome_fantasia)
+                self.lista_sem_marcadores.append(nome_fantasia)
                 continue
+        print('[AVISO]','Não foi possivel adicionar marcadores para {} clientes:'.format(len(self.lista_sem_marcadores)))
+        print('[AVISO]',self.lista_sem_marcadores)
         
         print('Fim de adicionar_marcadores:',len(self.lista_de_marcadores))
         print('Ultimo cliente que foi adicionado marcador:', self.lista_de_marcadores[-1])
