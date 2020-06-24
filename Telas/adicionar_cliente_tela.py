@@ -7,6 +7,7 @@ from datetime import date
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.label import MDLabel
+from pprint import pprint
 
 import json
 
@@ -98,6 +99,7 @@ class Adicionar_cliente_tela(Screen):
     def success(self,urlrequest, result):
         print('Success')
         print('tamanho de result:',len(result['items']))
+        pprint(result)
         
         if len(result['items']) == 0:
             app = MDApp.get_running_app()
@@ -107,9 +109,11 @@ class Adicionar_cliente_tela(Screen):
             try:
                 print(result['items'][0]['access'][0]['lat'])
                 print(result['items'][0]['access'][0]['lng'])
+                print('Postal Code:',result['items'][0]['address']['postalCode'])
                 self.novo_cliente['lat'] = result['items'][0]['access'][0]['lat']
                 self.novo_cliente['lon'] = result['items'][0]['access'][0]['lng']
-            except KeyError:
+                self.novo_cliente['cep'] = result['items'][0]['address']['postalCode']
+            except KeyError: #Caso ele tente acessar algum valor do result e não consiga
                 app = MDApp.get_running_app()
                 app.popup_leituradados.dismiss()
                 self.abrir_popup_error()
@@ -146,7 +150,7 @@ class Adicionar_cliente_tela(Screen):
         if not self.popup_error:
             self.popup_error = MDDialog( size_hint = [0.8,0.8],
                 title= 'ERRO',
-                text = ('As informações foram armazenadas mas houve um erro ao tentar conseguir as coordenadas geográficas para o endereço digitado.' \
+                text = ('As informações foram armazenadas mas houve um erro ao tentar conseguir as coordenadas geográficas nem o CEP para o endereço digitado.' \
                         ' \n'
                         'Não será possivel colocar um marcador para esse cliente no mapa.'),
                 buttons=[MDRaisedButton(
