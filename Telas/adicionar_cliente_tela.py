@@ -174,4 +174,19 @@ class Adicionar_cliente_tela(Screen):
         UrlRequest(url_cnpj, on_success=self.success_cnpj)
 
     def success_cnpj(self,urlrequest, result):
+        print('Tamanho do resultado:', len(result))
         pprint(result) 
+        if len(result) > 2: # Significa que deu certo
+            self.ids.nome_fantasia.text = str(result['fantasia'])
+            self.ids.endereco.text      = str(result['logradouro'])
+            self.ids.numero.text        = str(result['numero'])
+            self.ids.bairro.text        = str(result['bairro'])
+            self.ids.cidade.text        = str(result['municipio'])
+            self.ids.razao_social.text  = str(result['nome'])
+            self.ids.cep.text           = str(result['cep'])
+
+        else:
+            print('erro')
+
+           
+    
