@@ -132,6 +132,9 @@
                         size_hint_x: 0.5
                     MDTextField:
                         id: cnpj
+                    MDIconButton:
+                        icon: 'database-search'
+                        on_release: root.consulta_cnpj()
                 BoxparaScroll:
                     MDLabel:
                         text: 'CEP:'

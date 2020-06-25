@@ -167,3 +167,11 @@ class Adicionar_cliente_tela(Screen):
         self.popup_error.dismiss()
 
 
+    def consulta_cnpj(self):
+        url = 'https://www.receitaws.com.br/v1/cnpj/'
+        cnpj = self.ids.cnpj.text
+        url_cnpj = url + cnpj
+        UrlRequest(url_cnpj, on_success=self.success_cnpj)
+
+    def success_cnpj(self,urlrequest, result):
+        pprint(result) 
