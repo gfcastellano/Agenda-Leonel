@@ -16,6 +16,7 @@ class Adicionar_cliente_tela(Screen):
     dados_clientes=[]
     novo_cliente={}
     popup_error=None
+    popup_cnpj=None
     def on_pre_enter(self):
         print('Entrando em Adicionar_cliente_tela')
         app = MDApp.get_running_app()
@@ -175,18 +176,32 @@ class Adicionar_cliente_tela(Screen):
 
     def success_cnpj(self,urlrequest, result):
         print('Tamanho do resultado:', len(result))
-        pprint(result) 
+        #pprint(result) # Para auxiliar no debug
         if len(result) > 2: # Significa que deu certo
             self.ids.nome_fantasia.text = str(result['fantasia'])
             self.ids.endereco.text      = str(result['logradouro'])
             self.ids.numero.text        = str(result['numero'])
             self.ids.bairro.text        = str(result['bairro'])
             self.ids.cidade.text        = str(result['municipio'])
+            self.ids.telefone_fixo.text = str(result['telefone'])
             self.ids.razao_social.text  = str(result['nome'])
             self.ids.cep.text           = str(result['cep'])
 
         else:
+            if not self.popup_cnpj:
+                self.popup_cnpj = MDDialog( size_hint = [0.8,0.8],
+                    title= str(result['message']),
+                    text = ('Não foi possivel achar informações sobre esse CNPJ, confira se não há erro de digitação'),
+                    buttons=[MDRaisedButton(
+                            text="OK", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_cnpj
+                        ),
+                        MDLabel(
+                            text='')
+                    ],
+                )
+            self.popup_cnpj.open()
             print('erro')
 
-           
+    def fechar_cnpj(self,*args):
+        self.popup_cnpj.dismiss()
     
