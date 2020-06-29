@@ -11,11 +11,11 @@
             elevation: 11
             left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
             right_action_items: [["account-search", lambda x: root.mostrar_popup()]]
-			
 #----------------------------------------CAIXA DE BUSCA
         BoxLayout:  
 			orientation: 'vertical'
             size_hint_y: None
+            height: 270
 			BoxLayout:
             	size_hint_y: None
             	height: 150
@@ -67,13 +67,12 @@
             id: codigo
             halign: 'center'
             valign: 'bottom'
-            size_hint_x: 1
+            size_hint_x: 2
             color: app.theme_cls.primary_dark
         MDLabel:
             id: nome_fantasia
             halign: 'left'
             color: app.theme_cls.primary_dark
-            size_hint_x: 6
         MDIconButton:
             color: app.theme_cls.primary_dark
             icon: 'comment-edit'
