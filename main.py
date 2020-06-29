@@ -13,6 +13,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRaisedButton
 from Telas.adicionar_cliente_tela import Adicionar_cliente_tela
 from Telas.editar_tela import Editar_tela
+from Telas.visitas_tela import Visitas_tela
 
 
 import json
@@ -30,6 +31,7 @@ class MainApp(MDApp):
         'point-of-sale': 'Vendas',
         'briefcase': 'Visitas'}
     path = ''
+    dados_visitas=[]
     
     def build(self):
         self.theme_cls.primary_palette = "BlueGray"
@@ -37,6 +39,7 @@ class MainApp(MDApp):
 
     def on_start(self):
         self.carregar_clientes()
+        self.carregar_visitas()
         clientes_tela = Clientes_tela()
         clientes_tela.adicionar_clientes(self.dados_clientes)
         self.popup_leituradados = Popup_LeituraDados()
@@ -57,6 +60,21 @@ class MainApp(MDApp):
                     print('clientes.json carregado com sucesso,' 'tamanho:',len(self.dados_clientes))
             except:
                 print('clientes.json não achado no diretório')
+
+    def carregar_visitas(self):
+        self.path = MDApp.get_running_app().user_data_dir + '/'
+        print(self.path)
+        try:
+            with open(self.path + 'visitas.json', 'r') as file:
+                self.dados_visitas = json.load(file)
+                print('visitas.json carregado com sucesso,' 'tamanho:',len(self.dados_visitas))
+        except FileNotFoundError:
+            try:
+                with open('visitas.json', 'r') as file:
+                    self.dados_visitas = json.load(file)
+                    print('visitas.json carregado com sucesso,' 'tamanho:',len(self.dados_visitas))
+            except:
+                print('visitas.json não achado no diretório')
 
     def registrar_tela(self):
         try:        

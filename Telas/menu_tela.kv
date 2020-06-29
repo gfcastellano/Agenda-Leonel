@@ -36,5 +36,10 @@
                 app.root.transition.direction = 'left'
                 app.root.current = 'Adicionar_cliente_tela'
         MDRaisedButton:
+            text: 'Visitas'
+            on_release: 
+                app.root.transition.direction = 'left'
+                app.root.current = 'Visitas_tela'
+        MDRaisedButton:
             text: 'Sair'
             on_release: app.stop()

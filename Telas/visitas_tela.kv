@@ -1,0 +1,92 @@
+<Visitas_tela>:
+    BoxLayout:
+        orientation:'vertical'
+#---------------------------------------HEADER
+        MDToolbar:
+            title: 'Visitas'
+            md_bg_color: app.theme_cls.primary_dark
+            size_hint_y: None
+            height: 150
+            pos_hint: {'top':1}
+            elevation: 11
+            left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
+            right_action_items: [["account-search", lambda x: root.mostrar_popup()]]
+			
+#----------------------------------------CAIXA DE BUSCA
+        BoxLayout:  
+			orientation: 'vertical' 
+			BoxLayout:
+            	size_hint_y: None
+            	height: 150
+            	MDTextField:
+                	id: buscar
+                	font_size: 40
+                	size_hint_x: 4
+                	hint_text: 'Pesquisar'
+            	MDIconButton:
+                	text: 'Buscar'
+                	on_release: root.apagar_texto() 
+                	icon: 'backspace'
+			BoxLayout:
+				MDIconButton:
+					icon: 'calendar'
+                MDLabel:
+                    id: data	
+				MDIconButton:
+					text: 'Escolher data'
+					icon: 'backspace'	
+#---------------------------------------LISTA DE CLIENTES
+        ScrollView:   
+            BoxLayout:
+                id: box_scroll
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+
+
+<Visita>:
+    rows: 2
+    size_hint_y: None
+    height: self.minimum_height
+    orientation: 'vertical'
+    GridLayout:
+        rows:1
+        cols:4
+        size_hint_y: None
+    	MDLabel:
+            id: data
+            halign: 'center'
+            valign: 'bottom'
+            size_hint_x: 1
+            color: app.theme_cls.primary_dark
+	    MDLabel:
+            id: codigo
+            halign: 'center'
+            valign: 'bottom'
+            size_hint_x: 1
+            color: app.theme_cls.primary_dark
+        MDLabel:
+            id: nome_fantasia
+            halign: 'left'
+            color: app.theme_cls.primary_dark
+            size_hint_x: 6
+        MDIconButton:
+            color: app.theme_cls.primary_dark
+            icon: 'comment-edit'
+	GridLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        rows: 2
+        cols: 2
+        padding: [30,0,0,0]
+        MDLabel:
+            text: 'Contato:'
+            size_hint_x: 0.3
+        MDLabel:
+            text: 'Informacoes:'
+        MDLabel:
+            id: contato
+            size_hint_x: 0.3
+        MDLabel:
+            id: informacoes
