@@ -28,6 +28,8 @@
                 	on_release: root.apagar_texto() 
                 	icon: 'backspace'
 			BoxLayout:
+            	size_hint_y: None
+            	height: 120
 				MDIconButton:
 					icon: 'calendar'
                 MDLabel:
@@ -58,7 +60,7 @@
             id: data
             halign: 'center'
             valign: 'bottom'
-            size_hint_x: 1
+            size_hint_x: 3
             color: app.theme_cls.primary_dark
 	    MDLabel:
             id: codigo
@@ -82,11 +84,13 @@
         padding: [30,0,0,0]
         MDLabel:
             text: 'Contato:'
-            size_hint_x: 0.3
+            size_hint_x: 0.6
+            halign: 'center'
         MDLabel:
             text: 'Informacoes:'
         MDLabel:
             id: contato
-            size_hint_x: 0.3
+            size_hint_x: 0.6
+            halign: 'center'
         MDLabel:
             id: informacoes
