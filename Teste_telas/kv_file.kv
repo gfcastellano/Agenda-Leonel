@@ -1,0 +1,41 @@
+Screen:
+	GridLayout:
+	    rows: 3
+		cols: 2
+  	  size_hint_y: None
+   	 height: self.minimum_height
+    	orientation: 'vertical'
+	    padding: [30,0,0,0]
+ 	   GridLayout:
+  	      rows:1
+   	     cols:2
+    	    size_hint_y: None
+			size_hint_x: 4
+    		MDLabel:
+	            id: data
+				text: '25/05/2015'
+ 	           halign: 'left'
+  	          valign: 'bottom'
+   	         size_hint_x: 3
+    	        color: app.theme_cls.primary_dark
+		    MDLabel:
+ 	           id: codigo
+				text: '25'
+  	          halign: 'center'
+   	         valign: 'bottom'
+    	        size_hint_x: 2
+     	       color: app.theme_cls.primary_dark
+        MDLabel:
+       	 id: nome_fantasia
+			text: 'Qualquer nome aqui'
+        	halign: 'left'
+            size_hint_x: 6
+            color: app.theme_cls.primary_dark
+		MDLabel:
+			text:'Contato'
+		MDLabel:
+			text:'Informações'
+		MDLabel:
+			text:'Qualquer contato aqui o bom é escrever'
+		MDLabel:
+			text: 'Qualquer informação aqui o importante é escrever para parecer que trabalha e simular uma situação real'

@@ -47,53 +47,52 @@
                 height: self.minimum_height
 
 
-
 <Visita>:
-    rows: 2
+    rows: 3
+    cols: 2
     size_hint_y: None
     height: self.minimum_height
     orientation: 'vertical'
     padding: [30,0,0,0]
     GridLayout:
         rows:1
-        cols:3
+        cols:2
         size_hint_y: None
-    	MDLabel:
+        size_hint_x: 4
+        MDLabel:
             id: data
             halign: 'left'
             valign: 'bottom'
             size_hint_x: 3
             color: app.theme_cls.primary_dark
-	    MDLabel:
+        MDLabel:
             id: codigo
             halign: 'center'
             valign: 'bottom'
             size_hint_x: 2
             color: app.theme_cls.primary_dark
-        MDLabel:
-            id: nome_fantasia
-            halign: 'left'
-            size_hint_x: 6
-            color: app.theme_cls.primary_dark
-	GridLayout:
-        orientation: 'vertical'
+    MDLabel:
+        id: nome_fantasia
+        halign: 'left'
+        size_hint_x: 6
+        color: app.theme_cls.primary_dark
+    MDLabel:
+        text: 'Contato:'
+        size_hint_x: 0.4
+        halign: 'left'
         size_hint_y: None
-        rows: 2
-        cols: 2
-        MDLabel:
-            text: 'Contato:'
-            size_hint_x: 0.4
-            halign: 'left'
-        MDLabel:
-            text: 'Informacoes:'
-            halign:'left'
-        MDLabel:
-            id: contato
-            size_hint_x: 0.4
-            halign: 'left'
-            text_size: self.width, None
-            size_hint: 1, None
-            height: self.texture_size[1]
-        MDLabel:
-            id: informacoes
-            halign:'left'
+    MDLabel:
+        text: 'Informacoes:'
+        halign:'left'
+        size_hint_y: None
+    MDLabel:
+        id: contato
+        size_hint_x: 0.4
+        size_hint_y: None
+        halign: 'left'
+        valign: 'middle'
+    MDLabel:
+        id: informacoes
+        halign:'left'
+        size_hint_y: None
+        height: self.texture_size[1]
