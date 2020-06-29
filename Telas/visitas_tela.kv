@@ -53,13 +53,14 @@
     size_hint_y: None
     height: self.minimum_height
     orientation: 'vertical'
+    padding: [30,0,0,0]
     GridLayout:
         rows:1
         cols:3
         size_hint_y: None
     	MDLabel:
             id: data
-            halign: 'center'
+            halign: 'left'
             valign: 'bottom'
             size_hint_x: 3
             color: app.theme_cls.primary_dark
@@ -79,21 +80,20 @@
         size_hint_y: None
         rows: 2
         cols: 2
-        padding: [30,0,0,0]
         MDLabel:
             text: 'Contato:'
-            size_hint_x: 0.6
-            halign: 'center'
+            size_hint_x: 0.4
+            halign: 'left'
         MDLabel:
             text: 'Informacoes:'
+            halign:'left'
         MDLabel:
             id: contato
-            size_hint_x: 0.6
-            halign: 'center'
+            size_hint_x: 0.4
+            halign: 'left'
             text_size: self.width, None
             size_hint: 1, None
             height: self.texture_size[1]
         MDLabel:
             id: informacoes
-            #size_hint_y: None
-            #height: self.texture_size[1] if self.ids.contato.height < self.texture_size[1] else self.ids.contato.height
+            halign:'left'
