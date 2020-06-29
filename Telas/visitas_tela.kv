@@ -48,55 +48,58 @@
 
 
 <Visita>:
-    rows: 3
-    cols: 2
     size_hint_y: None
     height: self.minimum_height
-    orientation: 'vertical'
-    padding: [30,0,0,0]
     GridLayout:
-        rows:1
-        cols:2
+        rows: 3
+        cols: 2
         size_hint_y: None
-        size_hint_x: 5
+        height: self.minimum_height
+        orientation: 'vertical'
+        padding: [30,0,0,0]
+        GridLayout:
+            rows:1
+            cols:2
+            size_hint_y: None
+            size_hint_x: 5
+            MDLabel:
+                id: data
+                halign: 'left'
+                valign: 'bottom'
+                size_hint_x: 3
+                color: app.theme_cls.primary_dark
+                bold: True
+            MDLabel:
+                id: codigo
+                halign: 'center'
+                valign: 'bottom'
+                size_hint_x: 2
+                color: app.theme_cls.primary_dark
+                bold: True
         MDLabel:
-            id: data
+            id: nome_fantasia
             halign: 'left'
-            valign: 'bottom'
-            size_hint_x: 3
+            size_hint_x: 6
             color: app.theme_cls.primary_dark
             bold: True
         MDLabel:
-            id: codigo
-            halign: 'center'
-            valign: 'bottom'
-            size_hint_x: 2
-            color: app.theme_cls.primary_dark
+            text: 'Contato:'
+            size_hint_x: 0.4
+            halign: 'left'
+            size_hint_y: None
             bold: True
-    MDLabel:
-        id: nome_fantasia
-        halign: 'left'
-        size_hint_x: 6
-        color: app.theme_cls.primary_dark
-        bold: True
-    MDLabel:
-        text: 'Contato:'
-        size_hint_x: 0.4
-        halign: 'left'
-        size_hint_y: None
-        bold: True
-    MDLabel:
-        text: 'Informacoes:'
-        halign:'left'
-        size_hint_y: None
-        bold: True
-    MDLabel:
-        id: contato
-        size_hint_x: 0.4
-        size_hint_y: None
-        halign: 'left'
-        valign: 'middle'
-    MDLabel:
-        id: informacoes
-        halign:'left'
-        size_hint_y: None
+        MDLabel:
+            text: 'Informacoes:'
+            halign:'left'
+            size_hint_y: None
+            bold: True
+        MDLabel:
+            id: contato
+            size_hint_x: 0.4
+            size_hint_y: None
+            halign: 'left'
+            valign: 'middle'
+        MDLabel:
+            id: informacoes
+            halign:'left'
+            size_hint_y: None

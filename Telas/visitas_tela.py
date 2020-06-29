@@ -1,7 +1,7 @@
 from kivymd.app import MDApp 
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.gridlayout import GridLayout
+from kivymd.uix.card import MDCard
 from kivy.core.window import Window
 
 class Visitas_tela(Screen):
@@ -37,7 +37,7 @@ class Visitas_tela(Screen):
 
 
 
-class Visita(GridLayout):
+class Visita(MDCard):
     def __init__(self,data='', codigo='', nome_fantasia='',contato='', informacoes='',**kwargs):
         super().__init__(**kwargs)
         self.ids.data.text          = data
@@ -46,14 +46,3 @@ class Visita(GridLayout):
         self.ids.contato.text       = contato
         self.ids.informacoes.text   = informacoes
 
-
-class Cliente(BoxLayout):
-    def __init__(self, codigo='', nome_fantasia='',**kwargs):
-        super().__init__(**kwargs)
-        self.ids.codigo.text = codigo
-        self.ids.nome_fantasia.text = nome_fantasia
-
-    def ir_para_infos(self, root):
-        app = MDApp.get_running_app()
-        app.root.current = 'Info_tela'
-        app.root.get_screen('Info_tela').adicionar_infos(root)
