@@ -3,7 +3,6 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.core.window import Window
-from pandas import to_datetime
 
 class Visitas_tela(Screen):
     def on_pre_enter(self):
@@ -25,11 +24,11 @@ class Visitas_tela(Screen):
             scroll.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
         for visita in reversed(dados_visitas):
             #print(visita)
-            dia  = str(to_datetime(visita['data']).day)
-            mes  = str(to_datetime(visita['data']).month)
-            ano  = str(to_datetime(visita['data']).year)
+            dia  = visita['data'][-2:]
+            mes  = visita['data'][-5:-3]
+            ano  = visita['data'][-10:-6]
             data = dia + '/' + mes + '/' + ano
-            scroll.add_widget(Visita(data = str(data),
+            scroll.add_widget(Visita(data = data,
                                      codigo = str(visita['codigo']),
                                      nome_fantasia = visita['nome_fantasia'],
                                      contato = visita['contato'],
