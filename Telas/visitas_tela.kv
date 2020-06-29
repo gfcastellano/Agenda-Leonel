@@ -55,7 +55,7 @@
     orientation: 'vertical'
     GridLayout:
         rows:1
-        cols:4
+        cols:3
         size_hint_y: None
     	MDLabel:
             id: data
@@ -74,9 +74,6 @@
             halign: 'left'
             size_hint_x: 6
             color: app.theme_cls.primary_dark
-        MDIconButton:
-            color: app.theme_cls.primary_dark
-            icon: 'comment-edit'
 	GridLayout:
         orientation: 'vertical'
         size_hint_y: None
@@ -93,5 +90,10 @@
             id: contato
             size_hint_x: 0.6
             halign: 'center'
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
         MDLabel:
             id: informacoes
+            #size_hint_y: None
+            #height: self.texture_size[1] if self.ids.contato.height < self.texture_size[1] else self.ids.contato.height
