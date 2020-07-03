@@ -11,7 +11,7 @@ class Busca_tela(Screen):
         app = MDApp.get_running_app()
         app.registrar_tela()
         Window.bind(on_keyboard=app.voltar)
-        self.ids.scroll.scroll_to(self.ids.codigo)
+        self.ids.scroll.scroll_y = 1
 
     def apagar_texto(self,id):
         field = MDApp.get_running_app().root.get_screen('Busca_tela').ids

@@ -21,7 +21,7 @@ class Info_tela(Screen):
         self.dados_clientes = app.dados_clientes
         app.registrar_tela()
         Window.bind(on_keyboard=app.voltar)
-        self.ids.scroll.scroll_to(self.ids.codigo)
+        self.ids.scroll.scroll_y = 1
 
     def apagar_infos(self):
         print('Apagando infos da Info_tela')

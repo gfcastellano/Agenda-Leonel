@@ -3,6 +3,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.card import MDCard
 from kivy.core.window import Window
+from kivy.clock import Clock
 
 class Visitas_tela(Screen):
     def on_pre_enter(self):
@@ -33,6 +34,47 @@ class Visitas_tela(Screen):
                                      nome_fantasia = visita['nome_fantasia'],
                                      contato = visita['contato'],
                                      informacoes = visita['informacoes']))
+
+    def mostrar_popup(self):
+        MDApp.get_running_app().popup_leituradados.open()
+        Clock.schedule_once(self.buscar,0.1)
+
+    def buscar(self,*args):
+        print('Excutando busca')
+        texto = MDApp.get_running_app().root.get_screen('Visitas_tela').ids.buscar.text
+        print('Buscando pelo texto:',texto)
+        try:  #Se conseguir transformar em int significa que é pra procurar pelo código
+            texto = int(texto)
+            texto = str(texto) #se manter no formato int não é possivel iterar
+            parametro = 'codigo'
+        except ValueError:
+            texto = str(texto)
+            parametro = 'nome_fantasia'
+        self.executar_busca(texto.lower(),parametro)
+
+    def executar_busca(self,texto,parametro):
+        print('[executar_busca] texto:',texto)
+        print('[executar_busca] parametro:',parametro)
+        match=[]
+        for cliente in self.dados_visitas:
+            if parametro == 'codigo':
+                if texto in str(cliente['codigo']):
+                    match.append(cliente)
+            else:
+                if texto in str(cliente['nome_fantasia']).lower():
+                    match.append(cliente)
+
+        print('MATCH:',len(match))
+        self.apagar_visitas()
+        self.adicionar_visitas(match)
+        MDApp.get_running_app().root.get_screen('Visitas_tela').ids.box_scroll.scroll_y=1
+        self.fechar_popup()
+
+    def apagar_visitas(self):
+        MDApp.get_running_app().root.get_screen('Visitas_tela').ids.box_scroll.clear_widgets()
+
+    def fechar_popup(self):
+        MDApp.get_running_app().popup_leituradados.dismiss()
 
 
 
