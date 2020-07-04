@@ -172,6 +172,8 @@ class MainApp(MDApp):
             app.telas = ['Menu_tela']
         #print('FINAL DE VOLTAR', app.telas)
         #print('+++++++++++++++++++++++++++')
-           
+
     
+
+
 MainApp().run()

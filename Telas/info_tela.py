@@ -182,5 +182,25 @@ class Info_tela(Screen):
     
     def fechar_popup_editar(self,*args):
         self.popup_editar.dismiss()
+
+
+
+    def callback(self, instance):
+        print(instance.icon)
+        if instance.icon == 'briefcase':
+            self.abrir_visitas()
+        if instance.icon == 'point-of-sale':
+            pass
+           
+    def abrir_visitas(self):
+        print('Executando abrir_visitas em main')
+        app = MDApp.get_running_app()
+        info_tela = app.root.get_screen('Info_tela')
+        visitas_tela = app.root.get_screen('Visitas_tela')
+        visitas_tela.ids.buscar.text = info_tela.ids.nome_fantasia.text
+        visitas_tela.ids.data.text = ''
+        visitas_tela.mostrar_popup()
+        app.root.transition.direction = 'left'
+        app.root.current = 'Visitas_tela'
         
 
