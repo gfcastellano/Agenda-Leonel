@@ -6,11 +6,18 @@ from kivymd.uix.label import MDLabel
 from kivy.core.window import Window
 from kivy.clock import Clock
 from kivymd.uix.picker import MDDatePicker
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton, MDRaisedButton
 
 class Visitas_tela(Screen):
-    dia=''
-    mes=''
-    ano=''
+    primeiro_dia=''
+    primeiro_mes=''
+    primeiro_ano=''
+    segundo_dia=''
+    segundo_mes=''
+    segundo_ano=''
+    popup_segunda_data=None
+
     def on_pre_enter(self):
         print('Entrando em Visitas_tela')
         app = MDApp.get_running_app()
@@ -20,8 +27,7 @@ class Visitas_tela(Screen):
         self.dados_clientes = app.dados_clientes
         self.dados_visitas  = app.dados_visitas
         self.apagar_visitas()
-        #self.adicionar_visitas(self.dados_visitas)
-        self.ids.box_scroll.scroll_y=1
+        self.ids.scroll.scroll_y=1
 
 
     def adicionar_visitas(self, dados_visitas):
@@ -71,21 +77,75 @@ class Visitas_tela(Screen):
                     match.append(visita)
 
         remover=[]
-        if self.ids.data.text != '':
-            data = self.ano + '-' + self.mes + '-' + self.dia
-            print(data)
-            for visita in match:
-                if visita['data'] != data:
-                    remover.append(visita)
-            
+        if self.ids.data.text != '':  #Verifica se tem a condição de data
+            if len(self.ids.data.text) > 10: #verifica se tem uma ou duas datas
+                if self.ordem == 'primeiro':
+                    menor_data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
+                    maior_data = self.segundo_ano + '-' + self.segundo_mes + '-' + self.segundo_dia
+                else:
+                    maior_data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
+                    menor_data = self.segundo_ano + '-' + self.segundo_mes + '-' + self.segundo_dia
+                print(menor_data, maior_data)
+                for visita in match:
+                    if int(visita['data'][:4]) < int(menor_data[:4]): #verificando ano
+                        print('-------------eliminado por ano-------------------')
+                        print(visita['data'][:4], '<', menor_data[:4])
+                        remover.append(visita)
+                    else:
+                        if int(visita['data'][5:7]) < int(menor_data[5:7]):  #verificando mes
+                            if visita in remover:
+                                continue
+                            else:
+                                print('-----------eliminado por mes----------------')
+                                print(visita['data'][5:7], '<', menor_data[5:7])
+                                remover.append(visita)
+                        else:
+                            if int(visita['data'][8:]) < int(menor_data[8:]): #verificando dia
+                                if visita in remover:
+                                    continue
+                                else:
+                                    print('----------eliminado por dia-----------')
+                                    print(visita['data'][8:], '<', menor_data[8:])
+                                    remover.append(visita)
+                    if int(visita['data'][:4]) > int(maior_data[:4]): #verificando ano
+                        if visita in remover:
+                                continue
+                        else:
+                            print('--------------eliminado por ano----------------')
+                            print(visita['data'][:4], '>', maior_data[:4])
+                            remover.append(visita)
+                    else:
+                        if int(visita['data'][5:7]) > int(maior_data[5:7]): #verificando mes
+                            if visita in remover:
+                                continue
+                            else:
+                                print('-------------------eliminado por mes-------------------------')
+                                print(visita['data'][5:7], '>', maior_data[5:7])
+                                remover.append(visita)
+                        elif int(visita['data'][:4]) == int(maior_data[:4]) and \
+                            int(visita['data'][5:7]) == int(maior_data[5:7]) and \
+                            int(visita['data'][8:]) > int(maior_data[8:]):                             
+                            if visita in remover:
+                                continue
+                            else:
+                                print('-------------------eliminado por dia-------------------------')
+                                print(visita['data'][8:], '>', maior_data[8:])
+                                remover.append(visita)
+            else: #significa que só tem uma data na busca
+                data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
+                #print(data)
+                for visita in self.dados_visitas:
+                    if visita['data'] != data:
+                        remover.append(visita)       
+        
         for visita in remover:
             match.remove(visita)
                   
         print('MATCH:',len(match))
         self.apagar_visitas()
         self.adicionar_visitas(match)
-        MDApp.get_running_app().root.get_screen('Visitas_tela').ids.box_scroll.scroll_y=1
         self.fechar_popup()
+        self.ids.scroll.scroll_y=1
 
     def apagar_visitas(self):
         MDApp.get_running_app().root.get_screen('Visitas_tela').ids.box_scroll.clear_widgets()
@@ -99,16 +159,67 @@ class Visitas_tela(Screen):
     def apagar_data(self):
         self.ids.data.text = ''
     
-    def abrir_popup_data(self):
-        calendario = MDDatePicker(callback = self.data_escolhida)
-        calendario.open()
+    def abrir_popup_primeira_data(self):
+        primeiro_calendario = MDDatePicker(callback = self.abrir_popup_segunda_data)
+        primeiro_calendario.open()
 
-    def data_escolhida(self, data):
+    def abrir_popup_segunda_data(self, data):
+        self.primeiro_dia = str(data.day) if len(str(data.day)) > 1 else '0'+str(data.day)
+        self.primeiro_mes = str(data.month) if len(str(data.month)) > 1 else '0'+str(data.month)
+        self.primeiro_ano = str(data.year)
+        self.ids.data.text = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
+        if not self.popup_segunda_data:
+            app = MDApp.get_running_app()
+            self.popup_segunda_data = MDDialog( size_hint = [0.8,0.8],
+                text="Deseja escolher uma segunda data?",
+                buttons=[
+                    MDRaisedButton(
+                        text="Sim", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.escolher_segunda_data
+                    ),
+                    MDFlatButton(
+                        text="Não", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_popup_segunda_data
+                    )
+                ],
+            )
+        self.popup_segunda_data.open()
+    
+    def fechar_popup_segunda_data(self,*args):
+        self.popup_segunda_data.dismiss()
+    
+    def escolher_segunda_data(self,*args):
+        self.popup_segunda_data.dismiss()
+        segundo_calendario = MDDatePicker(callback = self.segunda_data)
+        segundo_calendario.open()
+
+    def segunda_data(self,date, *args):
         #print(data)
-        self.dia = str(data.day) if len(str(data.day)) > 1 else '0'+str(data.day)
-        self.mes = str(data.month) if len(str(data.month)) > 1 else '0'+str(data.month)
-        self.ano = str(data.year)
-        self.ids.data.text = self.dia + '/' + self.mes + '/' + self.ano
+        self.segundo_dia = str(date.day) if len(str(date.day)) > 1 else '0'+str(date.day)
+        self.segundo_mes = str(date.month) if len(str(date.month)) > 1 else '0'+str(date.month)
+        self.segundo_ano = str(date.year)
+        
+        if int(self.primeiro_ano) == int(self.segundo_ano):
+            if int(self.primeiro_mes) == int(self.segundo_mes):
+                if int(self.primeiro_dia) == int(self.segundo_dia):
+                    pass
+                elif int(self.primeiro_dia) < int(self.segundo_dia):
+                    self.ids.data.text = self.ids.data.text + ' até ' + self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano
+                    self.ordem = 'primeiro'
+                else:
+                    self.ids.data.text = self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano + ' até ' +  self.ids.data.text
+                    self.ordem = 'segundo'
+            elif int(self.primeiro_mes) < int(self.segundo_mes):
+                self.ids.data.text = self.ids.data.text + ' até ' + self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano
+                self.ordem = 'primeiro'
+            else:
+                self.ids.data.text = self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano + ' até ' +  self.ids.data.text
+                self.ordem = 'segundo'
+        elif int(self.primeiro_ano) < int(self.segundo_ano):
+            self.ids.data.text = self.ids.data.text + ' até ' + self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano
+            self.ordem = 'primeiro'
+        else:
+            self.ids.data.text = self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano + ' até ' +  self.ids.data.text
+            self.ordem = 'segundo'
+
 
 
 

@@ -33,7 +33,7 @@
             	height: self.minimum_height
 				MDIconButton:
 					icon: 'calendar'
-                    on_release: root.abrir_popup_data()
+                    on_release: root.abrir_popup_primeira_data()
                 MDLabel:
                     id: data	
                     halign: 'center'
@@ -42,7 +42,8 @@
 					icon: 'backspace'	
                     on_release: root.apagar_data() 
 #---------------------------------------LISTA DE CLIENTES
-        ScrollView:   
+        ScrollView:
+            id: scroll
             BoxLayout:
                 id: box_scroll
                 orientation: 'vertical'
