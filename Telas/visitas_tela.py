@@ -100,7 +100,9 @@ class Visitas_tela(Screen):
                                 print(visita['data'][5:7], '<', menor_data[5:7])
                                 remover.append(visita)
                         else:
-                            if int(visita['data'][8:]) < int(menor_data[8:]): #verificando dia
+                            if int(visita['data'][:4]) == int(menor_data[:4]) and \
+                               int(visita['data'][5:7]) == int(menor_data[5:7]) and \
+                               int(visita['data'][8:]) < int(menor_data[8:]): #verificando dia
                                 if visita in remover:
                                     continue
                                 else:
