@@ -27,9 +27,7 @@ class MainApp(MDApp):
     dados_clientes =[]
     popup_leituradados = None
     telas = ['Menu_tela']
-    data = {
-        'point-of-sale': 'Vendas',
-        'briefcase': 'Visitas'}
+    
     path = ''
     dados_visitas=[]
     
