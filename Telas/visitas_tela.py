@@ -19,8 +19,9 @@ class Visitas_tela(Screen):
         
         self.dados_clientes = app.dados_clientes
         self.dados_visitas  = app.dados_visitas
-
-        self.adicionar_visitas(self.dados_visitas)
+        self.apagar_visitas()
+        #self.adicionar_visitas(self.dados_visitas)
+        self.ids.box_scroll.scroll_y=1
 
 
     def adicionar_visitas(self, dados_visitas):

@@ -8,12 +8,16 @@ from kivymd.uix.label import MDLabel
 from urllib import parse
 from kivy.core.clipboard import Clipboard
 from mapview import MapMarkerPopup
+from kivy.clock import Clock
 
 
 class Info_tela(Screen):
     dados_clientes=[]
     popup_maps=None
     popup_editar=None
+    data = {
+        'point-of-sale': 'Vendas',
+        'briefcase': 'Visitas'}
 
     def on_pre_enter(self):
         print('Entrando em Info_tela')
@@ -186,13 +190,14 @@ class Info_tela(Screen):
 
 
     def callback(self, instance):
-        print(instance.icon)
         if instance.icon == 'briefcase':
-            self.abrir_visitas()
+            app = MDApp.get_running_app()
+            app.popup_leituradados.open()
+            Clock.schedule_once(self.abrir_visitas,0.1)
         if instance.icon == 'point-of-sale':
             pass
            
-    def abrir_visitas(self):
+    def abrir_visitas(self,*args):
         print('Executando abrir_visitas em main')
         app = MDApp.get_running_app()
         info_tela = app.root.get_screen('Info_tela')
