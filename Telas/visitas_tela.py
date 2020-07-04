@@ -92,7 +92,8 @@ class Visitas_tela(Screen):
                         print(visita['data'][:4], '<', menor_data[:4])
                         remover.append(visita)
                     else:
-                        if int(visita['data'][5:7]) < int(menor_data[5:7]):  #verificando mes
+                        if int(visita['data'][:4]) == int(menor_data[:4]) and \
+                           int(visita['data'][5:7]) < int(menor_data[5:7]):  #verificando mes
                             if visita in remover:
                                 continue
                             else:
@@ -117,7 +118,8 @@ class Visitas_tela(Screen):
                             print(visita['data'][:4], '>', maior_data[:4])
                             remover.append(visita)
                     else:
-                        if int(visita['data'][5:7]) > int(maior_data[5:7]): #verificando mes
+                        if int(visita['data'][:4]) == int(maior_data[:4]) and \
+                           int(visita['data'][5:7]) > int(maior_data[5:7]): #verificando mes
                             if visita in remover:
                                 continue
                             else:
