@@ -1,4 +1,4 @@
-# Copyright (c) 2019 Artem S. Bulgakov
+# Copyright (c) 2019-2020 Artem Bulgakov
 #
 # This file is distributed under the terms of the same license,
 # as the Kivy framework.
@@ -11,12 +11,13 @@ Downloads archive from https://github.com/Templarian/MaterialDesign-Webfont and
 updates font file with icon_definitions.
 """
 
-import os
-import requests
-import zipfile
-import shutil
-import re
 import json
+import os
+import re
+import shutil
+import zipfile
+
+import requests
 
 os.chdir(os.path.dirname(__file__))
 # Paths to files in kivymd repository
@@ -89,7 +90,7 @@ def make_icon_definitions(icons):
             icon_definitions += f'"{i["name"]}": "\\U{i["hex"].upper()}",\n'
         else:
             icon_definitions += f'"{i["name"]}": "\\u{i["hex"].upper()}",\n'
-    icon_definitions += " " * 4 + f'"blank": " ",\n'  # Add blank icon (space)
+    icon_definitions += " " * 4 + '"blank": " ",\n'  # Add blank icon (space)
     icon_definitions += "}"
     return icon_definitions
 

@@ -435,49 +435,49 @@ __all__ = (
     "MDFloatingActionButtonSpeedDial",
 )
 
-from kivy.core.window import Window
-from kivy.metrics import dp
+from kivy.animation import Animation
 from kivy.clock import Clock
+from kivy.core.window import Window
+from kivy.graphics.context_instructions import Color
+from kivy.graphics.stencil_instructions import (
+    StencilPop,
+    StencilPush,
+    StencilUnUse,
+    StencilUse,
+)
+from kivy.graphics.vertex_instructions import Ellipse, RoundedRectangle
 from kivy.lang import Builder
+from kivy.metrics import dp
+from kivy.properties import (
+    AliasProperty,
+    BooleanProperty,
+    BoundedNumericProperty,
+    DictProperty,
+    ListProperty,
+    NumericProperty,
+    ObjectProperty,
+    OptionProperty,
+    StringProperty,
+)
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.image import Image
 from kivy.uix.widget import Widget
 from kivy.utils import get_color_from_hex
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.anchorlayout import AnchorLayout
-from kivy.uix.behaviors import ButtonBehavior
-from kivy.animation import Animation
-from kivy.graphics.context_instructions import Color
-from kivy.graphics.vertex_instructions import Ellipse, RoundedRectangle
-from kivy.graphics.stencil_instructions import (
-    StencilPush,
-    StencilUse,
-    StencilPop,
-    StencilUnUse,
-)
-from kivy.properties import (
-    StringProperty,
-    BoundedNumericProperty,
-    ListProperty,
-    AliasProperty,
-    BooleanProperty,
-    NumericProperty,
-    OptionProperty,
-    ObjectProperty,
-    DictProperty,
-)
 
 from kivymd.theming import ThemableBehavior
-from kivymd.uix.tooltip import MDTooltip
 from kivymd.uix.behaviors import (
+    CircularElevationBehavior,
+    CircularRippleBehavior,
     CommonElevationBehavior,
     RectangularElevationBehavior,
-    CircularElevationBehavior,
-    SpecificBackgroundColorBehavior,
-    CircularRippleBehavior,
     RectangularRippleBehavior,
+    SpecificBackgroundColorBehavior,
 )
+from kivymd.uix.tooltip import MDTooltip
 
 Builder.load_string(
     """
@@ -513,7 +513,6 @@ Builder.load_string(
         else (dp(root.user_font_size + 23), dp(root.user_font_size + 23))
     lbl_txt: lbl_txt
     padding: (dp(12), dp(12), dp(12), dp(12)) if root.icon in md_icons else (0, 0, 0, 0)
-    theme_text_color: 'Primary'
 
     MDIcon:
         id: lbl_txt
@@ -813,8 +812,7 @@ class BaseButton(
     """
 
     theme_text_color = OptionProperty(
-        None,
-        allownone=True,
+        "Primary",
         options=[
             "Primary",
             "Secondary",
@@ -858,7 +856,7 @@ class BaseButton(
 
     user_font_size = NumericProperty()
     """Custom font size for :class:`~MDIconButton`.
-    
+
     :attr:`user_font_size` is an :class:`~kivy.properties.NumericProperty`
     and defaults to `0`.
     """
@@ -1400,7 +1398,7 @@ class MDFloatingActionButtonSpeedDial(ThemableBehavior, FloatLayout):
 
     data = DictProperty()
     """
-    Must be a dictionary 
+    Must be a dictionary
 
     .. code-block:: python
 
@@ -1596,7 +1594,7 @@ class MDFloatingActionButtonSpeedDial(ThemableBehavior, FloatLayout):
                         ).start(instance)
                         if self.hint_animation:
                             Animation(
-                                opacity=0, d=0.1, t=self.opening_transition,
+                                opacity=0, d=0.1, t=self.opening_transition
                             ).start(widget)
                         break
 
@@ -1642,6 +1640,7 @@ class MDFloatingActionButtonSpeedDial(ThemableBehavior, FloatLayout):
             floating_text = value[name_icon]
             if floating_text:
                 label = MDFloatingLabel(text=floating_text, opacity=0)
+                label.text_color = self.label_text_color
                 self.add_widget(label)
         # Top root button.
         root_button = MDFloatingRootButton(on_release=self.open_stack)
@@ -1713,7 +1712,7 @@ class MDFloatingActionButtonSpeedDial(ThemableBehavior, FloatLayout):
 
         if self.state != "open":
             y = 0
-            l = dp(56)
+            label_position = dp(56)
             anim_buttons_data = {}
             anim_labels_data = {}
 
@@ -1730,10 +1729,10 @@ class MDFloatingActionButtonSpeedDial(ThemableBehavior, FloatLayout):
                         )
                 elif isinstance(widget, MDFloatingLabel):
                     # Sets new labels positions.
-                    l += dp(56)
+                    label_position += dp(56)
                     # Sets the position of signatures only once.
                     if not self._label_pos_y_set:
-                        widget.y = widget.y * 2 + l
+                        widget.y = widget.y * 2 + label_position
                         widget.x = Window.width - widget.width - dp(86)
                     if not self._anim_labels_data:
                         anim_labels_data[widget] = Animation(

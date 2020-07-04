@@ -38,8 +38,11 @@ Usage
             self.screen = Builder.load_string(KV)
             menu_items = [{"icon": "git", "text": f"Item {i}"} for i in range(5)]
             self.menu = MDDropdownMenu(
-                caller=self.screen.ids.button, items=menu_items, width_mult=4
+                caller=self.screen.ids.button, items=menu_items, width_mult=4, callback=self.menu_callback
             )
+
+        def menu_callback(self, instance):
+            self.menu.dismiss()
 
         def build(self):
             return self.screen
@@ -175,14 +178,31 @@ Full example
                 for i in range(5)
             ]
             self.menu = MDDropdownMenu(
-                caller=self.screen.ids.button, items=menu_items, width_mult=4
+                caller=self.screen.ids.button, items=menu_items, width_mult=4, callback=self.menu_callback
             )
+
+        def menu_callback(self, instance):
+            self.menu.dismiss()
 
         def build(self):
             return self.screen
 
 
     Test().run()
+
+Hover Behavior
+--------------
+
+.. code-block:: python
+
+    self.menu = MDDropdownMenu(
+        ...,
+        ...,
+        selected_color=self.theme_cls.primary_dark_hue,
+    )
+
+.. image:: https://github.com/HeaTTheatR/KivyMD-data/raw/master/gallery/kivymddoc/menu-with-hover.gif
+    :align: center
 
 Menu with MDToolbar
 -------------------
@@ -253,15 +273,21 @@ Menu with MDToolbar
             super().__init__(**kwargs)
             self.screen = Builder.load_string(KV)
             self.menu_1 = self.create_menu(
-                "Button menu", self.screen.ids.toolbar.ids.button_1
+                "Button menu", self.screen.ids.toolbar.ids.button_1, self.menu_1_callback
             )
             self.menu_2 = self.create_menu(
-                "Button dots", self.screen.ids.toolbar.ids.button_2
+                "Button dots", self.screen.ids.toolbar.ids.button_2, self.menu_2_callback
             )
 
-        def create_menu(self, text, instance):
+        def create_menu(self, text, instance, callback):
             menu_items = [{"icon": "git", "text": text} for i in range(5)]
-            return MDDropdownMenu(caller=instance, items=menu_items, width_mult=5)
+            return MDDropdownMenu(caller=instance, items=menu_items, width_mult=5, callback=callback)
+
+        def menu_1_callback(self, instance):
+            self.menu_1.dismiss()
+
+        def menu_2_callback(self, instance):
+            self.menu_2.dismiss()
 
         def build(self):
             return self.screen
@@ -319,6 +345,7 @@ Bottom position
         def set_item(self, instance):
             def set_item(interval):
                 self.screen.ids.field.text = instance.text
+                self.menu.dismiss()
 
             Clock.schedule_once(set_item, 0.5)
 
@@ -367,6 +394,7 @@ Center position
 
         def set_item(self, instance):
             self.screen.ids.drop_item.set_item(instance.text)
+            self.menu.dismiss()
 
         def build(self):
             return self.screen
@@ -378,36 +406,29 @@ Center position
     :align: center
 """
 
-__all__ = (
-    "MDDropdownMenu",
-    "MDMenuItem",
-    "RightContent",
-)
+__all__ = ("MDDropdownMenu", "RightContent")
 
 from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.scrollview import ScrollView
 from kivy.metrics import dp
 from kivy.properties import (
-    NumericProperty,
+    BooleanProperty,
     ListProperty,
+    NumericProperty,
+    ObjectProperty,
     OptionProperty,
     StringProperty,
-    ObjectProperty,
-    BooleanProperty,
 )
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.scrollview import ScrollView
 
 import kivymd.material_resources as m_res
 from kivymd.theming import ThemableBehavior
+from kivymd.uix.behaviors import HoverBehavior
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.list import (
-    OneLineAvatarIconListItem,
-    IRightBodyTouch,
-    OneLineListItem,
-)
+from kivymd.uix.list import IRightBodyTouch, OneLineAvatarIconListItem
 
 Builder.load_string(
     """
@@ -421,17 +442,8 @@ Builder.load_string(
 <MDMenuItemIcon>
 
     IconLeftWidget:
+        id: icon_widget
         icon: root.icon
-
-
-<MDMenuItem>
-    _txt_top_pad: "8dp"
-    _txt_bot_pad: "16dp"
-    on_release: root.parent.parent.parent.parent.dispatch("on_dismiss")
-
-    IconLeftWidget:
-        icon: root.icon
-        pos_hint: {"center_y": .5}
 
 
 <MDMenu>
@@ -466,6 +478,7 @@ Builder.load_string(
 
         MDMenu:
             id: md_menu
+            drop_cls: root
             width_mult: root.width_mult
             size_hint: None, None
             size: 0, 0
@@ -479,12 +492,11 @@ class RightContent(IRightBodyTouch, MDBoxLayout):
     icon = StringProperty()
 
 
-class MDMenuItemIcon(OneLineAvatarIconListItem):
+class MDMenuItemIcon(HoverBehavior, OneLineAvatarIconListItem):
     icon = StringProperty()
 
-
-class MDMenuItem(OneLineListItem):
-    icon = StringProperty()
+    def on_enter(self):
+        self.parent.parent.drop_cls.set_bg_color_items(self)
 
 
 class MDMenu(ScrollView):
@@ -493,8 +505,20 @@ class MDMenu(ScrollView):
     See :attr:`~MDDropdownMenu.width_mult`.
     """
 
+    drop_cls = ObjectProperty()
+    """
+    See :class:`~MDDropdownMenu` class.
+    """
+
 
 class MDDropdownMenu(ThemableBehavior, FloatLayout):
+    selected_color = ListProperty()
+    """Custom color (``rgba`` format) for list item when hover behavior occurs.
+
+    :attr:`selected_color` is a :class:`~kivy.properties.ListProperty`
+    and defaults to `[]`.
+    """
+
     items = ListProperty()
     """
     See :attr:`~kivy.uix.recycleview.RecycleView.data`.
@@ -600,7 +624,7 @@ class MDDropdownMenu(ThemableBehavior, FloatLayout):
 
     use_icon_item = BooleanProperty(True)
     """Whether to use menu items with an icon on the left.
-    
+
     :attr:`use_icon_item` is a :class:`~kivy.properties.BooleanProperty`
     and defaults to `True`.
     """
@@ -619,20 +643,31 @@ class MDDropdownMenu(ThemableBehavior, FloatLayout):
     def check_position_caller(self, instance, width, height):
         self.set_menu_properties(0)
 
+    def set_bg_color_items(self, instance_selected_item):
+        """Called when a Hover Behavior event occurs for a list item.
+
+        :type instance_selected_item: <kivymd.uix.menu.MDMenuItemIcon object>
+        """
+
+        if self.selected_color:
+            for item in self.menu.ids.box.children:
+                if item is not instance_selected_item:
+                    item.bg_color = (0, 0, 0, 0)
+                else:
+                    instance_selected_item.bg_color = self.selected_color
+
     def create_menu_items(self):
         """Creates menu items."""
 
-        if self.use_icon_item:
-            item_cls = MDMenuItemIcon
-        else:
-            item_cls = MDMenuItem
-
         for data in self.items:
-            item = item_cls(
-                text=data.get("text", ""),
-                icon=data.get("icon", "") if self.use_icon_item else "",
-                divider=data.get("divider", "Full"),
+            item = MDMenuItemIcon(
+                text=data.get("text", ""), divider=data.get("divider", "Full")
             )
+            if not self.use_icon_item:
+                item.remove_widget(item.ids._left_container)
+                item._txt_left_pad = dp(16)
+            else:
+                item.icon = data.get("icon", "")
             if self.callback:
                 item.bind(on_release=self.callback)
             right_content_cls = data.get("right_content_cls", None)
@@ -669,11 +704,7 @@ class MDDropdownMenu(ThemableBehavior, FloatLayout):
             )
 
         # The height of each MDMenuItem or MDMenuItemIcon
-        menu_item_height = (
-            MDMenuItemIcon().height
-            if self.use_icon_item
-            else MDMenuItem().height
-        )
+        menu_item_height = MDMenuItemIcon().height
         # Set the target_height of the menu depending on the size of
         # each MDMenuItem or MDMenuItemIcon
         self.target_height = menu_item_height * len(self.items)

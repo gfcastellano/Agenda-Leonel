@@ -167,6 +167,7 @@ End full code
                 title: "MDCardSwipe"
 
             ScrollView:
+                scroll_timeout : 100
 
                 MDList:
                     id: md_list
@@ -538,27 +539,27 @@ __all__ = (
     "MDSeparator",
 )
 
-from kivy.clock import Clock
 from kivy.animation import Animation
+from kivy.clock import Clock
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.properties import (
-    StringProperty,
+    BooleanProperty,
     ListProperty,
     NumericProperty,
     OptionProperty,
-    BooleanProperty,
+    StringProperty,
 )
 from kivy.uix.boxlayout import BoxLayout
-from kivy.metrics import dp
 from kivy.uix.relativelayout import RelativeLayout
 
-from kivymd.uix.behaviors import (
-    RectangularElevationBehavior,
-    BackgroundColorBehavior,
-    RectangularRippleBehavior,
-    FocusBehavior,
-)
 from kivymd.theming import ThemableBehavior
+from kivymd.uix.behaviors import (
+    BackgroundColorBehavior,
+    FocusBehavior,
+    RectangularElevationBehavior,
+    RectangularRippleBehavior,
+)
 
 Builder.load_string(
     """
@@ -639,7 +640,7 @@ class MDCard(
     background = StringProperty()
     """
     Background image path.
-    
+
     :attr:`background` is a :class:`~kivy.properties.StringProperty`
     and defaults to `''`.
     """
@@ -660,13 +661,20 @@ class MDCard(
     and defaults to `False`.
     """
 
+    elevation = NumericProperty(0)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        Clock.schedule_once(lambda x: self._on_elevation(self.elevation))
         Clock.schedule_once(
-            lambda x: self._on_ripple_behavior(0, self.ripple_behavior)
+            lambda x: self._on_ripple_behavior(self.ripple_behavior)
         )
 
-    def _on_ripple_behavior(self, instance, value):
+    def _on_elevation(self, value):
+        if not value:
+            self.elevation = 6
+
+    def _on_ripple_behavior(self, value):
         self._no_ripple_effect = False if value else True
 
 
@@ -751,7 +759,7 @@ class MDCardSwipe(RelativeLayout):
 
     max_opened_x = NumericProperty("100dp")
     """
-    The value of the position the card shifts to when :attr:`~type_swipe` 
+    The value of the position the card shifts to when :attr:`~type_swipe`
     s set to `'hand'`.
 
     :attr:`max_opened_x` is a :class:`~kivy.properties.NumericProperty`

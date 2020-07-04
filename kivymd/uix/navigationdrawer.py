@@ -273,20 +273,20 @@ Switching screens in the ``ScreenManager`` and using the common ``MDToolbar``
 
 __all__ = ("NavigationLayout", "MDNavigationDrawer")
 
-from kivy.core.window import Window
-from kivy.logger import Logger
 from kivy.animation import Animation, AnimationTransition
+from kivy.core.window import Window
 from kivy.graphics.context_instructions import Color
 from kivy.graphics.vertex_instructions import Rectangle
 from kivy.lang import Builder
+from kivy.logger import Logger
 from kivy.properties import (
-    NumericProperty,
-    StringProperty,
-    OptionProperty,
+    AliasProperty,
     BooleanProperty,
     ListProperty,
+    NumericProperty,
     ObjectProperty,
-    AliasProperty,
+    OptionProperty,
+    StringProperty,
 )
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager
@@ -378,7 +378,7 @@ class MDNavigationDrawer(MDCard):
     """
     Indicates if panel closed or opened. Sets after :attr:`status` change.
     Available options are: `'close'`, `'open'`.
-    
+
     :attr:`state` is a :class:`~kivy.properties.OptionProperty`
     and defaults to `'close'`.
     """
@@ -622,9 +622,8 @@ class MDNavigationDrawer(MDCard):
             else:
                 self.set_state("open", animation=True)
         elif self.status == "opened":
-            if (
-                self.close_on_click
-                and self.get_dist_from_side(touch.ox) > self.width
+            if self.close_on_click and not self.collide_point(
+                touch.ox, touch.oy
             ):
                 self.set_state("close", animation=True)
         elif self.status == "closed":

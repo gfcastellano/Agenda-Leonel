@@ -1,4 +1,4 @@
-# Copyright (c) 2019 Artem S. Bulgakov
+# Copyright (c) 2019-2020 Artem Bulgakov
 #
 # This file is distributed under the terms of the same license,
 # as the Kivy framework.
@@ -22,10 +22,10 @@ What this script does:
 * Git push
 """
 
-import sys
 import os
-import subprocess
 import re
+import subprocess
+import sys
 
 
 def command(cmd: list):
@@ -118,7 +118,7 @@ def update_init_py(version):
 def update_readme(previous_version, version):
     """Change version in README."""
     readme_file = os.path.abspath("README.md")
-    readme_version_regex = rf"(?<=\[)v{previous_version}[ \-*\w^\]\n]*(?=\])"
+    readme_version_regex = rf"(?<=\[v){previous_version}[ \-*\w^\]\n]*(?=\])"
     replace_in_file(readme_version_regex, version, readme_file)
 
 
@@ -202,7 +202,7 @@ def create_unreleased_changelog(index_file, unreleased_file, previous_version):
     # Update index file
     replace_in_file(
         r"(?<=Change Log\n==========\n\n)",
-        f".. include:: /changelog/unreleased.rst\n",
+        ".. include:: /changelog/unreleased.rst\n",
         index_file,
     )
 

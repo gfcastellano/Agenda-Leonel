@@ -29,6 +29,7 @@ without asking too.
 """
 
 import os
+
 from kivy.logger import Logger
 
 __version__ = "0.104.1"
@@ -45,5 +46,6 @@ images_path = os.path.join(path, f"images{os.sep}")
 
 Logger.info(f"KivyMD: v{__version__}")
 
-import kivymd.factory_registers
-from kivymd.tools.packaging.pyinstaller import hooks_path
+import kivymd.factory_registers  # NOQA
+import kivymd.font_definitions  # NOQA
+from kivymd.tools.packaging.pyinstaller import hooks_path  # NOQA

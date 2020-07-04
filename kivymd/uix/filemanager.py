@@ -116,30 +116,29 @@ __all__ = ("MDFileManager",)
 import os
 import threading
 
-from PIL import Image
-
 from kivy.app import App
+from kivy.lang import Builder
 from kivy.metrics import dp
+from kivy.properties import (
+    BooleanProperty,
+    ListProperty,
+    NumericProperty,
+    ObjectProperty,
+    OptionProperty,
+    StringProperty,
+)
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
-from kivy.lang import Builder
 from kivy.uix.image import AsyncImage
-from kivy.properties import (
-    ObjectProperty,
-    StringProperty,
-    ListProperty,
-    BooleanProperty,
-    NumericProperty,
-    OptionProperty,
-)
 from kivy.uix.modalview import ModalView
+from PIL import Image
 
 from kivymd import images_path
-from kivymd.uix.floatlayout import MDFloatLayout
-from kivymd.uix.list import BaseListItem, ContainerSupport
 from kivymd.theming import ThemableBehavior
 from kivymd.toast import toast
+from kivymd.uix.floatlayout import MDFloatLayout
+from kivymd.uix.list import BaseListItem, ContainerSupport
 
 ACTIVITY_MANAGER = """
 #:import os os
@@ -173,7 +172,6 @@ ACTIVITY_MANAGER = """
     shorten_from: 'center'
     halign: 'center'
     text_size: self.width, None
-    theme_text_color: 'Primary'
 
 
 <BodyManagerWithPrevious>
@@ -602,10 +600,10 @@ class MDFileManager(ThemableBehavior, MDFloatLayout):
     def _update_list_images(self):
         self.ids.rv.refresh_from_layout()
 
-    def _split_list(self, l, n):
-        if l:
+    def _split_list(self, lst, n):
+        if lst:
             n = max(1, n)
-            return (l[i : i + n] for i in range(0, len(l), n))
+            return (lst[i : i + n] for i in range(0, len(lst), n))
         else:
             return []
 

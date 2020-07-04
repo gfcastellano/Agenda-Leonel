@@ -64,24 +64,23 @@ Usage
 
 __all__ = ("MDDialog",)
 
+from kivy.core.window import Window
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.properties import (
-    StringProperty,
-    NumericProperty,
     ListProperty,
-    OptionProperty,
+    NumericProperty,
     ObjectProperty,
+    OptionProperty,
+    StringProperty,
 )
 from kivy.uix.modalview import ModalView
-from kivy.metrics import dp
-from kivy.core.window import Window
 
+from kivymd.material_resources import DEVICE_TYPE
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.button import BaseButton
-from kivymd.uix.list import BaseListItem
 from kivymd.uix.card import MDSeparator
-from kivymd.material_resources import DEVICE_TYPE
-
+from kivymd.uix.list import BaseListItem
 
 Builder.load_string(
     """
@@ -93,7 +92,7 @@ Builder.load_string(
 
 
 <MDDialog>
-            
+
     MDCard:
         id: container
         orientation: "vertical"
@@ -531,7 +530,7 @@ class MDDialog(BaseDialog):
 
     def on_open(self):
         # TODO: Add scrolling text.
-        pass
+        self.height = self.ids.container.height
 
     def set_normal_height(self):
         self.size_hint_y = 0.8
