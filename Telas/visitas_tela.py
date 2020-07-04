@@ -85,11 +85,9 @@ class Visitas_tela(Screen):
                 else:
                     maior_data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
                     menor_data = self.segundo_ano + '-' + self.segundo_mes + '-' + self.segundo_dia
-                print(menor_data, maior_data)
+                #print(menor_data, maior_data)
                 for visita in match:
                     if int(visita['data'][:4]) < int(menor_data[:4]): #verificando ano
-                        print('-------------eliminado por ano-------------------')
-                        print(visita['data'][:4], '<', menor_data[:4])
                         remover.append(visita)
                     else:
                         if int(visita['data'][:4]) == int(menor_data[:4]) and \
@@ -97,8 +95,6 @@ class Visitas_tela(Screen):
                             if visita in remover:
                                 continue
                             else:
-                                print('-----------eliminado por mes----------------')
-                                print(visita['data'][5:7], '<', menor_data[5:7])
                                 remover.append(visita)
                         else:
                             if int(visita['data'][:4]) == int(menor_data[:4]) and \
@@ -107,15 +103,11 @@ class Visitas_tela(Screen):
                                 if visita in remover:
                                     continue
                                 else:
-                                    print('----------eliminado por dia-----------')
-                                    print(visita['data'][8:], '<', menor_data[8:])
                                     remover.append(visita)
                     if int(visita['data'][:4]) > int(maior_data[:4]): #verificando ano
                         if visita in remover:
                                 continue
                         else:
-                            print('--------------eliminado por ano----------------')
-                            print(visita['data'][:4], '>', maior_data[:4])
                             remover.append(visita)
                     else:
                         if int(visita['data'][:4]) == int(maior_data[:4]) and \
@@ -123,8 +115,6 @@ class Visitas_tela(Screen):
                             if visita in remover:
                                 continue
                             else:
-                                print('-------------------eliminado por mes-------------------------')
-                                print(visita['data'][5:7], '>', maior_data[5:7])
                                 remover.append(visita)
                         elif int(visita['data'][:4]) == int(maior_data[:4]) and \
                             int(visita['data'][5:7]) == int(maior_data[5:7]) and \
@@ -132,8 +122,6 @@ class Visitas_tela(Screen):
                             if visita in remover:
                                 continue
                             else:
-                                print('-------------------eliminado por dia-------------------------')
-                                print(visita['data'][8:], '>', maior_data[8:])
                                 remover.append(visita)
             else: #significa que só tem uma data na busca
                 data = self.primeiro_ano + '-' + self.primeiro_mes + '-' + self.primeiro_dia
