@@ -2,10 +2,15 @@ from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
 from kivy.core.window import Window
 from kivy.clock import Clock
+from kivymd.uix.picker import MDDatePicker
 
 class Visitas_tela(Screen):
+    dia=''
+    mes=''
+    ano=''
     def on_pre_enter(self):
         print('Entrando em Visitas_tela')
         app = MDApp.get_running_app()
@@ -56,14 +61,25 @@ class Visitas_tela(Screen):
         print('[executar_busca] texto:',texto)
         print('[executar_busca] parametro:',parametro)
         match=[]
-        for cliente in self.dados_visitas:
+        for visita in self.dados_visitas:
             if parametro == 'codigo':
-                if texto in str(cliente['codigo']):
-                    match.append(cliente)
+                if texto in str(visita['codigo']):
+                    match.append(visita)
             else:
-                if texto in str(cliente['nome_fantasia']).lower():
-                    match.append(cliente)
+                if texto in str(visita['nome_fantasia']).lower():
+                    match.append(visita)
 
+        remover=[]
+        if self.ids.data.text != '':
+            data = self.ano + '-' + self.mes + '-' + self.dia
+            print(data)
+            for visita in match:
+                if visita['data'] != data:
+                    remover.append(visita)
+            
+        for visita in remover:
+            match.remove(visita)
+                  
         print('MATCH:',len(match))
         self.apagar_visitas()
         self.adicionar_visitas(match)
@@ -76,6 +92,22 @@ class Visitas_tela(Screen):
     def fechar_popup(self):
         MDApp.get_running_app().popup_leituradados.dismiss()
 
+    def apagar_texto(self):
+        self.ids.buscar.text = ''
+    
+    def apagar_data(self):
+        self.ids.data.text = ''
+    
+    def abrir_popup_data(self):
+        calendario = MDDatePicker(callback = self.data_escolhida)
+        calendario.open()
+
+    def data_escolhida(self, data):
+        #print(data)
+        self.dia = str(data.day) if len(str(data.day)) > 1 else '0'+str(data.day)
+        self.mes = str(data.month) if len(str(data.month)) > 1 else '0'+str(data.month)
+        self.ano = str(data.year)
+        self.ids.data.text = self.dia + '/' + self.mes + '/' + self.ano
 
 
 

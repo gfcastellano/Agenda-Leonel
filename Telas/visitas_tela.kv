@@ -33,11 +33,14 @@
             	height: 120
 				MDIconButton:
 					icon: 'calendar'
+                    on_release: root.abrir_popup_data()
                 MDLabel:
                     id: data	
+                    halign: 'center'
 				MDIconButton:
 					text: 'Escolher data'
 					icon: 'backspace'	
+                    on_release: root.apagar_data() 
 #---------------------------------------LISTA DE CLIENTES
         ScrollView:   
             BoxLayout:
