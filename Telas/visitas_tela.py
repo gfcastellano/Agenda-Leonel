@@ -10,6 +10,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRaisedButton
 
 class Visitas_tela(Screen):
+    data={'card-plus-outline': 'Adicionar visita'}
     primeiro_dia=''
     primeiro_mes=''
     primeiro_ano=''
