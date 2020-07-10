@@ -30,7 +30,7 @@ class Editar_tela(Screen):
     def adicionar_infos(self,root):
         dados=[]
         print('Adicionando infos a Editar_tela')
-        codigo = str(root.ids.codigo.text)        
+        codigo = str(root.ids.info_tab.ids.codigo.text)        
         print('Adicionando informações do cliente:', codigo)
         for cliente in self.dados_clientes:
             if codigo == str(cliente['codigo']):

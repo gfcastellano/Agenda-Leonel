@@ -5,7 +5,8 @@
         orientation: 'vertical'
 #---------------------------------------HEADER
         MDToolbar:
-            title: 'Informacoes'
+            id: toolbar
+            title: 'Informações'
             md_bg_color: app.theme_cls.primary_dark
             size_hint_y: None
             height: 150
@@ -13,191 +14,238 @@
             elevation: 11
             left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
             right_action_items: [["map-marker", lambda x: root.ir_para_mapa()],["dots-vertical", lambda x: root.editar()]]
+
+
+        MDTabs:
+            lock_swiping: True
+            Info_tab:
+                text: 'Informações'
+                id: info_tab
+            Visitas_tab:
+                text: 'Visitas'
+                id: visitas_tab
+            Tab:
+                text: 'Vendas'
+                id: vendas_tab
+
+
+<Info_tab@Tab>:
+    ScrollView:
+        id: scroll_info
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+    #-------------------------------------------------CAIXAS
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Codigo:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                MDLabel:
+                    id: codigo
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Nome:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                MDLabel:
+                    id: nome_fantasia
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Endereco:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                ClickMDLabel:
+                    id: endereco
+                    on_release: app.root.get_screen('Info_tela').abrir_popup_maps()
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Numero:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                MDLabel:
+                    id: numero
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Bairro:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                MDLabel:
+                    id: bairro
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Telefone Fixo:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                ClickMDLabel:
+                    id: telefone_fixo
+                    halign: 'center'
+                    on_release: app.root.get_screen('Info_tela').copiar(self)
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Perfil:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                MDLabel:
+                    id: perfil_cliente
+                    halign: 'center'
+    #-----------------------------------------------------------------CONTATOS
+            BoxparaScroll:
+                MDLabel:
+                    text: 'CONTATOS'
+                    halign: 'center'
+                    bold: True
+            BoxparaScroll:
+                MDLabel:
+                    id: nome_1
+                    halign: 'center'
+                ClickMDLabel:
+                    id: telefone_1
+                    halign: 'center'
+                    on_release: app.root.get_screen('Info_tela').copiar(self)
+                MDLabel:
+                    id: tipo_1
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    id: nome_2
+                    halign: 'center'
+                ClickMDLabel:
+                    id: telefone_2
+                    halign: 'center'
+                    on_release: app.root.get_screen('Info_tela').copiar(self)
+                MDLabel:
+                    id: tipo_2
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    id: nome_3
+                    halign: 'center'
+                ClickMDLabel:
+                    id: telefone_3
+                    halign: 'center'
+                    on_release: app.root.get_screen('Info_tela').copiar(self)
+                MDLabel:
+                    id: tipo_3
+                    halign: 'center'
+    #-----------------------------------------SERVICOS
+            BoxparaScroll:
+                MDLabel:
+                    text: 'SERVICOS'
+                    halign: 'center'
+                    bold: True
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Banho:'
+                    halign: 'center'
+                MDLabel:
+                    text: 'Tosa:'
+                    halign: 'center'
+                MDLabel:
+                    text: 'Pet-Shop:'
+                    halign: 'center'
+                MDLabel:
+                    text: 'Clinica:'
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    id: banho
+                    halign: 'center'
+                MDLabel:
+                    id: tosa
+                    halign: 'center'
+                MDLabel:
+                    id: pet_shop
+                    halign: 'center'
+                MDLabel:
+                    id: clinica
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Razao Social:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                MDLabel:
+                    id: razao_social
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    text: 'CNPJ:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                MDLabel:
+                    id: cnpj
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    text: 'CEP:'
+                    size_hint_x: 0.5
+                    halign: 'center'
+                MDLabel:
+                    id: cep
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    text: 'Therapet:'
+                    halign: 'center'
+                MDLabel:
+                    text: 'Tesoura:'
+                    halign: 'center'
+                MDLabel:
+                    text: 'Tapetinho:'
+                    halign: 'center'
+            BoxparaScroll:
+                MDLabel:
+                    id: therapet
+                    halign: 'center'                        
+                MDLabel:
+                    id: tesoura
+                    halign: 'center'
+                MDLabel:
+                    id: tap_higienico
+                    halign: 'center'
+
+
+
+<Visitas_tab@Tab>:
+    BoxLayout:
+        orientation: 'vertical'
+        #size_hint_y: None
+        #height: self.minimum_height
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height + 15
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            MDIconButton:
+                icon: 'calendar'
+                on_release: app.root.get_screen('Visitas_tela').abrir_popup_primeira_data()
+            MDLabel:
+                id: data	
+                halign: 'center'
+            MDIconButton:
+                text: 'Escolher data'
+                icon: 'backspace'	
+                on_release: app.root.get_screen('Visitas_tela').apagar_data() 
+#---------------------------------------LISTA DE VISITAS
         ScrollView:
-            id: scroll
+            id: scroll_visitas
             BoxLayout:
+                id: box_scroll
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
-#-------------------------------------------------CAIXAS
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Codigo:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    MDLabel:
-                        id: codigo
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Nome:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    MDLabel:
-                        id: nome_fantasia
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Endereco:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    ClickMDLabel:
-                        id: endereco
-                        on_release: root.abrir_popup_maps()
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Numero:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    MDLabel:
-                        id: numero
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Bairro:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    MDLabel:
-                        id: bairro
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Telefone Fixo:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    ClickMDLabel:
-                        id: telefone_fixo
-                        halign: 'center'
-                        on_release: root.copiar(self)
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Perfil:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    MDLabel:
-                        id: perfil_cliente
-                        halign: 'center'
-#-----------------------------------------------------------------CONTATOS
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'CONTATOS'
-                        halign: 'center'
-                        bold: True
-                BoxparaScroll:
-                    MDLabel:
-                        id: nome_1
-                        halign: 'center'
-                    ClickMDLabel:
-                        id: telefone_1
-                        halign: 'center'
-                        on_release: root.copiar(self)
-                    MDLabel:
-                        id: tipo_1
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        id: nome_2
-                        halign: 'center'
-                    ClickMDLabel:
-                        id: telefone_2
-                        halign: 'center'
-                        on_release: root.copiar(self)
-                    MDLabel:
-                        id: tipo_2
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        id: nome_3
-                        halign: 'center'
-                    ClickMDLabel:
-                        id: telefone_3
-                        halign: 'center'
-                        on_release: root.copiar(self)
-                    MDLabel:
-                        id: tipo_3
-                        halign: 'center'
-#-----------------------------------------SERVICOS
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'SERVICOS'
-                        halign: 'center'
-                        bold: True
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Banho:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Tosa:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Pet-Shop:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Clinica:'
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        id: banho
-                        halign: 'center'
-                    MDLabel:
-                        id: tosa
-                        halign: 'center'
-                    MDLabel:
-                        id: pet_shop
-                        halign: 'center'
-                    MDLabel:
-                        id: clinica
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Razao Social:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    MDLabel:
-                        id: razao_social
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'CNPJ:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    MDLabel:
-                        id: cnpj
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'CEP:'
-                        size_hint_x: 0.5
-                        halign: 'center'
-                    MDLabel:
-                        id: cep
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        text: 'Therapet:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Tesoura:'
-                        halign: 'center'
-                    MDLabel:
-                        text: 'Tapetinho:'
-                        halign: 'center'
-                BoxparaScroll:
-                    MDLabel:
-                        id: therapet
-                        halign: 'center'                        
-                    MDLabel:
-                        id: tesoura
-                        halign: 'center'
-                    MDLabel:
-                        id: tap_higienico
-                        halign: 'center'
-    MDFloatingActionButtonSpeedDial:
-        data: root.data
-        rotation_root_button: True
-        callback: root.callback
 
+    #MDFloatingActionButtonSpeedDial:
+    #    data: app.root.get_screen('Visitas_tela').data
+    #    rotation_root_button: True
 
 <BoxparaScroll@BoxLayout>:
     padding: [5,0,0,0]
@@ -207,3 +255,9 @@
 
 <ClickMDLabel@ButtonBehavior+MDLabel>
     color: app.theme_cls.primary_color
+
+
+<Tab>:
+    MDLabel:
+        pos_hint: {"center_x": .5, "center_y": .5}
+

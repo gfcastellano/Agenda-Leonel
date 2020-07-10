@@ -70,20 +70,21 @@ You can inherit the ``MyToggleButton`` class only from the following classes
 - :class:`~kivymd.uix.button.MDFillRoundFlatIconButton`
 """
 
+__all__ = ("MDToggleButton",)
 
-from kivy.uix.behaviors import ToggleButtonBehavior
 from kivy.properties import ListProperty
+from kivy.uix.behaviors import ToggleButtonBehavior
 
 from kivymd.app import MDApp
 from kivymd.uix.button import (
+    MDFillRoundFlatButton,
+    MDFillRoundFlatIconButton,
     MDFlatButton,
     MDRaisedButton,
     MDRectangleFlatButton,
     MDRectangleFlatIconButton,
     MDRoundFlatButton,
     MDRoundFlatIconButton,
-    MDFillRoundFlatButton,
-    MDFillRoundFlatIconButton,
 )
 
 
@@ -134,8 +135,4 @@ class MDToggleButton(ToggleButtonBehavior):
             if button.state == "down":
                 button.md_bg_color = self.background_down
             else:
-                if isinstance(button, MDFlatButton):
-                    background_normal = (0, 0, 0, 0)
-                else:
-                    background_normal = self.background_normal
-                button.md_bg_color = background_normal
+                button.md_bg_color = self.background_normal

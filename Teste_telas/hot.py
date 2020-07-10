@@ -12,7 +12,7 @@ BoxLayout:
     CodeInput:
         lexer: KivyLexer()
         style_name: "native"
-        on_text: app.update_kv_file(self.text)
+        #on_text: app.update_kv_file(self.text)
         size_hint_x: .7
 
     HotReloadViewer:

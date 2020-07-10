@@ -50,6 +50,22 @@ class Visitas_tela(Screen):
                                      contato = visita['contato'],
                                      informacoes = visita['informacoes']))
 
+        #Adicionando visitas na visitas_tab
+        visitas_tab = MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.box_scroll
+        if len(dados_visitas) == 0: #Caso ele receba um match que contem nada
+            visitas_tab.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
+        for visita in reversed(dados_visitas):
+            #print(visita)
+            dia  = visita['data'][-2:]
+            mes  = visita['data'][-5:-3]
+            ano  = visita['data'][-10:-6]
+            data = dia + '/' + mes + '/' + ano
+            visitas_tab.add_widget(Visita(data = data,
+                                     codigo = str(visita['codigo']),
+                                     nome_fantasia = visita['nome_fantasia'],
+                                     contato = visita['contato'],
+                                     informacoes = visita['informacoes']))
+
     def mostrar_popup(self):
         MDApp.get_running_app().popup_leituradados.open()
         Clock.schedule_once(self.buscar,0.1)
@@ -71,6 +87,8 @@ class Visitas_tela(Screen):
         print('[executar_busca] texto:',texto)
         print('[executar_busca] parametro:',parametro)
         match=[]
+        app = MDApp.get_running_app()
+        self.dados_visitas = app.dados_visitas
         for visita in self.dados_visitas:
             if parametro == 'codigo':
                 if texto in str(visita['codigo']):
@@ -134,7 +152,10 @@ class Visitas_tela(Screen):
                         remover.append(visita)       
         
         for visita in remover:
-            match.remove(visita)
+            try:
+                match.remove(visita)
+            except ValueError:
+                continue
                   
         print('MATCH:',len(match))
         self.apagar_visitas()
@@ -144,16 +165,22 @@ class Visitas_tela(Screen):
 
     def apagar_visitas(self):
         MDApp.get_running_app().root.get_screen('Visitas_tela').ids.box_scroll.clear_widgets()
+        MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.box_scroll.clear_widgets()
 
     def fechar_popup(self):
         MDApp.get_running_app().popup_leituradados.dismiss()
 
     def apagar_texto(self):
         self.ids.buscar.text = ''
+        
     
     def apagar_data(self):
         self.ids.data.text = ''
-    
+        #APagar tambem da vsitas_tab
+        MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.data.text = ''
+        if str(MDApp.get_running_app().root.current_screen)[14:-2] == 'Info_tela':
+            self.buscar()
+
     def abrir_popup_primeira_data(self):
         primeiro_calendario = MDDatePicker(callback = self.abrir_popup_segunda_data)
         primeiro_calendario.open()
@@ -169,7 +196,7 @@ class Visitas_tela(Screen):
                 text="Deseja escolher uma segunda data?",
                 buttons=[
                     MDRaisedButton(
-                        text="Sim", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.escolher_segunda_data
+                        text="Sim", on_release = self.escolher_segunda_data
                     ),
                     MDFlatButton(
                         text="Não", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_popup_segunda_data
@@ -180,6 +207,8 @@ class Visitas_tela(Screen):
     
     def fechar_popup_segunda_data(self,*args):
         self.popup_segunda_data.dismiss()
+        if str(MDApp.get_running_app().root.current_screen)[14:-2] == 'Info_tela':
+            self.buscar()
     
     def escolher_segunda_data(self,*args):
         self.popup_segunda_data.dismiss()
@@ -214,7 +243,11 @@ class Visitas_tela(Screen):
         else:
             self.ids.data.text = self.segundo_dia + '/' + self.segundo_mes + '/' + self.segundo_ano + ' até ' +  self.ids.data.text
             self.ordem = 'segundo'
-
+        
+        MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.data.text = self.ids.data.text
+        if str(MDApp.get_running_app().root.current_screen)[14:-2] == 'Info_tela':
+            self.buscar()
+        
 
 
 

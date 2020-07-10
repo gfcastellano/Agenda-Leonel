@@ -204,19 +204,16 @@ The :class:`~MDIcon` class is inherited from
     :align: center
 """
 
-__all__ = (
-    "MDLabel",
-    "MDIcon",
-)
+__all__ = ("MDLabel", "MDIcon")
 
 from kivy.lang import Builder
 from kivy.metrics import sp
 from kivy.properties import (
-    OptionProperty,
-    ListProperty,
-    BooleanProperty,
-    StringProperty,
     AliasProperty,
+    BooleanProperty,
+    ListProperty,
+    OptionProperty,
+    StringProperty,
 )
 from kivy.uix.label import Label
 
@@ -253,7 +250,7 @@ class MDLabel(ThemableBehavior, Label):
     font_style = OptionProperty("Body1", options=theme_font_styles)
     """
     Label font style.
-    
+
     Available options are: `'H1'`, `'H2'`, `'H3'`, `'H4'`, `'H5'`, `'H6'`,
     `'Subtitle1'`, `'Subtitle2'`, `'Body1'`, `'Body2'`, `'Button'`,
     `'Caption'`, `'Overline'`, `'Icon'`.
@@ -278,7 +275,7 @@ class MDLabel(ThemableBehavior, Label):
     """Text of the label."""
 
     theme_text_color = OptionProperty(
-        None,
+        "Primary",
         allownone=True,
         options=[
             "Primary",

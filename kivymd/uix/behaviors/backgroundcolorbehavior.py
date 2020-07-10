@@ -5,13 +5,19 @@ Behaviors/Background Color
 .. note:: The following classes are intended for in-house use of the library.
 """
 
+__all__ = ("BackgroundColorBehavior", "SpecificBackgroundColorBehavior")
+
 from kivy.lang import Builder
-from kivy.properties import BoundedNumericProperty, ReferenceListProperty
-from kivy.properties import OptionProperty, ListProperty
+from kivy.properties import (
+    BoundedNumericProperty,
+    ListProperty,
+    OptionProperty,
+    ReferenceListProperty,
+)
 from kivy.uix.widget import Widget
 from kivy.utils import get_color_from_hex
 
-from kivymd.color_definitions import palette, hue, text_colors
+from kivymd.color_definitions import hue, palette, text_colors
 
 Builder.load_string(
     """
@@ -125,6 +131,18 @@ class SpecificBackgroundColorBehavior(BackgroundColorBehavior):
     and defaults to `[0, 0, 0, 0.87]`.
     """
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if hasattr(self, "theme_cls"):
+            self.theme_cls.bind(
+                primary_palette=self._update_specific_text_color
+            )
+            self.theme_cls.bind(accent_palette=self._update_specific_text_color)
+            self.theme_cls.bind(theme_style=self._update_specific_text_color)
+        self.bind(background_hue=self._update_specific_text_color)
+        self.bind(background_palette=self._update_specific_text_color)
+        self._update_specific_text_color(None, None)
+
     def _update_specific_text_color(self, instance, value):
         if hasattr(self, "theme_cls"):
             palette = {
@@ -137,7 +155,7 @@ class SpecificBackgroundColorBehavior(BackgroundColorBehavior):
             )
         color = get_color_from_hex(text_colors[palette][self.background_hue])
         secondary_color = color[:]
-        # Check for black text (need to adjust opacity)
+        # Check for black text (need to adjust opacity).
         if (color[0] + color[1] + color[2]) == 0:
             color[3] = 0.87
             secondary_color[3] = 0.54
@@ -145,15 +163,3 @@ class SpecificBackgroundColorBehavior(BackgroundColorBehavior):
             secondary_color[3] = 0.7
         self.specific_text_color = color
         self.specific_secondary_text_color = secondary_color
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        if hasattr(self, "theme_cls"):
-            self.theme_cls.bind(
-                primary_palette=self._update_specific_text_color
-            )
-            self.theme_cls.bind(accent_palette=self._update_specific_text_color)
-            self.theme_cls.bind(theme_style=self._update_specific_text_color)
-        self.bind(background_hue=self._update_specific_text_color)
-        self.bind(background_palette=self._update_specific_text_color)
-        self._update_specific_text_color(None, None)
