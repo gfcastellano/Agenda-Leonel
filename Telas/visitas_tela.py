@@ -69,6 +69,8 @@ class Visitas_tela(Screen):
         print('[executar_busca] texto:',texto)
         print('[executar_busca] parametro:',parametro)
         match=[]
+        app = MDApp.get_running_app()
+        self.dados_visitas = app.dados_visitas
         for visita in self.dados_visitas:
             if parametro == 'codigo':
                 if texto in str(visita['codigo']):

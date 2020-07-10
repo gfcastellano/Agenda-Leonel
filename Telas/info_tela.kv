@@ -18,18 +18,19 @@
         MDTabs:
             lock_swiping: True
             Info_tab:
-                text: 'Informações'
+                text: 'Informacoes'
                 id: info_tab
-            Tab:
+            Visitas_tab:
                 text: 'Visitas'
                 id: visitas_tab
             Tab:
                 text: 'Vendas'
                 id: vendas_tab
+
+
 <Info_tab@Tab>:
     ScrollView:
-        id: scroll
-        lock_swiping_x: True
+        id: scroll_info
         BoxLayout:
             orientation: 'vertical'
             size_hint_y: None
@@ -58,7 +59,7 @@
                     halign: 'center'
                 ClickMDLabel:
                     id: endereco
-                    on_release: root.abrir_popup_maps()
+                    on_release: app.root.get_screen('Info_tela').abrir_popup_maps()
                     halign: 'center'
             BoxparaScroll:
                 MDLabel:
@@ -84,7 +85,7 @@
                 ClickMDLabel:
                     id: telefone_fixo
                     halign: 'center'
-                    on_release: root.copiar(self)
+                    on_release: app.root.get_screen('Info_tela').copiar(self)
             BoxparaScroll:
                 MDLabel:
                     text: 'Perfil:'
@@ -106,7 +107,7 @@
                 ClickMDLabel:
                     id: telefone_1
                     halign: 'center'
-                    on_release: root.copiar(self)
+                    on_release: app.root.get_screen('Info_tela').copiar(self)
                 MDLabel:
                     id: tipo_1
                     halign: 'center'
@@ -117,7 +118,7 @@
                 ClickMDLabel:
                     id: telefone_2
                     halign: 'center'
-                    on_release: root.copiar(self)
+                    on_release: app.root.get_screen('Info_tela').copiar(self)
                 MDLabel:
                     id: tipo_2
                     halign: 'center'
@@ -128,7 +129,7 @@
                 ClickMDLabel:
                     id: telefone_3
                     halign: 'center'
-                    on_release: root.copiar(self)
+                    on_release: app.root.get_screen('Info_tela').copiar(self)
                 MDLabel:
                     id: tipo_3
                     halign: 'center'
@@ -210,6 +211,49 @@
                     halign: 'center'
 
 
+
+<Visitas_tab@Tab>:
+    BoxLayout:  
+        orientation: 'vertical'
+        size_hint_y: None
+        height: self.minimum_height
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height + 15
+            MDTextField:
+                id: buscar
+                font_size: 40
+                size_hint_x: 4
+                hint_text: 'Pesquisar'
+            MDIconButton:
+                text: 'Buscar'
+                on_release: app.root.get_screen('Visitas_tela').apagar_texto() 
+                icon: 'backspace'
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            MDIconButton:
+                icon: 'calendar'
+                on_release: app.root.get_screen('Visitas_tela').abrir_popup_primeira_data()
+            MDLabel:
+                id: data	
+                halign: 'center'
+            MDIconButton:
+                text: 'Escolher data'
+                icon: 'backspace'	
+                on_release: app.root.get_screen('Visitas_tela').apagar_data() 
+#---------------------------------------LISTA DE CLIENTES
+        ScrollView:
+            id: scroll_visitas
+            BoxLayout:
+                id: box_scroll
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+    #MDFloatingActionButtonSpeedDial:
+    #    data: app.root.get_screen('Visitas_tela').data
+    #    rotation_root_button: True
 
 <BoxparaScroll@BoxLayout>:
     padding: [5,0,0,0]
