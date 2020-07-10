@@ -65,6 +65,8 @@ class Info_tela(Screen):
     def adicionar_infos(self,root):
         dados=[]
         print('Adicionando infos a Info_tela')
+
+        #Identificar cliente
         if str(type(root)) == "<class 'kivy.weakproxy.WeakProxy'>" or str(root) == "<Screen name='Editar_tela'>":
             codigo = str(root.ids.codigo.text)
             dados=''
@@ -101,6 +103,7 @@ class Info_tela(Screen):
                         dados = cliente
                         print('Cliente:', dados['nome_fantasia'])
 
+        #Preencher informações no info_tab
 
         info_tab = self.ids.info_tab  
         info_tab.ids.codigo.text        = str(dados['codigo'])
@@ -133,7 +136,16 @@ class Info_tela(Screen):
         info_tab.ids.pet_shop.text    = x(str(dados['pet_shop']))
         info_tab.ids.clinica.text     = x(str(dados['clinica']))
 
+        #Adidionando informações no visitas_tab
         self.ids.visitas_tab.ids.buscar.text = self.ids.info_tab.ids.nome_fantasia.text
+        visitas_tela = MDApp.get_running_app().root.get_screen('Visitas_tela')
+        visitas_tela.ids.buscar.text = self.ids.info_tab.ids.nome_fantasia.text
+        visitas_tela.buscar()
+
+        self.ids.visitas_tab.ids.scroll_visitas.children = visitas_tela.ids.scroll.children
+
+
+
 
     def abrir_popup_maps(self):    
         if not self.popup_maps:

@@ -48,6 +48,22 @@ class Visitas_tela(Screen):
                                      contato = visita['contato'],
                                      informacoes = visita['informacoes']))
 
+        #Adicionando visitas na visitas_tab
+        visitas_tab = MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.box_scroll
+        if len(dados_visitas) == 0: #Caso ele receba um match que contem nada
+            visitas_tab.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
+        for visita in reversed(dados_visitas):
+            #print(visita)
+            dia  = visita['data'][-2:]
+            mes  = visita['data'][-5:-3]
+            ano  = visita['data'][-10:-6]
+            data = dia + '/' + mes + '/' + ano
+            visitas_tab.add_widget(Visita(data = data,
+                                     codigo = str(visita['codigo']),
+                                     nome_fantasia = visita['nome_fantasia'],
+                                     contato = visita['contato'],
+                                     informacoes = visita['informacoes']))
+
     def mostrar_popup(self):
         MDApp.get_running_app().popup_leituradados.open()
         Clock.schedule_once(self.buscar,0.1)

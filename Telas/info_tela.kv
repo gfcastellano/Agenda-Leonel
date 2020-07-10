@@ -213,10 +213,10 @@
 
 
 <Visitas_tab@Tab>:
-    BoxLayout:  
+    BoxLayout:
         orientation: 'vertical'
-        size_hint_y: None
-        height: self.minimum_height
+        #size_hint_y: None
+        #height: self.minimum_height
         BoxLayout:
             size_hint_y: None
             height: self.minimum_height + 15
@@ -242,14 +242,14 @@
                 text: 'Escolher data'
                 icon: 'backspace'	
                 on_release: app.root.get_screen('Visitas_tela').apagar_data() 
-#---------------------------------------LISTA DE CLIENTES
-    ScrollView:
-        id: scroll_visitas
-        BoxLayout:
-            id: box_scroll
-            orientation: 'vertical'
-            size_hint_y: None
-            height: self.minimum_height
+#---------------------------------------LISTA DE VISITAS
+        ScrollView:
+            id: scroll_visitas
+            BoxLayout:
+                id: box_scroll
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
 
     #MDFloatingActionButtonSpeedDial:
     #    data: app.root.get_screen('Visitas_tela').data
