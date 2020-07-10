@@ -243,13 +243,13 @@
                 icon: 'backspace'	
                 on_release: app.root.get_screen('Visitas_tela').apagar_data() 
 #---------------------------------------LISTA DE CLIENTES
-        ScrollView:
-            id: scroll_visitas
-            BoxLayout:
-                id: box_scroll
-                orientation: 'vertical'
-                size_hint_y: None
-                height: self.minimum_height
+    ScrollView:
+        id: scroll_visitas
+        BoxLayout:
+            id: box_scroll
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
 
     #MDFloatingActionButtonSpeedDial:
     #    data: app.root.get_screen('Visitas_tela').data
