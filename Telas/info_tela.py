@@ -9,6 +9,12 @@ from urllib import parse
 from kivy.core.clipboard import Clipboard
 from mapview import MapMarkerPopup
 from kivy.clock import Clock
+from kivymd.uix.tab import MDTabsBase
+from kivy.uix.floatlayout import FloatLayout
+
+
+class Tab(FloatLayout, MDTabsBase):
+    pass
 
 
 class Info_tela(Screen):
@@ -26,7 +32,6 @@ class Info_tela(Screen):
         app.registrar_tela()
         Window.bind(on_keyboard=app.voltar)
         self.ids.info_tab.ids.scroll_info.scroll_y = 1
-        print(self.ids.info_tab.ids.nome_fantasia.text)
 
     def apagar_infos(self):
         print('Apagando infos da Info_tela')

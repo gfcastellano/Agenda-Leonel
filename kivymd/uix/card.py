@@ -661,7 +661,7 @@ class MDCard(
     and defaults to `False`.
     """
 
-    elevation = NumericProperty(0)
+    elevation = NumericProperty(None, allownone=True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -671,8 +671,10 @@ class MDCard(
         )
 
     def _on_elevation(self, value):
-        if not value:
+        if value is None:
             self.elevation = 6
+        else:
+            self.elevation = value
 
     def _on_ripple_behavior(self, value):
         self._no_ripple_effect = False if value else True
@@ -727,7 +729,7 @@ class MDCardSwipe(RelativeLayout):
     begins.
 
     :attr:`swipe_distance` is a :class:`~kivy.properties.NumericProperty`
-    and defaults to `10`.
+    and defaults to `50`.
     """
 
     opening_time = NumericProperty(0.2)
