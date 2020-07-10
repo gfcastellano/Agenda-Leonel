@@ -223,7 +223,7 @@ android.arch = armeabi-v7a
 
 #
 # Python for android (p4a) specific
-2.0.15
+#
 
 # (str) python-for-android fork to use, defaults to upstream (kivy)
 p4a.fork = gfcastellano
