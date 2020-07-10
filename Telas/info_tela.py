@@ -137,9 +137,10 @@ class Info_tela(Screen):
         info_tab.ids.clinica.text     = x(str(dados['clinica']))
 
         #Adidionando informações no visitas_tab
-        self.ids.visitas_tab.ids.buscar.text = self.ids.info_tab.ids.nome_fantasia.text
+        
         visitas_tela = MDApp.get_running_app().root.get_screen('Visitas_tela')
         visitas_tela.ids.buscar.text = self.ids.info_tab.ids.nome_fantasia.text
+        self.ids.visitas_tab.ids.data.text = visitas_tela.ids.data.text
         visitas_tela.buscar()
 
         self.ids.visitas_tab.ids.scroll_visitas.children = visitas_tela.ids.scroll.children

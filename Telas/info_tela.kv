@@ -5,6 +5,7 @@
         orientation: 'vertical'
 #---------------------------------------HEADER
         MDToolbar:
+            id: toolbar
             title: 'Informações'
             md_bg_color: app.theme_cls.primary_dark
             size_hint_y: None
@@ -220,15 +221,6 @@
         BoxLayout:
             size_hint_y: None
             height: self.minimum_height + 15
-            MDTextField:
-                id: buscar
-                font_size: 40
-                size_hint_x: 4
-                hint_text: 'Pesquisar'
-            MDIconButton:
-                text: 'Buscar'
-                on_release: app.root.get_screen('Visitas_tela').apagar_texto() 
-                icon: 'backspace'
         BoxLayout:
             size_hint_y: None
             height: self.minimum_height
