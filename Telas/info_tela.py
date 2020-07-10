@@ -189,15 +189,16 @@ class Info_tela(Screen):
 
     def ir_para_mapa(self):
         for cliente in self.dados_clientes:
-            if str(cliente['codigo']) == str(self.ids.codigo.text):
+            if str(cliente['codigo']) == str(self.ids.info_tab.ids.codigo.text):
                 dados = cliente
+                print('Achou:', cliente['nome_fantasia'])
         try:
             lat,lon = float(dados['lat']), float(dados['lon'])
             app = MDApp.get_running_app()
             mapa_tela = app.root.get_screen('Mapa_tela')
             mapa_tela.ids.mapa.center_on(lat,lon)
             mapa_tela.ids.mapa.zoom = 16
-            print('Indo para Mapa_tela centralizado em:', self.ids.nome_fantasia.text)
+            print('Indo para Mapa_tela centralizado em:', dados['nome_fantasia'])
             app.root.transition.direction = 'right'
             app.root.current = 'Mapa_tela'
         except:
