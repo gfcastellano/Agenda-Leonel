@@ -27,6 +27,8 @@ class Visitas_tela(Screen):
         
         self.dados_clientes = app.dados_clientes
         self.dados_visitas  = app.dados_visitas
+        if app.telas[-2] == 'Menu_tela':
+            self.ids.buscar.text = ''
         self.apagar_visitas()
         self.ids.scroll.scroll_y=1
 
