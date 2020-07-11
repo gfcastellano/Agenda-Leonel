@@ -154,7 +154,7 @@ class Info_tela(Screen):
                 text="Deseja ir para rotas no Maps?",
                 buttons=[
                     MDRaisedButton(
-                        text="Sim", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.abrir_maps
+                        text="Sim", text_color=MDApp.get_running_app().theme_cls.text_color, on_release = self.abrir_maps
                     ),
                     MDFlatButton(
                         text="Não", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_popup_maps
@@ -211,7 +211,7 @@ class Info_tela(Screen):
                 text="Deseja editar as informações desse cliente?",
                 buttons=[
                     MDRaisedButton(
-                        text="Sim", text_color=app.theme_cls.accent_dark, on_release = self.ir_para_Editar_tela
+                        text="Sim", text_color=app.theme_cls.text_color, on_release = self.ir_para_Editar_tela
                     ),
                     MDFlatButton(
                         text="Não", text_color=app.theme_cls.primary_color, on_release = self.fechar_popup_editar
