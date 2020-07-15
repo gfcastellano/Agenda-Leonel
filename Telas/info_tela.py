@@ -166,9 +166,9 @@ class Info_tela(Screen):
     def abrir_maps(self,*args):
         import webbrowser
         print('Abrindo Google Maps')
-        endereco = self.ids.endereco.text
-        numero = self.ids.numero.text
-        bairro = self.ids.bairro.text
+        endereco = self.ids.info_tab.ids.endereco.text
+        numero = self.ids.info_tab.ids.numero.text
+        bairro = self.ids.info_tab.ids.bairro.text
         endereco_completo = endereco + ', ' + numero + ' - ' + bairro
         print(endereco_completo)
         endereco_completo = parse.quote(endereco_completo)

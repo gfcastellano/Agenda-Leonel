@@ -77,7 +77,7 @@ class Editar_tela(Screen):
                 text="Deseja realizar as alterações?",
                 buttons=[
                     MDRaisedButton(
-                        text="Sim", text_color=MDApp.get_running_app().theme_cls.accent_color, on_release = self.adicionar
+                        text="Sim",text_color=MDApp.get_running_app().theme_cls.text_color, on_release = self.adicionar
                     ),
                     MDFlatButton(
                         text="Não", text_color=MDApp.get_running_app().theme_cls.primary_color, on_release = self.fechar_popup_certeza
