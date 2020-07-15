@@ -193,7 +193,7 @@ class Visitas_tela(Screen):
         if not self.popup_segunda_data:
             app = MDApp.get_running_app()
             self.popup_segunda_data = MDDialog( size_hint = [0.8,0.8],
-                text="Deseja escolher uma segunda data?",
+                text='Deseja escolher uma segunda data?\nCaso escolha "Sim" será retornado as visitas que estão no intervalo entre as duas datas escolhidas.',
                 buttons=[
                     MDRaisedButton(
                         text="Sim", on_release = self.escolher_segunda_data
@@ -207,6 +207,7 @@ class Visitas_tela(Screen):
     
     def fechar_popup_segunda_data(self,*args):
         self.popup_segunda_data.dismiss()
+        MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.data.text = self.ids.data.text
         if str(MDApp.get_running_app().root.current_screen)[14:-2] == 'Info_tela':
             self.buscar()
     
