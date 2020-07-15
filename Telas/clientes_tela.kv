@@ -51,11 +51,16 @@
         id: nome_fantasia
         halign: 'center'
         color: app.theme_cls.primary_dark
-        size_hint_x: 6
+        size_hint_x: 4
+    MDLabel:
+        id: bairro
+        halign: 'center'
+        color: app.theme_cls.primary_dark
+        size_hint_x: 2
     MDIconButton:
         size_hint_x: 2
         icon: 'information-outline'
-        pos_hint: {'top':0.5}
+        pos_hint: {'top':0.7}
         size_hint_x: 1
         on_release: 
             root.ir_para_infos(root)

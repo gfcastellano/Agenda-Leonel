@@ -33,7 +33,7 @@ class Clientes_tela(Screen):
         if len(dados_clientes) == 0: #Caso ele receba um match que contem nada
             scroll.add_widget(MDLabel(text='Nenhum resultado encontrado',size_hint_y = None, height = 200, halign = 'center'))      
         for cliente in dados_clientes:
-            scroll.add_widget(Cliente(codigo = str(cliente['codigo']),nome_fantasia = cliente['nome_fantasia']))
+            scroll.add_widget(Cliente(codigo = str(cliente['codigo']),nome_fantasia = cliente['nome_fantasia'], bairro=cliente['bairro']))
 
     def mostrar_popup(self):
         MDApp.get_running_app().popup_leituradados.open()
@@ -84,10 +84,11 @@ class Clientes_tela(Screen):
 
 
 class Cliente(BoxLayout):
-    def __init__(self, codigo='', nome_fantasia='',**kwargs):
+    def __init__(self, codigo='', nome_fantasia='',bairro='',**kwargs):
         super().__init__(**kwargs)
         self.ids.codigo.text = codigo
         self.ids.nome_fantasia.text = nome_fantasia
+        self.ids.bairro.text = bairro
 
     def ir_para_infos(self, root):
         app = MDApp.get_running_app()
