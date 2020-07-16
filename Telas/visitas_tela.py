@@ -176,7 +176,7 @@ class Visitas_tela(Screen):
     
     def apagar_data(self):
         self.ids.data.text = ''
-        #APagar tambem da vsitas_tab
+        #Apagar tambem da vsitas_tab
         MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.data.text = ''
         if str(MDApp.get_running_app().root.current_screen)[14:-2] == 'Info_tela':
             self.buscar()
@@ -248,6 +248,11 @@ class Visitas_tela(Screen):
         MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.data.text = self.ids.data.text
         if str(MDApp.get_running_app().root.current_screen)[14:-2] == 'Info_tela':
             self.buscar()
+
+    def ir_para_visita_tela(self):
+        app = MDApp.get_running_app()
+        app.root.current = 'Visita_tela'
+        print('Executou')
         
 
 

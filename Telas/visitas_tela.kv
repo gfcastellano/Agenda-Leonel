@@ -10,7 +10,7 @@
             pos_hint: {'top':1}
             elevation: 11
             left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
-            right_action_items: [["account-search", lambda x: root.mostrar_popup()]]
+            right_action_items: [["card-search", lambda x: root.mostrar_popup()]]
 #----------------------------------------CAIXA DE BUSCA
         BoxLayout:  
 			orientation: 'vertical'
@@ -51,11 +51,11 @@
                 height: self.minimum_height
 
     MDFloatingActionButton:
-        icon: 'plus'
+        icon: 'card-plus-outline'
         md_bg_color: app.theme_cls.primary_dark
         rotation_root_button: True
         pos_hint: {"center_x": .9, "center_y": .1}
-
+        on_release: root.ir_para_visita_tela()
 
 <Visita>:
     size_hint_y: None

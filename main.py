@@ -15,6 +15,7 @@ from Telas.adicionar_cliente_tela import Adicionar_cliente_tela
 from Telas.editar_tela import Editar_tela
 from Telas.visitas_tela import Visitas_tela
 from kivymd.icon_definitions import md_icons
+from Telas.visita_tela import Visita_tela
 
 
 import json

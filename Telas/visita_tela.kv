@@ -1,0 +1,72 @@
+<Visita_tela>:    
+    MDCard:
+        height: self.minimum_height
+        orientation: 'vertical'
+        padding: 8
+        size_hint: 0.9,0.9
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        BoxLayout:
+            MDLabelButton:
+                text: ' Data:'
+                size_hint_x: None
+                on_release: print('funcionando')
+            MDTextField:
+                #size_hint_x: 2
+        BoxLayout:
+            MDLabelButton:
+                text: ' Cliente:'
+                size_hint_x: None
+            MDTextField:
+                text: 'Código'
+                size_hint_x: 1
+            MDTextField:
+                text: 'Nome Fantasia'
+                size_hint_x: 3
+        BoxLayout:
+            MDLabel:
+                text: 'Contato:'
+                halign: 'center'
+            MDLabel:
+                text: 'Telefone:'
+                halign: 'center'
+            MDLabel:
+                text: 'Tipo:'
+                halign: 'center'
+        BoxLayout:
+            MDTextField:
+                halign: 'center'
+            MDTextField:
+                halign: 'center'
+            MDTextField:
+                halign: 'center'
+        BoxLayout:
+            MDLabel:
+                text: " Visita:"
+                size_hint_x: None
+            MDTextField:
+                #size_hint_x: 2
+        MDLabel:
+            text: ' Informações:'
+        MDTextFieldRect:
+            multiline: True
+        BoxLayout:
+            MDLabel:
+                text: ' Venda?'
+            MDCheckbox:
+        BoxLayout:
+            MDLabel:
+                text: ' Lembrete:'
+            MDLabel:
+                text: 'Para o dia:'
+                halign: 'center'
+        BoxLayout:
+            MDTextFieldRect:
+                multiline: True
+                lines: 3
+            MDTextField:
+            
+        
+
+
+<MDLabelButton@ButtonBehavior+MDLabel>:
+    halign: 'left'
