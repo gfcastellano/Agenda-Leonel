@@ -60,6 +60,7 @@
 <Visita>:
     size_hint_y: None
     height: self.minimum_height
+    orientation: 'vertical'
     GridLayout:
         rows: 3
         cols: 2
@@ -113,3 +114,6 @@
             id: informacoes
             halign:'left'
             size_hint_y: None
+
+    MDSeparator:
+        height: "10dp"
