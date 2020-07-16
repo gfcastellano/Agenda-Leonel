@@ -21,9 +21,7 @@ class Info_tela(Screen):
     dados_clientes=[]
     popup_maps=None
     popup_editar=None
-    data = {
-        'point-of-sale': 'Vendas',
-        'briefcase': 'Visitas'}
+    data={'card-plus-outline': 'Adicionar visita'}
 
     def on_pre_enter(self):
         print('Entrando em Info_tela')

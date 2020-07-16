@@ -50,9 +50,11 @@
                 size_hint_y: None
                 height: self.minimum_height
 
-    #MDFloatingActionButtonSpeedDial:
-    #    data: root.data
-    #    rotation_root_button: True
+    MDFloatingActionButton:
+        icon: 'plus'
+        md_bg_color: app.theme_cls.primary_dark
+        rotation_root_button: True
+        pos_hint: {"center_x": .95, "center_y": .1}
 
 
 <Visita>:
