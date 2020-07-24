@@ -45,28 +45,20 @@
                 size_hint_x: None
             MDTextField:
                 #size_hint_x: 2
-        MDLabel:
-            text: ' Informações:'
-        MDTextFieldRect:
-            multiline: True
         BoxLayout:
-            MDLabel:
-                text: ' Venda?'
-            MDCheckbox:
-        BoxLayout:
-            MDLabel:
-                text: ' Lembrete:'
-            MDLabel:
-                text: 'Para o dia:'
-                halign: 'center'
-        BoxLayout:
-            MDTextFieldRect:
-                multiline: True
-                lines: 3
-            MDTextField:
-            
+            MDRectangleFlatIconButton:
+                text: 'Salvar como está'
+            MDSeparator:
+                width: "10dp"
+            MDRectangleFlatIconButton:
+                text: 'Mais informações'
+        
         
 
 
 <MDLabelButton@ButtonBehavior+MDLabel>:
     halign: 'left'
+
+
+    
+            

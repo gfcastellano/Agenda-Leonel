@@ -18,6 +18,7 @@ class Visitas_tela(Screen):
     segundo_mes=''
     segundo_ano=''
     popup_segunda_data=None
+    popup_visita=None
 
     def on_pre_enter(self):
         print('Entrando em Visitas_tela')
@@ -253,6 +254,23 @@ class Visitas_tela(Screen):
         app = MDApp.get_running_app()
         app.root.current = 'Visita_tela'
         print('Executou')
+
+    def abrir_popup_visita(self):    
+        if not self.popup_visita:
+            self.popup_visita = MDDialog(
+                title="Visita:",
+                type="custom",
+                content_cls=Content(),
+                buttons=[
+                    MDFlatButton(
+                        text="CANCEL"
+                    ),
+                    MDFlatButton(
+                        text="OK"
+                    ),
+                ],
+            )
+        self.popup_visita.open()
         
 
 
@@ -266,3 +284,6 @@ class Visita(MDCard):
         self.ids.contato.text       = contato
         self.ids.informacoes.text   = informacoes
 
+
+class Content(BoxLayout):
+    pass

@@ -55,7 +55,7 @@
         md_bg_color: app.theme_cls.primary_dark
         rotation_root_button: True
         pos_hint: {"center_x": .9, "center_y": .1}
-        on_release: root.ir_para_visita_tela()
+        on_release: root.abrir_popup_visita()
 
 <Visita>:
     size_hint_y: None
@@ -117,3 +117,50 @@
 
     MDSeparator:
         height: "10dp"
+
+
+<Content>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "300dp"
+    BoxLayout:
+        MDLabelButton:
+            text: ' Data:'
+            size_hint_x: None
+            on_release: print('funcionando')
+        MDTextField:
+            #size_hint_x: 2
+    BoxLayout:
+        MDLabelButton:
+            text: ' Cliente:'
+            size_hint_x: None
+        MDTextField:
+            text: 'Código'
+            size_hint_x: 1
+        MDTextField:
+            text: 'Nome Fantasia'
+            size_hint_x: 3
+    BoxLayout:
+        MDLabel:
+            text: 'Contato:'
+            halign: 'center'
+        MDLabel:
+            text: 'Telefone:'
+            halign: 'center'
+        MDLabel:
+            text: 'Tipo:'
+            halign: 'center'
+    BoxLayout:
+        MDTextField:
+            halign: 'center'
+        MDTextField:
+            halign: 'center'
+        MDTextField:
+            halign: 'center'
+    BoxLayout:
+        MDLabel:
+            text: " Visita:"
+            size_hint_x: None
+        MDTextField:
+            #size_hint_x: 2
