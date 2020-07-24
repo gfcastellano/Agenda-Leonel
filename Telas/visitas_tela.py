@@ -258,7 +258,7 @@ class Visitas_tela(Screen):
     def abrir_popup_visita(self):    
         if not self.popup_visita:
             self.popup_visita = MDDialog(
-                title="Visita:",
+                title="Visita",
                 type="custom",
                 content_cls=Content(),
                 buttons=[
