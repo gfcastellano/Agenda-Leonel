@@ -1,59 +1,78 @@
-<Visita_tela>:    
-    MDCard:
-        height: self.minimum_height
-        orientation: 'vertical'
-        padding: 8
-        size_hint: 0.9,0.9
-        pos_hint:{'center_x':0.5,'center_y':0.5}
+<Visita_tela>:
+    BoxLayout:
+        orientation:'vertical'
+#---------------------------------------HEADER
+        MDToolbar:
+            title: 'Visitas'
+            md_bg_color: app.theme_cls.primary_dark
+            size_hint_y: None
+            height: 150
+            pos_hint: {'top':1}
+            elevation: 11
+            left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
+            right_action_items: [["content-save", lambda x: root.mostrar_popup()]]
         BoxLayout:
-            MDLabelButton:
-                text: ' Data:'
-                size_hint_x: None
-                on_release: print('funcionando')
+            size_hint_y: None
+            height: self.minimum_height
+            MDIconButton:
+                icon: 'calendar'
+                on_release: root.abrir_popup_primeira_data()
             MDTextField:
-                #size_hint_x: 2
-        BoxLayout:
-            MDLabelButton:
-                text: ' Cliente:'
-                size_hint_x: None
-            MDTextField:
-                text: 'Código'
-                size_hint_x: 1
-            MDTextField:
-                text: 'Nome Fantasia'
-                size_hint_x: 3
-        BoxLayout:
-            MDLabel:
-                text: 'Contato:'
+                id: data	
                 halign: 'center'
-            MDLabel:
-                text: 'Telefone:'
-                halign: 'center'
-            MDLabel:
-                text: 'Tipo:'
-                halign: 'center'
-        BoxLayout:
-            MDTextField:
-                halign: 'center'
-            MDTextField:
-                halign: 'center'
-            MDTextField:
-                halign: 'center'
-        BoxLayout:
-            MDLabel:
-                text: " Visita:"
-                size_hint_x: None
-            MDTextField:
-                #size_hint_x: 2
-        BoxLayout:
-            MDRectangleFlatIconButton:
-                text: 'Salvar como está'
-            MDSeparator:
-                width: "10dp"
-            MDRectangleFlatIconButton:
-                text: 'Mais informações'
-        
-        
+            MDIconButton:
+                text: 'Escolher data'
+                icon: 'backspace'	
+                on_release: root.apagar_data() 
+#----------------------------------CONTEUDO DA VISITA
+        MDCard:
+            height: self.minimum_height
+            orientation: 'vertical'
+            padding: 8
+            size_hint: 0.9,0.9
+            pos_hint:{'center_x':0.5,'center_y':0.5}
+            BoxLayout:
+                MDLabelButton:
+                    text: ' Cliente:'
+                    size_hint_x: None
+                MDTextField:
+                    text: 'Código'
+                    size_hint_x: 1
+                MDTextField:
+                    text: 'Nome Fantasia'
+                    size_hint_x: 3
+            BoxLayout:
+                MDLabel:
+                    text: 'Contato:'
+                    halign: 'center'
+                MDLabel:
+                    text: 'Telefone:'
+                    halign: 'center'
+                MDLabel:
+                    text: 'Tipo:'
+                    halign: 'center'
+            BoxLayout:
+                MDTextField:
+                    halign: 'center'
+                MDTextField:
+                    halign: 'center'
+                MDTextField:
+                    halign: 'center'
+            BoxLayout:
+                MDLabel:
+                    text: " Visita:"
+                    size_hint_x: None
+                MDTextField:
+                    #size_hint_x: 2
+            BoxLayout:
+                MDRectangleFlatIconButton:
+                    text: 'Salvar como está'
+                MDSeparator:
+                    width: "10dp"
+                MDRectangleFlatIconButton:
+                    text: 'Mais informações'
+    
+    
 
 
 <MDLabelButton@ButtonBehavior+MDLabel>:
