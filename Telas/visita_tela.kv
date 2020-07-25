@@ -38,12 +38,14 @@
                         MDIconButton:
                             icon: 'calendar'
                             on_release: root.abrir_popup_data()
+                            pos_hint:{'center_y':0.5}
                         MDLabel:
                             id: data	
                             halign: 'center'
                         MDIconButton:
                             icon: 'backspace'	
                             on_release: root.ids.data.text ='' 
+                            pos_hint:{'center_y':0.5}
                     BoxLayout:
                         MDLabelButton:
                             text: 'Cliente:'
@@ -92,12 +94,14 @@
                         MDIconButton:
                             icon: 'calendar'
                             on_release: root.abrir_popup_data_lembrete()
+                            pos_hint:{'center_y':0.5}
                         MDLabel:
                             id: data_lembrete
                             halign: 'center'
                         MDIconButton:
                             icon: 'backspace'	
                             on_release: root.ids.data_lembrete.text ='' 
+                            pos_hint:{'center_y':0.5}
                 
                 MDLabel:
                     size_hint_y: None
