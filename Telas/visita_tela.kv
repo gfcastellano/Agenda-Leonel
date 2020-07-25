@@ -25,20 +25,25 @@
                     padding: 8
                     size_hint_y: None
                     pos_hint:{'center_x':0.5,'center_y':0.5}
-                    MDLabel:
-                        text:' Data:'
                     BoxLayout:
                         size_hint_y: None
                         height: self.minimum_height
+                        MDLabel:
+                            text: ' Data:'
+                            halign: 'left'
+                            valign: 'center'
+                            text_size: None, self.height
+                            size_hint_x: None
+                            width: self.texture_size[0]   
                         MDIconButton:
                             icon: 'calendar'
-                            on_release: root.abrir_popup_primeira_data()
+                            on_release: root.abrir_popup_data()
                         MDLabel:
                             id: data	
                             halign: 'center'
                         MDIconButton:
                             icon: 'backspace'	
-                            on_release: root.apagar_data() 
+                            on_release: root.ids.data.text ='' 
                     BoxLayout:
                         MDLabelButton:
                             text: 'Cliente:'
@@ -50,7 +55,7 @@
                             hint_text: 'Nome Fantasia'
                             size_hint_x: 2
                         MDIconButton:
-                            icon: 'account-search-outline'	
+                            icon: 'account-search'	
                             on_release: 
                             pos_hint: {'center_y':0.5}
                     BoxLayout:
@@ -76,19 +81,23 @@
                     MDTextField:
                         multiline: True
                         lines: 3                    
-                    MDLabel:
-                        text: 'Para o dia:'
-                        halign: 'left'
                     BoxLayout:
+                        MDLabel:
+                            text: 'Para o dia:'
+                            halign: 'left'
+                            valign: 'center'
+                            text_size: None, self.height
+                            size_hint_x: None
+                            width: self.texture_size[0]                            
                         MDIconButton:
                             icon: 'calendar'
-                            on_release: root.abrir_popup_primeira_data()
+                            on_release: root.abrir_popup_data_lembrete()
                         MDLabel:
-                            id: data	
+                            id: data_lembrete
                             halign: 'center'
                         MDIconButton:
                             icon: 'backspace'	
-                            on_release: root.apagar_data()
+                            on_release: root.ids.data_lembrete.text ='' 
                 
                 MDLabel:
                     size_hint_y: None
