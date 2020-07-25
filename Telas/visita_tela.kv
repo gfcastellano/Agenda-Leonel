@@ -20,7 +20,7 @@
                 size_hint_y: None
                 height: self.minimum_height
                 MDCard:
-                    height: "400dp"
+                    height: "600dp"
                     orientation: 'vertical'
                     padding: 8
                     size_hint_y: None
@@ -35,7 +35,6 @@
                             id: data	
                             halign: 'center'
                         MDIconButton:
-                            text: 'Escolher data'
                             icon: 'backspace'	
                             on_release: root.apagar_data() 
                     BoxLayout:
@@ -43,11 +42,15 @@
                             text: ' Cliente:'
                             size_hint_x: 1
                         MDTextField:
-                            text: 'Código'
+                            hint_text: 'Código'
                             size_hint_x: 1
                         MDTextField:
-                            text: 'Nome Fantasia'
+                            hint_text: 'Nome Fantasia'
                             size_hint_x: 2
+                        MDIconButton:
+                            icon: 'account-search-outline'	
+                            on_release: 
+                            pos_hint: {'center_y':0.5}
                     BoxLayout:
                         MDLabel:
                             text: 'Contato:'
@@ -58,25 +61,24 @@
                     BoxLayout:
                         MDLabel:
                             text: " Visita:"
-                            size_hint_x: None
+                            size_hint_x: 1
                         MDTextField:
-                            #size_hint_x: 2
+                            size_hint_x: 3
                     MDLabel:
                         text: ' Informações:'
                     MDTextField:
                         multiline: True
                     BoxLayout:
                         MDLabel:
-                            text: ' Venda?'
-                        MDCheckbox:
-                    BoxLayout:
-                        MDLabel:
                             text: ' Lembrete:'
                         MDLabel:
                             text: 'Para o dia:'
                             halign: 'center'
+                        MDIconButton:
+                            icon: 'calendar'
+                            on_release: root.abrir_popup_primeira_data()
                     BoxLayout:
-                        MDTextFieldRect:
+                        MDTextField:
                             multiline: True
                             lines: 3
                         MDTextField:
