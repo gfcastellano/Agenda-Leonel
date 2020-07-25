@@ -31,7 +31,8 @@ class Visitas_tela(Screen):
         if app.telas[-2] == 'Menu_tela':
             self.ids.buscar.text = ''
         self.apagar_visitas()
-        self.ids.scroll.scroll_y=1
+        if app.telas[-2] == 'Menu_tela':
+            self.ids.scroll.scroll_y=1
 
 
     def adicionar_visitas(self, dados_visitas):
