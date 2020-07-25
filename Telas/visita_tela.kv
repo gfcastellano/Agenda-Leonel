@@ -51,31 +51,35 @@
                     BoxLayout:
                         MDLabel:
                             text: 'Contato:'
-                            halign: 'center'
-                        MDLabel:
-                            text: 'Telefone:'
-                            halign: 'center'
-                        MDLabel:
-                            text: 'Tipo:'
-                            halign: 'center'
-                    BoxLayout:
+                            size_hint_x: 1
                         MDTextField:
                             halign: 'center'
-                        MDTextField:
-                            halign: 'center'
-                        MDTextField:
-                            halign: 'center'
+                            size_hint_x: 3
                     BoxLayout:
                         MDLabel:
                             text: " Visita:"
                             size_hint_x: None
                         MDTextField:
                             #size_hint_x: 2
+                    MDLabel:
+                        text: ' Informações:'
+                    MDTextField:
+                        multiline: True
                     BoxLayout:
-                        MDRectangleFlatIconButton:
-                            text: 'Salvar como está'
-                        MDRectangleFlatIconButton:
-                            text: 'Mais informações'
+                        MDLabel:
+                            text: ' Venda?'
+                        MDCheckbox:
+                    BoxLayout:
+                        MDLabel:
+                            text: ' Lembrete:'
+                        MDLabel:
+                            text: 'Para o dia:'
+                            halign: 'center'
+                    BoxLayout:
+                        MDTextFieldRect:
+                            multiline: True
+                            lines: 3
+                        MDTextField:
                 
                 MDLabel:
                     size_hint_y: None
