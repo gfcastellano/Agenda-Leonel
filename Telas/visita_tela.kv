@@ -48,14 +48,12 @@
                             size_hint_x: 1
                             haling: 'bottom'
                         MDTextField:
-                            hint_text: 'Código'
-                            size_hint_x: 1
-                        MDTextField:
+                            id: nome_fantasia
                             hint_text: 'Nome Fantasia'
-                            size_hint_x: 2
+                            size_hint_x: 3
                         MDIconButton:
                             icon: 'account-search'	
-                            on_release: 
+                            on_release: root.pesquisar_cliente()
                             pos_hint: {'center_y':0.5}
                     BoxLayout:
                         MDLabel:
@@ -64,6 +62,11 @@
                             haling: 'bottom'
                         MDTextField:
                             size_hint_x: 3
+                            id: contato
+                        MDIconButton:
+                            icon: 'account-search'	
+                            on_release: root.pesquisar_contato()
+                            pos_hint: {'center_y':0.5}
                     BoxLayout:
                         MDLabel:
                             text: " Visita:"
@@ -110,6 +113,12 @@
 <MDLabelButton@ButtonBehavior+MDLabel>:
     halign: 'left'
 
+<Item_cliente>:
+    on_release: 
+        root.preencher_cliente(self.text)
+        app.root.get_screen('Visita_tela').popup_pesquisa_cliente.dismiss()
 
-    
-            
+<Item_contato>:
+    on_release: 
+        root.preencher_contato(self.text)
+        app.root.get_screen('Visita_tela').popup_pesquisa_contato.dismiss()
