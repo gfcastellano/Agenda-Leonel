@@ -285,6 +285,9 @@ class Visita(MDCard):
         self.ids.contato.text       = contato
         self.ids.informacoes.text   = informacoes
 
+    def abrir_visita(self, objeto):
+        print(objeto.ids.codigo.text)
+
 
 class Content(BoxLayout):
     pass

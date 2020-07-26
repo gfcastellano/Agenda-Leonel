@@ -7,6 +7,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
 from kivymd.uix.list import OneLineAvatarListItem
 from kivy.properties import StringProperty
+from kivy.clock import Clock
 
 
 
@@ -49,7 +50,12 @@ class Visita_tela(Screen):
         self.primeiro_ano = str(data.year)
         self.ids.data_lembrete.text = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
 
-    def pesquisar_cliente(self):
+    def mostrar_popup(self):
+        MDApp.get_running_app().popup_leituradados.open()
+        Clock.schedule_once(self.pesquisar_cliente,0.1)
+
+    def pesquisar_cliente(self,*args):
+        MDApp.get_running_app().popup_leituradados.dismiss()
         print('Executando pesquisar_cliente')
         texto = self.ids.nome_fantasia.text
         texto = str(texto).lower()
