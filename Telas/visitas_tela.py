@@ -47,7 +47,6 @@ class Visitas_tela(Screen):
             ano  = visita['data'][-10:-6]
             data = dia + '/' + mes + '/' + ano
             scroll.add_widget(Visita(data = data,
-                                     codigo = str(visita['codigo']),
                                      nome_fantasia = visita['nome_fantasia'],
                                      contato = visita['contato'],
                                      informacoes = visita['informacoes']))
