@@ -286,6 +286,10 @@ class Visita(MDCard):
         self.ids.informacoes.text   = informacoes
 
     def abrir_visita(self, objeto):
+        print('Executando abrir_visita')
+        app = MDApp.get_running_app()
+        app.root.transition.direction = 'left'
+        app.root.current = 'Visita_tela'
         print(objeto.ids.codigo.text)
 
 
