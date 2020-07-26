@@ -284,7 +284,7 @@ class Visita(MDCard):
         #self.ids.codigo.text        = codigo
         self.ids.nome_fantasia.text = nome_fantasia
         self.ids.contato.text       = contato
-        #self.ids.visita.text        = visita
+        self.ids.visita.text        = visita
         self.ids.informacoes.text   = informacoes
 
     def abrir_visita(self, objeto):
