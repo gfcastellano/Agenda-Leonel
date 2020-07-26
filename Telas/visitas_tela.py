@@ -62,7 +62,6 @@ class Visitas_tela(Screen):
             ano  = visita['data'][-10:-6]
             data = dia + '/' + mes + '/' + ano
             visitas_tab.add_widget(Visita(data = data,
-                                     codigo = str(visita['codigo']),
                                      nome_fantasia = visita['nome_fantasia'],
                                      contato = visita['contato'],
                                      informacoes = visita['informacoes']))
@@ -277,7 +276,7 @@ class Visitas_tela(Screen):
 
 
 class Visita(MDCard):
-    def __init__(self,data='', codigo='', nome_fantasia='',contato='',visita='', informacoes='',**kwargs):
+    def __init__(self,data='', nome_fantasia='',contato='',visita='', informacoes='',**kwargs):
         super().__init__(**kwargs)
         self.ids.data.text          = data
         #self.ids.codigo.text        = codigo
