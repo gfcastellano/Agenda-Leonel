@@ -116,8 +116,10 @@
         MDLabel:
             id: informacoes
             halign:'left'
-            size_hint_y: None
             multiline: True
+            text_size: self.width, None
+            size_hint: 1, None
+            height: self.texture_size[1]
 
     MDSeparator:
         height: "10dp"

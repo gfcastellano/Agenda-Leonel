@@ -49,7 +49,8 @@ class Visitas_tela(Screen):
             scroll.add_widget(Visita(data = data,
                                      nome_fantasia = visita['nome_fantasia'],
                                      contato = visita['contato'],
-                                     informacoes = visita['informacoes']))
+                                     informacoes = visita['informacoes'],
+                                     visita = visita['visita']))
 
         #Adicionando visitas na visitas_tab
         visitas_tab = MDApp.get_running_app().root.get_screen('Info_tela').ids.visitas_tab.ids.box_scroll
@@ -64,7 +65,8 @@ class Visitas_tela(Screen):
             visitas_tab.add_widget(Visita(data = data,
                                      nome_fantasia = visita['nome_fantasia'],
                                      contato = visita['contato'],
-                                     informacoes = visita['informacoes']))
+                                     informacoes = visita['informacoes'],
+                                     visita = visita['visita']))
 
     def mostrar_popup(self):
         MDApp.get_running_app().popup_leituradados.open()
