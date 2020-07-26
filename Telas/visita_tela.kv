@@ -10,7 +10,7 @@
             pos_hint: {'top':1}
             elevation: 11
             left_action_items: [["menu-left", lambda x: app.voltar_toolbar()]]
-            right_action_items: [["content-save", lambda x: root.mostrar_popup()]]
+            right_action_items: [["content-save", lambda x: root.adicionar_visita()]]
         
 #----------------------------------CONTEUDO DA VISITA
         ScrollView:
@@ -74,10 +74,12 @@
                             haling: 'bottom'
                         MDTextField:
                             size_hint_x: 3
+                            id: visita
                     MDLabel:
                         text: ' Informações:'
                     MDTextField:
                         multiline: True
+                        id: informacoes
                     MDSeparator:
                         height: "20dp"
                     BoxLayout:

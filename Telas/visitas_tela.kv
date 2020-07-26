@@ -55,7 +55,9 @@
         md_bg_color: app.theme_cls.primary_dark
         rotation_root_button: True
         pos_hint: {"center_x": .9, "center_y": .1}
-        on_release: root.ir_para_visita_tela()
+        on_release: 
+            app.root.transition.direction = 'left'
+            root.ir_para_visita_tela()
 
 <Visita>:
     size_hint_y: None
@@ -63,31 +65,19 @@
     orientation: 'vertical'
     on_release: self.abrir_visita(self)
     GridLayout:
-        rows: 3
+        rows: 4
         cols: 2
         size_hint_y: None
         height: self.minimum_height
         orientation: 'vertical'
-        padding: [30,0,0,0]
-        GridLayout:
-            rows:1
-            cols:2
-            size_hint_y: None
-            size_hint_x: 5
-            MDLabel:
-                id: data
-                halign: 'left'
-                valign: 'bottom'
-                size_hint_x: 3
-                color: app.theme_cls.primary_dark
-                bold: True
-            MDLabel:
-                id: codigo
-                halign: 'center'
-                valign: 'bottom'
-                size_hint_x: 2
-                color: app.theme_cls.primary_dark
-                bold: True
+        padding: 30
+        MDLabel:
+            id: data
+            halign: 'left'
+            valign: 'bottom'
+            size_hint_x: 3
+            color: app.theme_cls.primary_dark
+            bold: True
         MDLabel:
             id: nome_fantasia
             halign: 'left'
@@ -101,20 +91,33 @@
             size_hint_y: None
             bold: True
         MDLabel:
-            text: 'Informações:'
-            halign:'left'
-            size_hint_y: None
-            bold: True
-        MDLabel:
             id: contato
             size_hint_x: 0.4
             size_hint_y: None
             halign: 'left'
             valign: 'middle'
         MDLabel:
+            text: 'Visita:'
+            size_hint_x: 0.4
+            halign: 'left'
+            size_hint_y: None
+            bold: True
+        MDLabel:
+            id: visita
+            size_hint_x: 0.4
+            size_hint_y: None
+            halign: 'left'
+            valign: 'middle'        
+        MDLabel:
+            text: 'Informações:'
+            halign:'left'
+            size_hint_y: None
+            bold: True        
+        MDLabel:
             id: informacoes
             halign:'left'
             size_hint_y: None
+            multiline: True
 
     MDSeparator:
         height: "10dp"

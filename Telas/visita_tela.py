@@ -9,6 +9,8 @@ from kivymd.uix.list import OneLineAvatarListItem
 from kivy.properties import StringProperty
 from kivy.clock import Clock
 
+import json
+
 
 
 class Visita_tela(Screen):
@@ -23,12 +25,29 @@ class Visita_tela(Screen):
         
         self.dados_clientes = app.dados_clientes
         self.dados_visitas  = app.dados_visitas
+        #data = date.today()
+        #self.primeiro_dia = str(data.day) if len(str(data.day)) > 1 else '0'+str(data.day)
+        #self.primeiro_mes = str(data.month) if len(str(data.month)) > 1 else '0'+str(data.month)
+        #self.primeiro_ano = str(data.year)
+        #self.ids.data.text = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
+    def adicionar_infos(self,objeto):
+        self.ids.data.text    = objeto.ids.data.text
+        #self.ids.codigo.text  = objeto.ids.codigo.text
+        self.ids.nome_fantasia.text    = objeto.ids.nome_fantasia.text
+        self.ids.contato.text    = objeto.ids.contato.text
+        self.ids.informacoes.text    = objeto.ids.informacoes.text
+        self.ids.visita.text    = objeto.ids.visita.text
+
+    def limpar(self):
         data = date.today()
         self.primeiro_dia = str(data.day) if len(str(data.day)) > 1 else '0'+str(data.day)
         self.primeiro_mes = str(data.month) if len(str(data.month)) > 1 else '0'+str(data.month)
         self.primeiro_ano = str(data.year)
         self.ids.data.text = self.primeiro_dia + '/' + self.primeiro_mes + '/' + self.primeiro_ano
-
+        self.ids.nome_fantasia.text    = ''
+        self.ids.contato.text    = ''
+        self.ids.informacoes.text    = ''
+        self.ids.visita.text    = ''
 
     def abrir_popup_data(self):
         primeiro_calendario = MDDatePicker(callback = self.marcar_data_visita)
@@ -91,6 +110,38 @@ class Visita_tela(Screen):
             type="simple",
             items=items)
         self.popup_pesquisa_contato.open()
+
+    def adicionar_visita(self):
+        novo_visita={}
+        data       = self.ids.data.text
+        nome_fantasia   = self.ids.nome_fantasia.text
+        contato     = self.ids.contato.text
+        visita     = self.ids.visita.text
+        informacoes     = self.ids.informacoes.text
+
+
+        if data == '' or nome_fantasia == '' or contato == '' or visita == '':
+            #self.abrir_popup_infos()
+            print('Entrou no if')
+        else:
+            novo_visita['data']            = self.ids.data.text
+            novo_visita['nome_fantasia']         = self.ids.nome_fantasia.text
+            novo_visita['contato']         = self.ids.contato.text
+            novo_visita['visita']          = self.ids.visita.text
+            novo_visita['informacoes']     = self.ids.informacoes.text
+
+
+            
+            self.novo_visita = novo_visita
+
+            self.dados_visitas.append(self.novo_visita)
+
+        app = MDApp.get_running_app()
+        with open(app.path + 'visitas.json', 'w') as data:
+            json.dump(self.dados_visitas,data)
+
+        app.root.transition.direction = 'right'
+        app.root.current = 'Visitas_tela'
 
     
 class Item_cliente(OneLineAvatarListItem):

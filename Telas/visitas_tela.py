@@ -30,7 +30,7 @@ class Visitas_tela(Screen):
         self.dados_visitas  = app.dados_visitas
         if app.telas[-2] == 'Menu_tela':
             self.ids.buscar.text = ''
-        self.apagar_visitas()
+            self.apagar_visitas()
         if app.telas[-2] == 'Menu_tela':
             self.ids.scroll.scroll_y=1
 
@@ -253,6 +253,7 @@ class Visitas_tela(Screen):
 
     def ir_para_visita_tela(self):
         app = MDApp.get_running_app()
+        app.root.get_screen('Visita_tela').limpar()
         app.root.current = 'Visita_tela'
         print('Executou')
 
@@ -277,12 +278,13 @@ class Visitas_tela(Screen):
 
 
 class Visita(MDCard):
-    def __init__(self,data='', codigo='', nome_fantasia='',contato='', informacoes='',**kwargs):
+    def __init__(self,data='', codigo='', nome_fantasia='',contato='',visita='', informacoes='',**kwargs):
         super().__init__(**kwargs)
         self.ids.data.text          = data
-        self.ids.codigo.text        = codigo
+        #self.ids.codigo.text        = codigo
         self.ids.nome_fantasia.text = nome_fantasia
         self.ids.contato.text       = contato
+        #self.ids.visita.text        = visita
         self.ids.informacoes.text   = informacoes
 
     def abrir_visita(self, objeto):
@@ -290,7 +292,7 @@ class Visita(MDCard):
         app = MDApp.get_running_app()
         app.root.transition.direction = 'left'
         app.root.current = 'Visita_tela'
-        print(objeto.ids.codigo.text)
+        app.root.get_screen('Visita_tela').adicionar_infos(self)
 
 
 class Content(BoxLayout):
