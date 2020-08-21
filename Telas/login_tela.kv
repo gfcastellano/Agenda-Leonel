@@ -1,0 +1,47 @@
+<Login_tela>:
+    BoxLayout:
+        orientation: 'vertical'
+#---------------------------------------HEADER
+        MDToolbar:
+            id: toolbar
+            title: 'LOGIN'
+            bold: True
+            md_bg_color: app.theme_cls.primary_dark
+            size_hint_y: None
+            height: 150
+            pos_hint: {'top':1}
+            elevation: 11
+
+        BoxLayout:
+            spaccing: 50,50
+            padding: 100,20
+            orientation: 'vertical'
+            MDLabel:
+                text: 'Fazer login com seu e-mail e senha'
+            MDTextField:
+                hint_text: 'email'
+                id: email
+            MDTextField:
+                hint_text: 'senha'
+                password: True
+                id: senha
+            MDLabel:
+                id: mensagem
+                color: (1,0,0,1)
+                halign: 'center'
+            MDLabelButton:
+                canvas.before:
+                    Color:
+                        rgb: app.theme_cls.primary_light if self.state == 'normal' else app.theme_cls.primary_dark
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                text: '[u]Fazer Login![/u]'
+                markup: True
+                halign: 'center'
+                on_release:
+                    app.login(email.text, senha.text)
+                    #print('Fazendo login!', email.text, senha.text)
+            
+
+            
