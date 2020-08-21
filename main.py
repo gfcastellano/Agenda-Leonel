@@ -63,13 +63,13 @@ class MainApp(MDApp):
         self.get()
         #self.carregar_clientes()
         #self.carregar_visitas()
-        clientes_tela = Clientes_tela()
+        #clientes_tela = Clientes_tela()
         #clientes_tela.adicionar_clientes(self.dados_clientes)
         self.popup_leituradados = Popup_LeituraDados()
 
         
 
-    def carregar_clientes(self):
+    """ def carregar_clientes(self):
         self.path = MDApp.get_running_app().user_data_dir + '/'
         print(self.path)
         try:
@@ -98,7 +98,7 @@ class MainApp(MDApp):
                     print('visitas.json carregado com sucesso,' 'tamanho:',len(self.dados_visitas))
             except:
                 print('visitas.json não achado no diretório')
-
+ """
     def registrar_tela(self):
         try:        
             app = MDApp.get_running_app()
