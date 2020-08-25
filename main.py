@@ -63,12 +63,27 @@ class MainApp(MDApp):
         return Gerenciador()
 
     def on_start(self):
-        #self.get()
-        #self.carregar_clientes()
-        #self.carregar_visitas()
-        #clientes_tela = Clientes_tela()
-        #clientes_tela.adicionar_clientes(self.dados_clientes)
-        self.popup_leituradados = Popup_LeituraDados()
+        try: #tenta ver se já havia alguem logado
+            with open('refresh_token','r') as f:
+                refresh_token = f.read()
+
+            # Use refresh token to get a new idToken
+            self.id_token, self.local_id = self.trocar_refresh_token(refresh_token)
+            #print('Pegou id_token: {%s} e local_id:{%s}' %(self.id_token,self.local_id))
+            #print(self.id_token, type(self.id_token))
+            #print(self.local_id)
+            self.get()
+            #self.carregar_clientes()
+            #self.carregar_visitas()
+            #clientes_tela = Clientes_tela()
+            #clientes_tela.adicionar_clientes(self.dados_clientes)
+            self.popup_leituradados = Popup_LeituraDados()
+
+            MDApp.get_running_app().root.current = 'Menu_tela'
+        except:
+            print('Entrou no except do on_start()')
+        
+
 
         
 
@@ -201,12 +216,13 @@ class MainApp(MDApp):
 
     def get(self):
         # Acessa a base de dados e recupera as informações dos clientes
-        response = requests.get(url = self.url_db + self.local_id + 'clientes' + '.json?auth=' + self.id_token)
+        response = requests.get(url = self.url_db + self.local_id + '/clientes' + '.json?auth=' + self.id_token)
         print('Fez o request dos clientes?',response.ok)
         self.dados_clientes = json.loads(response.content.decode())
         # Acessa a base de dados e recupera as informações das visitas
-        response = requests.get(url = self.url_db + self.local_id + 'visitas' + '.json?auth=' + self.id_token,)
+        response = requests.get(url = self.url_db + self.local_id + '/visitas' + '.json?auth=' + self.id_token)
         print('Fez o request das visitas?',response.ok)
+        #print(json.loads(response.content.decode()))
         self.dados_visitas = json.loads(response.content.decode())
     
     def patch(self, dados):
@@ -233,12 +249,12 @@ class MainApp(MDApp):
         # Testa se é um dado de visita ou de cliente que foi enviado
         if 'visita' not in list(dados.keys()):
             print('Iniciou o patch')
-            response = requests.patch(url = self.url_db + self.local_id + 'clientes/' + str(codigo - 1) + '.json?auth=' + self.id_token,
+            response = requests.patch(url = self.url_db + self.local_id + '/clientes/' + str(codigo - 1) + '.json?auth=' + self.id_token,
                                     data = to_database)
             print('Fez o patch dos clientes?', response.ok)
             #print('Conteudo', response.content.decode())
         else:
-            response = requests.patch(url = self.url_db + self.local_id + 'visitas/' + index + '.json?auth=' + self.id_token,
+            response = requests.patch(url = self.url_db + self.local_id + '/visitas/' + index + '.json?auth=' + self.id_token,
                                     data = to_database)
             print('Fez o patch das visitas?', response.ok)
             #print('Conteudo', response.content.decode())
@@ -279,14 +295,51 @@ class MainApp(MDApp):
             # Get request on firebase to get the next friend id
             self.friend_get_req = UrlRequest(sel.url_db + idToken, ca_file=certifi.where(), on_success=self.on_friend_get_req_ok, on_error=self.on_error, on_failure=self.on_error)
  """
+            app.root.current = 'Menu_tela'
         elif sign_up_request.ok == False:
             error_data = json.loads(sign_up_request.content.decode())
             error_message = error_data["error"]['message']
             print(error_message)
             if error_message == "EMAIL_EXISTS":
+                print('Usuário já existe')
                 self.sign_in_existing_user(email, password)
             else:
-                app.root.get_screen('Login_tela').ids.mensagem.text = error_message.replace("_", " ")
+                app.root.get_screen('Login_tela').ids.mensagem.text = error_message
 
-    
+    def trocar_refresh_token(self,refresh_token):
+        refresh_url = "https://securetoken.googleapis.com/v1/token?key=" + self.wak
+        refresh_payload = '{"grant_type": "refresh_token", "refresh_token": "%s"}' % refresh_token
+        refresh_req = requests.post(refresh_url, data=refresh_payload)
+        id_token = refresh_req.json()['id_token']
+        local_id = refresh_req.json()['user_id']
+        return id_token, local_id
+
+    def sign_in_existing_user(self, email, password):
+        """Called if a user tried to sign up and their email already existed."""
+        signin_url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + self.wak
+        signin_payload = {"email": email, "password": password, "returnSecureToken": True}
+        signin_request = requests.post(signin_url, data=signin_payload)
+        sign_up_data = json.loads(signin_request.content.decode())
+        app = MDApp.get_running_app()
+
+        if signin_request.ok == True:
+            refresh_token = sign_up_data['refreshToken']
+            localId = sign_up_data['localId']
+            idToken = sign_up_data['idToken']
+            # Save refreshToken to a file
+            with open('refresh_token', "w") as f:
+                f.write(refresh_token)
+
+            # Save localId to a variable in main app class
+            # Save idToken to a variable in main app class
+            app.local_id = localId
+            app.id_token = idToken
+
+            app.on_start()
+
+        elif signin_request.ok == False:
+            error_data = json.loads(signin_request.content.decode())
+            error_message = error_data["error"]['message']
+            app.root.get_screen('Login_tela').ids.mensagem.text = "EMAIL EXISTS - " + error_message
+
 MainApp().run()
